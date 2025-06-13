@@ -1,19 +1,41 @@
 import React from 'react';
-import { FirstImpression } from './FirstImpression';
-import { QuickSearch } from './QuickSearch';
+import { useAppearance } from '@/hooks/use-appearance';
+import { Sun, Moon } from 'lucide-react';
+import Header from './sections/Header';
+import Hero from './sections/Hero';
 
-const LandingPage = () => {
-  const handleSearch = (location: string, priceRange: number, amenities: string[]) => {
-    // TODO: Implement search functionality
-    console.log('Searching for:', { location, priceRange, amenities });
+const LandingPage: React.FC = () => {
+  const { appearance, updateAppearance } = useAppearance();
+
+  // Theme toggle functionality - Master control
+  const toggleTheme = () => {
+    updateAppearance(appearance === 'light' ? 'dark' : 'light');
+  };
+
+  const getThemeIcon = () => {
+    return appearance === 'dark' ? (
+      <Moon className="h-5 w-5" />
+    ) : (
+      <Sun className="h-5 w-5" />
+    );
+  };
+
+  // Theme props to pass to child components
+  const themeProps = {
+    currentTheme: appearance === 'system' ? 'light' : appearance as 'light' | 'dark',
+    toggleTheme,
+    getThemeIcon,
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
-      <FirstImpression />
-      <QuickSearch onSearch={handleSearch} />
+    <div className="bg-slate-50 dark:bg-slate-900 min-h-screen transition-colors duration-300">
+      <Header {...themeProps} />
+      <main className="relative">
+        <Hero {...themeProps} />
+        {/* Additional content sections will be added here */}
+      </main>
     </div>
   );
 };
 
-export { LandingPage };
+export default LandingPage;

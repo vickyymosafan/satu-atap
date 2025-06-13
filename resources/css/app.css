@@ -157,3 +157,11 @@
         @apply bg-background text-foreground;
     }
 }
+
+/* Professional Header Enhancements */
+@layer components {
+    .professional-backdrop {
+        backdrop-filter: blur(16px) saturate(120%);
+        -webkit-backdrop-filter: blur(16px) saturate(120%);
+    }
+}
