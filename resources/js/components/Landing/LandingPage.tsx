@@ -4,6 +4,7 @@ import { Sun, Moon } from 'lucide-react';
 import Header from './sections/Header';
 import Hero from './sections/Hero';
 import QuickSearch from './sections/QuickSearch';
+import FeaturedKosts from './sections/FeaturedKosts';
 
 const LandingPage: React.FC = () => {
   const { appearance, updateAppearance } = useAppearance();
@@ -38,12 +39,8 @@ const LandingPage: React.FC = () => {
         <section id="quick-search">
           <QuickSearch {...themeProps} />
         </section>
-        {/* Additional content sections will be added here */}
-        <section id="featured" className="min-h-screen bg-muted flex items-center justify-center">
-          <div className="text-center text-muted-foreground">
-            <h2 className="text-2xl font-bold mb-4 text-foreground">Kost Unggulan</h2>
-            <p>Section ini akan segera hadir</p>
-          </div>
+        <section id="featured">
+          <FeaturedKosts {...themeProps} />
         </section>
         <section id="about" className="min-h-screen bg-background flex items-center justify-center">
           <div className="text-center text-muted-foreground">
