@@ -3,6 +3,7 @@ import { useAppearance } from '@/hooks/use-appearance';
 import { Sun, Moon } from 'lucide-react';
 import Header from './sections/Header';
 import Hero from './sections/Hero';
+import QuickSearch from './sections/QuickSearch';
 
 const LandingPage: React.FC = () => {
   const { appearance, updateAppearance } = useAppearance();
@@ -32,6 +33,7 @@ const LandingPage: React.FC = () => {
       <Header {...themeProps} />
       <main className="relative">
         <Hero {...themeProps} />
+        <QuickSearch {...themeProps} />
         {/* Additional content sections will be added here */}
       </main>
     </div>
