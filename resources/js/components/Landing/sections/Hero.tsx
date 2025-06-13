@@ -21,7 +21,7 @@ const popularLocations = [
   "Jakarta", "Bandung", "Yogyakarta", "Surabaya", "Semarang"
 ];
 
-const Hero: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon }) => {
+const Hero: React.FC<ThemeProps> = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [currentLocationIndex, setCurrentLocationIndex] = useState(0);
 
@@ -106,7 +106,7 @@ const Hero: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon })
                 { number: "50+", label: "Kota", icon: <Users className="w-5 h-5" /> },
                 { number: "5000+", label: "Pengguna", icon: <Star className="w-5 h-5" /> },
                 { number: "4.8/5", label: "Rating", icon: <Shield className="w-5 h-5" /> }
-              ].map((stat, index) => (
+              ].map((stat) => (
                 <div
                   key={stat.label}
                   className="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 text-center shadow-sm"
