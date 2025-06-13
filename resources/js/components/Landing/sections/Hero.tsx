@@ -8,7 +8,7 @@ interface ThemeProps {
   getThemeIcon: () => React.ReactElement;
 }
 
-const Hero: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon }) => {
+const Hero: React.FC<ThemeProps> = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-50 dark:bg-slate-900 pt-20 sm:pt-24 md:pt-28 lg:pt-32 transition-colors duration-300">
       {/* Background Image */}
