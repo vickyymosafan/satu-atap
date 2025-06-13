@@ -201,7 +201,7 @@ const QuickSearch: React.FC<ThemeProps> = ({ currentTheme }) => {
   }, [showLocationDropdown]);
 
   return (
-    <section className="relative py-8 sm:py-12 md:py-16 lg:py-20 bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
+    <section id="quick-search" className="relative py-8 sm:py-12 md:py-16 lg:py-20 bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Simplified Header - User-Focused */}
         <div className="text-center mb-8 sm:mb-10 md:mb-12">
