@@ -70,7 +70,7 @@ const formatPrice = (price: number): string => {
   }).format(price);
 };
 
-const QuickSearch: React.FC<ThemeProps> = ({ currentTheme }) => {
+const QuickSearch: React.FC<ThemeProps> = () => {
   // Search state management
   const [filters, setFilters] = useState<SearchFilters>({
     location: '',
