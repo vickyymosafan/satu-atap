@@ -1,18 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { 
-  Star, 
-  MapPin, 
-  Users, 
-  Wifi, 
-  Car, 
-  Shield, 
-  Eye, 
+import {
+  Star,
+  MapPin,
+  Wifi,
+  Car,
+  Shield,
+  Eye,
   Heart,
   ChevronLeft,
   ChevronRight,
   X,
-  Phone,
-  Clock,
   CheckCircle
 } from 'lucide-react';
 import { KostProperty } from '@/types';
@@ -24,8 +21,8 @@ interface ThemeProps {
   getThemeIcon: () => React.ReactElement;
 }
 
-// Component props interface
-interface FeaturedKostsProps extends ThemeProps {}
+// Component props type - uses ThemeProps directly
+type FeaturedKostsProps = ThemeProps;
 
 // Mock data for featured properties (will be replaced with API call)
 const mockFeaturedProperties: KostProperty[] = [
@@ -457,7 +454,7 @@ const FeaturedKosts: React.FC<FeaturedKostsProps> = () => {
         // Simulate API delay
         await new Promise(resolve => setTimeout(resolve, 1000));
         setProperties(mockFeaturedProperties);
-      } catch (err) {
+      } catch {
         setError('Gagal memuat kost unggulan. Silakan coba lagi.');
       } finally {
         setLoading(false);
