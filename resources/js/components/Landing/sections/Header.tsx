@@ -8,12 +8,19 @@ interface ThemeProps {
   getThemeIcon: () => React.ReactElement;
 }
 
-const navLinks = [
-  { label: 'Beranda', href: '#home', isActive: true },
-  { label: 'Cari Kost', href: '#search', isActive: false },
-  { label: 'Kost Unggulan', href: '#featured', isActive: false },
-  { label: 'Tentang', href: '#about', isActive: false },
-  { label: 'Kontak', href: '#contact', isActive: false },
+// Navigation link interface
+interface NavLink {
+  label: string;
+  href: string;
+  id: string;
+}
+
+const navLinks: NavLink[] = [
+  { label: 'Beranda', href: '#hero', id: 'hero' },
+  { label: 'Cari Kost', href: '#quick-search', id: 'quick-search' },
+  { label: 'Kost Unggulan', href: '#featured', id: 'featured' },
+  { label: 'Tentang', href: '#about', id: 'about' },
+  { label: 'Kontak', href: '#contact', id: 'contact' },
 ];
 
 const authButtons = [
@@ -23,6 +30,29 @@ const authButtons = [
 
 const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon }) => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [activeSection, setActiveSection] = React.useState('hero');
+
+  // Scroll detection for active section
+  React.useEffect(() => {
+    const handleScroll = () => {
+      const sections = navLinks.map(link => document.getElementById(link.id));
+      const scrollPosition = window.scrollY + 100; // Offset for header height
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = sections[i];
+        if (section && section.offsetTop <= scrollPosition) {
+          setActiveSection(navLinks[i].id);
+          break;
+        }
+      }
+    };
+
+    // Set initial active section
+    handleScroll();
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Close mobile menu when clicking outside
   React.useEffect(() => {
@@ -38,6 +68,25 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
       return () => document.removeEventListener('mousedown', handleClickOutside);
     }
   }, [mobileOpen]);
+
+  // Handle navigation click with smooth scroll
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+    e.preventDefault();
+    const section = document.getElementById(sectionId);
+    if (section) {
+      const headerHeight = 100; // Account for fixed header
+      const targetPosition = section.offsetTop - headerHeight;
+
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+      });
+
+      // Update active section immediately for better UX
+      setActiveSection(sectionId);
+      setMobileOpen(false); // Close mobile menu if open
+    }
+  };
   return (
     <header className="fixed top-2 sm:top-4 left-1/2 transform -translate-x-1/2 w-[96%] sm:w-[95%] md:w-[90%] max-w-7xl bg-white/90 dark:bg-slate-900/90 backdrop-blur-lg shadow-lg rounded-xl sm:rounded-2xl z-[100] border border-slate-200 dark:border-slate-700 transition-all duration-300">
       <div className="flex items-center justify-between py-3 sm:py-4 px-4 sm:px-6 md:px-8 lg:px-10">
@@ -57,8 +106,9 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
             <a
               key={link.href}
               href={link.href}
+              onClick={(e) => handleNavClick(e, link.id)}
               className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${
-                link.isActive
+                activeSection === link.id
                   ? 'text-white bg-slate-800 dark:bg-slate-200 dark:text-slate-800'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800'
               }`}
@@ -122,16 +172,16 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
                 <a
                   key={link.href}
                   href={link.href}
+                  onClick={(e) => handleNavClick(e, link.id)}
                   className={`block px-4 py-3 rounded-lg font-medium transition-colors duration-200 ${
-                    link.isActive
+                    activeSection === link.id
                       ? 'text-white bg-slate-800 dark:bg-slate-200 dark:text-slate-800'
                       : 'text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800'
                   }`}
-                  onClick={() => setMobileOpen(false)}
                 >
                   <div className="flex items-center justify-between">
                     {link.label}
-                    {link.isActive && (
+                    {activeSection === link.id && (
                       <div className="w-2 h-2 bg-slate-800 dark:bg-slate-200 rounded-full"></div>
                     )}
                   </div>

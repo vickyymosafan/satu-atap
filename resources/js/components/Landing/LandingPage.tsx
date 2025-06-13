@@ -32,9 +32,31 @@ const LandingPage: React.FC = () => {
     <div className="bg-slate-50 dark:bg-slate-900 min-h-screen transition-colors duration-300">
       <Header {...themeProps} />
       <main className="relative">
-        <Hero {...themeProps} />
-        <QuickSearch {...themeProps} />
+        <section id="hero">
+          <Hero {...themeProps} />
+        </section>
+        <section id="quick-search">
+          <QuickSearch {...themeProps} />
+        </section>
         {/* Additional content sections will be added here */}
+        <section id="featured" className="min-h-screen bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+          <div className="text-center text-slate-600 dark:text-slate-400">
+            <h2 className="text-2xl font-bold mb-4">Kost Unggulan</h2>
+            <p>Section ini akan segera hadir</p>
+          </div>
+        </section>
+        <section id="about" className="min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
+          <div className="text-center text-slate-600 dark:text-slate-400">
+            <h2 className="text-2xl font-bold mb-4">Tentang Kami</h2>
+            <p>Section ini akan segera hadir</p>
+          </div>
+        </section>
+        <section id="contact" className="min-h-screen bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+          <div className="text-center text-slate-600 dark:text-slate-400">
+            <h2 className="text-2xl font-bold mb-4">Kontak</h2>
+            <p>Section ini akan segera hadir</p>
+          </div>
+        </section>
       </main>
     </div>
   );
