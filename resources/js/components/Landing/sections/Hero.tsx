@@ -206,7 +206,7 @@ const Hero: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon })
                     <Star className="w-4 h-4 text-yellow-500 fill-current" />
                   </div>
                   <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">
-                    Dipercaya 5000+ pengguna
+                    Dipercaya 10000+ pengguna
                   </span>
                 </div>
 
