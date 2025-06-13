@@ -19,14 +19,14 @@
             })();
         </script>
 
-        {{-- Inline style to set the HTML background color based on our theme in app.css --}}
+        {{-- Inline style to set the HTML background color based on our Gen-Z theme --}}
         <style>
             html {
-                background-color: oklch(1 0 0);
+                background-color: oklch(0.98 0.008 85); /* Soft warm white with subtle peach undertone */
             }
 
             html.dark {
-                background-color: oklch(0.145 0 0);
+                background-color: oklch(0.12 0.015 285); /* Deep navy-purple base */
             }
         </style>
 

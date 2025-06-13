@@ -201,41 +201,41 @@ const QuickSearch: React.FC<ThemeProps> = () => {
   }, [showLocationDropdown]);
 
   return (
-    <section id="quick-search" className="relative py-8 sm:py-12 md:py-16 lg:py-20 bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
+    <section id="quick-search" className="relative py-8 sm:py-12 md:py-16 lg:py-20 bg-background transition-colors duration-300">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Simplified Header - User-Focused */}
         <div className="text-center mb-8 sm:mb-10 md:mb-12">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 sm:mb-4">
             Temukan Kost Impian Anda
           </h2>
-          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-xl mx-auto">
+          <p className="text-sm sm:text-base text-muted-foreground max-w-xl mx-auto">
             Cari kost dengan mudah berdasarkan lokasi dan budget Anda
           </p>
         </div>
 
         {/* Main Search Container - User-Friendly Design */}
         <div className="max-w-4xl mx-auto">
-          <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 overflow-hidden">
+          <div className="bg-card rounded-xl shadow-lg border border-border overflow-hidden">
 
             {/* Primary Search Section */}
             <div className="p-6 sm:p-8">
               {/* Step Indicator - Mobile Optimized */}
               <div className="flex items-center justify-center mb-6 sm:mb-8">
-                <div className="flex items-center space-x-3 sm:space-x-4 text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                <div className="flex items-center space-x-3 sm:space-x-4 text-xs sm:text-sm text-muted-foreground">
                   <div className="flex items-center space-x-2">
-                    <div className="w-7 h-7 sm:w-8 sm:h-8 bg-slate-600 dark:bg-slate-400 text-white dark:text-slate-900 rounded-full flex items-center justify-center text-xs sm:text-sm font-semibold">1</div>
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-xs sm:text-sm font-semibold">1</div>
                     <span className="font-medium hidden sm:inline">Lokasi</span>
                     <span className="font-medium sm:hidden">Lokasi</span>
                   </div>
-                  <div className="w-6 sm:w-8 h-px bg-slate-300 dark:bg-slate-600"></div>
+                  <div className="w-6 sm:w-8 h-px bg-border"></div>
                   <div className="flex items-center space-x-2">
-                    <div className="w-7 h-7 sm:w-8 sm:h-8 bg-slate-300 dark:bg-slate-600 text-slate-600 dark:text-slate-400 rounded-full flex items-center justify-center text-xs sm:text-sm font-semibold">2</div>
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 bg-muted text-muted-foreground rounded-full flex items-center justify-center text-xs sm:text-sm font-semibold">2</div>
                     <span className="hidden sm:inline">Budget</span>
                     <span className="sm:hidden">Budget</span>
                   </div>
-                  <div className="w-6 sm:w-8 h-px bg-slate-300 dark:bg-slate-600"></div>
+                  <div className="w-6 sm:w-8 h-px bg-border"></div>
                   <div className="flex items-center space-x-2">
-                    <div className="w-7 h-7 sm:w-8 sm:h-8 bg-slate-300 dark:bg-slate-600 text-slate-600 dark:text-slate-400 rounded-full flex items-center justify-center text-xs sm:text-sm font-semibold">3</div>
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 bg-muted text-muted-foreground rounded-full flex items-center justify-center text-xs sm:text-sm font-semibold">3</div>
                     <span className="hidden sm:inline">Cari</span>
                     <span className="sm:hidden">Cari</span>
                   </div>
@@ -247,14 +247,14 @@ const QuickSearch: React.FC<ThemeProps> = () => {
 
                 {/* Location Search - User-Friendly Design */}
                 <div>
-                  <label className="block text-lg font-semibold text-slate-900 dark:text-white mb-3">
+                  <label className="block text-lg font-semibold text-foreground mb-3">
                     Di mana Anda ingin tinggal?
-                    <span className="text-red-500 ml-1">*</span>
+                    <span className="text-destructive ml-1">*</span>
                   </label>
                   <div className="relative">
                     <div className="relative group">
                       <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-10">
-                        <MapPin className="h-5 w-5 text-slate-400 group-focus-within:text-slate-600 dark:group-focus-within:text-slate-300 transition-colors duration-200" />
+                        <MapPin className="h-5 w-5 text-muted-foreground group-focus-within:text-foreground transition-colors duration-200" />
                       </div>
                       <input
                         ref={locationInputRef}
@@ -264,7 +264,7 @@ const QuickSearch: React.FC<ThemeProps> = () => {
                         onFocus={() => setShowLocationDropdown(true)}
                         onKeyDown={handleLocationKeyDown}
                         placeholder="Coba ketik 'Jakarta', 'Bandung', atau nama daerah lainnya..."
-                        className="w-full pl-12 pr-12 py-4 text-base bg-slate-50 dark:bg-slate-700 border-2 border-slate-200 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500/30 focus:border-slate-500 dark:focus:border-slate-400 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 transition-all duration-200 hover:border-slate-300 dark:hover:border-slate-500"
+                        className="w-full pl-12 pr-12 py-4 text-base bg-input border-2 border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring text-foreground placeholder-muted-foreground transition-all duration-200 hover:border-accent"
                         required
                         aria-describedby="location-help"
                         aria-label="Masukkan lokasi kost yang diinginkan"
@@ -277,7 +277,7 @@ const QuickSearch: React.FC<ThemeProps> = () => {
                         <button
                           type="button"
                           onClick={() => handleLocationChange('')}
-                          className="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors duration-200"
+                          className="absolute inset-y-0 right-0 pr-4 flex items-center text-muted-foreground hover:text-foreground transition-colors duration-200"
                           aria-label="Hapus lokasi"
                         >
                           <X className="h-4 w-4" />
@@ -289,7 +289,7 @@ const QuickSearch: React.FC<ThemeProps> = () => {
                     {showLocationDropdown && (
                       <div
                         ref={locationDropdownRef}
-                        className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg shadow-xl z-50 max-h-64 overflow-y-auto"
+                        className="absolute top-full left-0 right-0 mt-2 bg-popover border border-border rounded-lg shadow-xl z-50 max-h-64 overflow-y-auto"
                         role="listbox"
                         aria-label="Pilihan lokasi"
                       >
@@ -297,19 +297,19 @@ const QuickSearch: React.FC<ThemeProps> = () => {
                         {/* Show popular cities when no input */}
                         {!filters.location && (
                           <>
-                            <div className="px-3 py-2 text-xs text-slate-500 dark:text-slate-400 font-medium border-b border-slate-200 dark:border-slate-600 mb-2">
+                            <div className="px-3 py-2 text-xs text-muted-foreground font-medium border-b border-border mb-2">
                               Kota populer:
                             </div>
                             {['Jakarta', 'Bandung', 'Yogyakarta', 'Surabaya', 'Semarang'].map((city) => (
                               <button
                                 key={city}
                                 onClick={() => handleLocationChange(city)}
-                                className="w-full px-3 py-3 text-left hover:bg-slate-50 dark:hover:bg-slate-600 rounded-md transition-all duration-200 group/item min-h-[44px]"
+                                className="w-full px-3 py-3 text-left hover:bg-accent rounded-md transition-all duration-200 group/item min-h-[44px]"
                                 role="option"
                               >
                                 <div className="flex items-center space-x-3">
-                                  <div className="w-2 h-2 bg-slate-400 dark:bg-slate-500 rounded-full group-hover/item:bg-slate-600 dark:group-hover/item:bg-slate-300 transition-colors duration-200"></div>
-                                  <div className="text-slate-800 dark:text-slate-200 font-medium text-sm">
+                                  <div className="w-2 h-2 bg-muted-foreground rounded-full group-hover/item:bg-accent-foreground transition-colors duration-200"></div>
+                                  <div className="text-popover-foreground font-medium text-sm">
                                     {city}
                                   </div>
                                 </div>
@@ -325,18 +325,18 @@ const QuickSearch: React.FC<ThemeProps> = () => {
                               <button
                                 key={location.id}
                                 onClick={() => handleLocationSelect(location)}
-                                className="w-full px-3 py-3 text-left hover:bg-slate-50 dark:hover:bg-slate-600 rounded-md transition-all duration-200 group/item min-h-[44px]"
+                                className="w-full px-3 py-3 text-left hover:bg-accent rounded-md transition-all duration-200 group/item min-h-[44px]"
                                 role="option"
                                 aria-selected={filters.selectedLocation?.id === location.id}
                                 tabIndex={index === 0 ? 0 : -1}
                               >
                                 <div className="flex items-center space-x-3">
-                                  <div className="w-2 h-2 bg-slate-400 dark:bg-slate-500 rounded-full group-hover/item:bg-slate-600 dark:group-hover/item:bg-slate-300 transition-colors duration-200"></div>
+                                  <div className="w-2 h-2 bg-muted-foreground rounded-full group-hover/item:bg-accent-foreground transition-colors duration-200"></div>
                                   <div>
-                                    <div className="text-slate-800 dark:text-slate-200 font-medium text-sm">
+                                    <div className="text-popover-foreground font-medium text-sm">
                                       {location.name}
                                     </div>
-                                    <div className="text-xs text-slate-500 dark:text-slate-400">
+                                    <div className="text-xs text-muted-foreground">
                                       {location.city}, {location.province}
                                     </div>
                                   </div>
@@ -348,7 +348,7 @@ const QuickSearch: React.FC<ThemeProps> = () => {
 
                         {/* No results message */}
                         {filters.location && filteredLocations.length === 0 && (
-                          <div className="px-3 py-4 text-center text-sm text-slate-500 dark:text-slate-400">
+                          <div className="px-3 py-4 text-center text-sm text-muted-foreground">
                             Tidak ada lokasi yang ditemukan
                           </div>
                         )}
@@ -362,14 +362,14 @@ const QuickSearch: React.FC<ThemeProps> = () => {
 
                 {/* Price Range - User-Friendly Design */}
                 <div>
-                  <label className="block text-lg font-semibold text-slate-900 dark:text-white mb-3">
+                  <label className="block text-lg font-semibold text-foreground mb-3">
                     Berapa budget Anda per bulan?
-                    <span className="text-slate-500 dark:text-slate-400 text-sm font-normal ml-2">(Opsional)</span>
+                    <span className="text-muted-foreground text-sm font-normal ml-2">(Opsional)</span>
                   </label>
 
                   {/* Quick Budget Options - Touch-Friendly */}
                   <div className="mb-6">
-                    <span className="block text-xs text-slate-500 dark:text-slate-400 font-medium mb-3">Budget populer:</span>
+                    <span className="block text-xs text-muted-foreground font-medium mb-3">Budget populer:</span>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                       {[
                         { label: '< 1 Juta', min: 0, max: 1000000 },
@@ -385,8 +385,8 @@ const QuickSearch: React.FC<ThemeProps> = () => {
                           }}
                           className={`min-h-[44px] px-3 py-2 text-sm rounded-lg transition-colors duration-200 border font-medium ${
                             filters.priceRange[0] === budget.min && filters.priceRange[1] === budget.max
-                              ? 'bg-slate-600 dark:bg-slate-400 text-white dark:text-slate-900 border-slate-600 dark:border-slate-400'
-                              : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-600 hover:bg-slate-200 dark:hover:bg-slate-600'
+                              ? 'bg-primary text-primary-foreground border-primary'
+                              : 'bg-secondary text-secondary-foreground border-border hover:bg-accent hover:text-accent-foreground'
                           }`}
                         >
                           {budget.label}
@@ -398,11 +398,11 @@ const QuickSearch: React.FC<ThemeProps> = () => {
                   {/* Custom Range Inputs */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                      <label className="block text-sm font-medium text-card-foreground mb-2">
                         Minimum
                       </label>
                       <div className="relative">
-                        <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-500 dark:text-slate-400 text-sm">
+                        <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground text-sm">
                           Rp
                         </span>
                         <input
@@ -410,16 +410,16 @@ const QuickSearch: React.FC<ThemeProps> = () => {
                           value={filters.priceRange[0]}
                           onChange={(e) => handlePriceRangeChange(0, parseInt(e.target.value) || 0)}
                           placeholder="500000"
-                          className="w-full pl-8 pr-4 py-3 text-base bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500/30 focus:border-slate-500 dark:focus:border-slate-400 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 transition-all duration-200"
+                          className="w-full pl-8 pr-4 py-3 text-base bg-input border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring text-foreground placeholder-muted-foreground transition-all duration-200"
                         />
                       </div>
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                      <label className="block text-sm font-medium text-card-foreground mb-2">
                         Maksimum
                       </label>
                       <div className="relative">
-                        <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-500 dark:text-slate-400 text-sm">
+                        <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground text-sm">
                           Rp
                         </span>
                         <input
@@ -427,15 +427,15 @@ const QuickSearch: React.FC<ThemeProps> = () => {
                           value={filters.priceRange[1]}
                           onChange={(e) => handlePriceRangeChange(1, parseInt(e.target.value) || 0)}
                           placeholder="2000000"
-                          className="w-full pl-8 pr-4 py-3 text-base bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500/30 focus:border-slate-500 dark:focus:border-slate-400 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 transition-all duration-200"
+                          className="w-full pl-8 pr-4 py-3 text-base bg-input border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring text-foreground placeholder-muted-foreground transition-all duration-200"
                         />
                       </div>
                     </div>
                   </div>
 
                   {/* Budget Display */}
-                  <div className="mt-3 p-3 bg-slate-100 dark:bg-slate-700 rounded-lg">
-                    <div className="text-sm text-slate-700 dark:text-slate-300">
+                  <div className="mt-3 p-3 bg-muted rounded-lg">
+                    <div className="text-sm text-muted-foreground">
                       <span className="font-medium">Budget Anda: </span>
                       {formatPrice(filters.priceRange[0])} - {formatPrice(filters.priceRange[1])}
                     </div>
@@ -449,12 +449,12 @@ const QuickSearch: React.FC<ThemeProps> = () => {
                 <button
                   onClick={handleSearch}
                   disabled={isSearching || !filters.location.trim()}
-                  className="w-full h-14 px-8 bg-slate-800 dark:bg-slate-200 text-white dark:text-slate-800 font-bold rounded-lg hover:bg-slate-700 dark:hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-500/50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-3 shadow-lg hover:shadow-xl text-lg transform hover:scale-[1.02] active:scale-[0.98]"
+                  className="w-full h-14 px-8 bg-primary text-primary-foreground font-bold rounded-lg hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-3 shadow-lg hover:shadow-xl text-lg transform hover:scale-[1.02] active:scale-[0.98]"
                   aria-label={isSearching ? 'Sedang mencari kost' : 'Mulai pencarian kost'}
                 >
                   {isSearching ? (
                     <>
-                      <div className="animate-spin rounded-full h-5 w-5 border-2 border-white dark:border-slate-800 border-t-transparent flex-shrink-0"></div>
+                      <div className="animate-spin rounded-full h-5 w-5 border-2 border-primary-foreground border-t-transparent flex-shrink-0"></div>
                       <span>Mencari kost terbaik...</span>
                     </>
                   ) : (
@@ -468,16 +468,16 @@ const QuickSearch: React.FC<ThemeProps> = () => {
                 {/* Helper Text & Search Summary */}
                 <div className="mt-3 text-center">
                   {!filters.location.trim() ? (
-                    <p className="text-sm text-slate-500 dark:text-slate-400">
+                    <p className="text-sm text-muted-foreground">
                       Masukkan lokasi untuk mulai mencari kost
                     </p>
                   ) : (
                     <div className="space-y-1">
-                      <p className="text-sm text-slate-600 dark:text-slate-300">
+                      <p className="text-sm text-card-foreground">
                         Siap mencari kost di <span className="font-semibold">{filters.selectedLocation?.name || filters.location}</span>
                       </p>
                       {filters.amenities.length > 0 && (
-                        <p className="text-xs text-slate-500 dark:text-slate-400">
+                        <p className="text-xs text-muted-foreground">
                           dengan {filters.amenities.length} fasilitas pilihan
                         </p>
                       )}
@@ -488,11 +488,11 @@ const QuickSearch: React.FC<ThemeProps> = () => {
             </div>
 
             {/* Advanced Filters Toggle - User-Friendly Design */}
-            <div className="border-t border-slate-200 dark:border-slate-600 px-6 sm:px-8 py-6">
+            <div className="border-t border-border px-6 sm:px-8 py-6">
               <div className="flex justify-center">
                 <button
                   onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-300 rounded-lg transition-all duration-200 text-sm font-medium"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-secondary hover:bg-accent text-secondary-foreground rounded-lg transition-all duration-200 text-sm font-medium"
                 >
                   <Sliders className="w-4 h-4" />
                   <span>
@@ -510,19 +510,19 @@ const QuickSearch: React.FC<ThemeProps> = () => {
             {/* Advanced Filters - User-Friendly Design */}
             {showAdvancedFilters && (
               <div className="px-6 sm:px-8 pb-6">
-                <div className="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-6">
+                <div className="bg-muted/50 rounded-lg p-6">
                   <div className="mb-6">
-                    <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">
+                    <h3 className="text-lg font-bold text-foreground mb-2">
                       Fasilitas yang Anda butuhkan
                     </h3>
-                    <p className="text-sm text-slate-600 dark:text-slate-400">
+                    <p className="text-sm text-muted-foreground">
                       Pilih fasilitas penting untuk kenyamanan Anda
                     </p>
                   </div>
 
                   {/* Popular Amenities */}
                   <div className="mb-6">
-                    <h4 className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-3">
+                    <h4 className="text-sm font-semibold text-card-foreground mb-3">
                       Fasilitas Populer
                     </h4>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -532,14 +532,14 @@ const QuickSearch: React.FC<ThemeProps> = () => {
                           onClick={() => handleAmenityToggle(amenity.id)}
                           className={`flex items-center gap-3 p-4 min-h-[60px] rounded-lg border transition-all duration-200 text-left ${
                             filters.amenities.includes(amenity.id)
-                              ? 'bg-slate-800 dark:bg-slate-200 text-white dark:text-slate-800 border-slate-800 dark:border-slate-200'
-                              : 'bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-600'
+                              ? 'bg-primary text-primary-foreground border-primary'
+                              : 'bg-card text-card-foreground border-border hover:bg-accent hover:text-accent-foreground'
                           }`}
                         >
                           <div className={`flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center ${
                             filters.amenities.includes(amenity.id)
-                              ? 'bg-white/20 dark:bg-slate-800/20'
-                              : 'bg-slate-100 dark:bg-slate-600'
+                              ? 'bg-primary-foreground/20'
+                              : 'bg-muted'
                           }`}>
                             {amenity.icon}
                           </div>
@@ -551,7 +551,7 @@ const QuickSearch: React.FC<ThemeProps> = () => {
 
                   {/* Other Amenities */}
                   <div>
-                    <h4 className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-3">
+                    <h4 className="text-sm font-semibold text-card-foreground mb-3">
                       Fasilitas Lainnya
                     </h4>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -561,14 +561,14 @@ const QuickSearch: React.FC<ThemeProps> = () => {
                           onClick={() => handleAmenityToggle(amenity.id)}
                           className={`flex items-center gap-3 p-4 min-h-[60px] rounded-lg border transition-all duration-200 text-left ${
                             filters.amenities.includes(amenity.id)
-                              ? 'bg-slate-800 dark:bg-slate-200 text-white dark:text-slate-800 border-slate-800 dark:border-slate-200'
-                              : 'bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-600'
+                              ? 'bg-primary text-primary-foreground border-primary'
+                              : 'bg-card text-card-foreground border-border hover:bg-accent hover:text-accent-foreground'
                           }`}
                         >
                           <div className={`flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center ${
                             filters.amenities.includes(amenity.id)
-                              ? 'bg-white/20 dark:bg-slate-800/20'
-                              : 'bg-slate-100 dark:bg-slate-600'
+                              ? 'bg-primary-foreground/20'
+                              : 'bg-muted'
                           }`}>
                             {amenity.icon}
                           </div>
@@ -580,14 +580,14 @@ const QuickSearch: React.FC<ThemeProps> = () => {
 
                   {/* Selected Amenities Summary */}
                   {filters.amenities.length > 0 && (
-                    <div className="mt-6 p-4 bg-white dark:bg-slate-700 rounded-lg border border-slate-200 dark:border-slate-600">
+                    <div className="mt-6 p-4 bg-card rounded-lg border border-border">
                       <div className="flex items-center justify-between">
-                        <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                        <span className="text-sm font-medium text-card-foreground">
                           {filters.amenities.length} fasilitas dipilih
                         </span>
                         <button
                           onClick={() => setFilters(prev => ({ ...prev, amenities: [] }))}
-                          className="text-xs text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300 transition-colors duration-200"
+                          className="text-xs text-muted-foreground hover:text-foreground transition-colors duration-200"
                         >
                           Hapus semua
                         </button>

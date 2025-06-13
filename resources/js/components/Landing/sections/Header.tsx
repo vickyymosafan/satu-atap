@@ -88,14 +88,14 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
     }
   };
   return (
-    <header className="fixed top-2 sm:top-4 left-1/2 transform -translate-x-1/2 w-[96%] sm:w-[95%] md:w-[90%] max-w-7xl bg-white/90 dark:bg-slate-900/90 backdrop-blur-lg shadow-lg rounded-xl sm:rounded-2xl z-[100] border border-slate-200 dark:border-slate-700 transition-all duration-300">
+    <header className="fixed top-2 sm:top-4 left-1/2 transform -translate-x-1/2 w-[96%] sm:w-[95%] md:w-[90%] max-w-7xl bg-card/90 backdrop-blur-lg shadow-lg rounded-xl sm:rounded-2xl z-[100] border border-border transition-all duration-300">
       <div className="flex items-center justify-between py-3 sm:py-4 px-4 sm:px-6 md:px-8 lg:px-10">
         {/* Logo with professional styling */}
         <div className="flex items-center space-x-3">
-          <div className="w-8 h-8 bg-slate-800 dark:bg-slate-200 rounded-lg flex items-center justify-center">
-            <span className="text-white dark:text-slate-800 font-bold text-sm">SA</span>
+          <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+            <span className="text-primary-foreground font-bold text-sm">SA</span>
           </div>
-          <div className="text-2xl font-bold text-slate-800 dark:text-slate-200 tracking-tight select-none">
+          <div className="text-2xl font-bold text-foreground tracking-tight select-none">
             Satu Atap
           </div>
         </div>
@@ -109,8 +109,8 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
               onClick={(e) => handleNavClick(e, link.id)}
               className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${
                 activeSection === link.id
-                  ? 'text-white bg-slate-800 dark:bg-slate-200 dark:text-slate-800'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800'
+                  ? 'text-primary-foreground bg-primary'
+                  : 'text-muted-foreground hover:text-foreground hover:bg-accent'
               }`}
             >
               {link.label}
@@ -123,7 +123,7 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
           {/* Theme Toggle */}
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors duration-200"
+            className="p-2 rounded-lg bg-secondary text-secondary-foreground hover:bg-accent transition-colors duration-200"
             aria-label={`Switch to ${currentTheme === 'light' ? 'dark' : 'light'} mode`}
           >
             {getThemeIcon()}
@@ -136,8 +136,8 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
               href={btn.href}
               className={
                 btn.type === 'primary'
-                  ? 'px-6 py-2 rounded-lg font-semibold text-white bg-slate-800 dark:bg-slate-200 dark:text-slate-800 hover:bg-slate-700 dark:hover:bg-slate-300 transition-colors duration-200'
-                  : 'px-6 py-2 rounded-lg font-semibold text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-800 dark:hover:text-slate-200 transition-colors duration-200'
+                  ? 'px-6 py-2 rounded-lg font-semibold text-primary-foreground bg-primary hover:bg-primary/90 transition-colors duration-200'
+                  : 'px-6 py-2 rounded-lg font-semibold text-muted-foreground border border-border hover:bg-accent hover:text-accent-foreground transition-colors duration-200'
               }
             >
               {btn.label}
@@ -147,8 +147,8 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
 
         {/* Mobile Menu Button */}
         <button
-          className={`md:hidden p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors duration-200 ${
-            mobileOpen ? 'ring-2 ring-slate-300 dark:ring-slate-600' : ''
+          className={`md:hidden p-2 rounded-lg bg-secondary text-secondary-foreground hover:bg-accent transition-colors duration-200 ${
+            mobileOpen ? 'ring-2 ring-ring' : ''
           }`}
           aria-label="Toggle menu"
           onClick={() => setMobileOpen(v => !v)}
@@ -164,7 +164,7 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="md:hidden border-t border-slate-200 dark:border-slate-700 bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg rounded-b-xl sm:rounded-b-2xl shadow-lg">
+        <div className="md:hidden border-t border-border bg-card/95 backdrop-blur-lg rounded-b-xl sm:rounded-b-2xl shadow-lg">
           <div className="flex flex-col p-4 sm:p-6 space-y-3 sm:space-y-4">
             {/* Mobile Navigation */}
             <div className="space-y-2">
@@ -175,14 +175,14 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
                   onClick={(e) => handleNavClick(e, link.id)}
                   className={`block px-4 py-3 rounded-lg font-medium transition-colors duration-200 ${
                     activeSection === link.id
-                      ? 'text-white bg-slate-800 dark:bg-slate-200 dark:text-slate-800'
-                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800'
+                      ? 'text-primary-foreground bg-primary'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-accent'
                   }`}
                 >
                   <div className="flex items-center justify-between">
                     {link.label}
                     {activeSection === link.id && (
-                      <div className="w-2 h-2 bg-slate-800 dark:bg-slate-200 rounded-full"></div>
+                      <div className="w-2 h-2 bg-primary-foreground rounded-full"></div>
                     )}
                   </div>
                 </a>
@@ -192,7 +192,7 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
             {/* Mobile Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className="flex items-center justify-center space-x-3 w-full p-3 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors duration-200"
+              className="flex items-center justify-center space-x-3 w-full p-3 rounded-lg bg-secondary text-secondary-foreground hover:bg-accent transition-colors duration-200"
               aria-label={`Switch to ${currentTheme === 'light' ? 'dark' : 'light'} mode`}
             >
               {getThemeIcon()}
@@ -209,8 +209,8 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
                   href={btn.href}
                   className={
                     btn.type === 'primary'
-                      ? 'block w-full px-6 py-3 rounded-lg font-semibold text-white bg-slate-800 dark:bg-slate-200 dark:text-slate-800 hover:bg-slate-700 dark:hover:bg-slate-300 transition-colors duration-200 text-center'
-                      : 'block w-full px-6 py-3 rounded-lg font-semibold text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-800 dark:hover:text-slate-200 transition-colors duration-200 text-center'
+                      ? 'block w-full px-6 py-3 rounded-lg font-semibold text-primary-foreground bg-primary hover:bg-primary/90 transition-colors duration-200 text-center'
+                      : 'block w-full px-6 py-3 rounded-lg font-semibold text-muted-foreground border border-border hover:bg-accent hover:text-accent-foreground transition-colors duration-200 text-center'
                   }
                   onClick={() => setMobileOpen(false)}
                 >
