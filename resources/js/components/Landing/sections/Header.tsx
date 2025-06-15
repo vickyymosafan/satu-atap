@@ -88,14 +88,14 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
     }
   };
   return (
-    <header className="fixed top-2 sm:top-4 left-1/2 transform -translate-x-1/2 w-[96%] sm:w-[95%] md:w-[90%] max-w-7xl bg-card/90 backdrop-blur-lg shadow-lg rounded-xl sm:rounded-2xl z-[100] border border-border transition-all duration-300">
-      <div className="flex items-center justify-between py-3 sm:py-4 px-4 sm:px-6 md:px-8 lg:px-10">
-        {/* Logo with professional styling */}
-        <div className="flex items-center space-x-3">
-          <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-            <span className="text-primary-foreground font-bold text-sm">SA</span>
+    <header className="fixed top-2 sm:top-4 left-1/2 transform -translate-x-1/2 w-[96%] sm:w-[95%] md:w-[90%] max-w-6xl bg-card/90 backdrop-blur-lg shadow-lg rounded-lg md:rounded-xl z-[100] border border-border transition-all duration-300">
+      <div className="flex items-center justify-between py-2 md:py-3 px-4 md:px-6 lg:px-8">
+        {/* Logo with professional styling - Laptop optimized */}
+        <div className="flex items-center space-x-2 md:space-x-3">
+          <div className="w-7 h-7 md:w-8 md:h-8 bg-primary rounded-lg flex items-center justify-center">
+            <span className="text-primary-foreground font-bold text-xs md:text-sm">SA</span>
           </div>
-          <div className="text-2xl font-bold text-foreground tracking-tight select-none">
+          <div className="text-lg md:text-xl lg:text-2xl font-bold text-foreground tracking-tight select-none">
             Satu Atap
           </div>
         </div>

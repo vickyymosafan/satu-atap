@@ -249,32 +249,32 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
   }, [property.id]);
 
   return (
-    <div className="group bg-card rounded-2xl shadow-sm border border-border overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-      {/* Image Section */}
-      <div className="relative aspect-[4/3] overflow-hidden">
+    <div className="group bg-card/80 backdrop-blur-sm rounded-xl shadow-lg border border-border/50 overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 hover:scale-[1.01] h-full flex flex-col">
+      {/* Optimized Image Section - Reduced aspect ratio for compactness */}
+      <div className="relative aspect-[3/2] overflow-hidden">
         {/* Image */}
         <div className="relative w-full h-full bg-muted">
           {!imageLoaded && !imageError && (
             <div className="absolute inset-0 bg-muted animate-pulse flex items-center justify-center">
-              <div className="text-muted-foreground text-sm">Memuat gambar...</div>
+              <div className="text-muted-foreground text-sm font-medium">Memuat gambar...</div>
             </div>
           )}
           {imageError ? (
             <div className="absolute inset-0 bg-muted flex items-center justify-center">
               <div className="text-center text-muted-foreground">
-                <div className="w-16 h-16 mx-auto mb-2 bg-muted-foreground/20 rounded-lg flex items-center justify-center">
-                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-20 h-20 mx-auto mb-3 bg-muted-foreground/20 rounded-2xl flex items-center justify-center">
+                  <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
                 </div>
-                <div className="text-xs">Gambar tidak tersedia</div>
+                <div className="text-sm font-medium">Gambar tidak tersedia</div>
               </div>
             </div>
           ) : (
             <img
               src={property.images[currentImageIndex]?.url || 'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=800&h=600&fit=crop'}
               alt={property.images[currentImageIndex]?.alt || property.title}
-              className={`w-full h-full object-cover transition-opacity duration-300 ${
+              className={`w-full h-full object-cover transition-all duration-300 group-hover:scale-105 ${
                 imageLoaded ? 'opacity-100' : 'opacity-0'
               }`}
               onLoad={() => setImageLoaded(true)}
@@ -320,14 +320,14 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
           </div>
         )}
 
-        {/* Action Buttons */}
-        <div className="absolute top-3 right-3 flex space-x-2">
+        {/* Optimized Action Buttons - Smaller and more compact */}
+        <div className="absolute top-3 right-3 flex space-x-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <button
             onClick={() => onToggleFavorite(property.id)}
-            className={`w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 ${
-              isFavorite 
-                ? 'bg-red-500 text-white' 
-                : 'bg-white/90 hover:bg-white text-gray-700 hover:text-red-500'
+            className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 shadow-md backdrop-blur-sm ${
+              isFavorite
+                ? 'bg-red-500 text-white scale-110'
+                : 'bg-white/90 hover:bg-white text-gray-700 hover:text-red-500 hover:scale-110'
             }`}
             aria-label={isFavorite ? 'Hapus dari favorit' : 'Tambah ke favorit'}
           >
@@ -335,98 +335,116 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
           </button>
           <button
             onClick={() => onQuickView(property)}
-            className="w-9 h-9 bg-white/90 hover:bg-white text-gray-700 hover:text-primary rounded-full flex items-center justify-center transition-all duration-200"
+            className="w-8 h-8 bg-white/90 hover:bg-white text-gray-700 hover:text-primary rounded-full flex items-center justify-center transition-all duration-300 shadow-md backdrop-blur-sm hover:scale-110"
             aria-label="Lihat detail cepat"
           >
             <Eye className="w-4 h-4" />
           </button>
         </div>
 
-        {/* Property Type Badge */}
+        {/* Optimized Property Type Badge - Smaller and more compact */}
         <div className="absolute top-3 left-3">
-          <span className={`px-2 py-1 text-xs font-medium rounded-full ${
-            property.property_type === 'putra' 
-              ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300'
+          <span className={`px-2 py-1 text-xs font-bold rounded-full shadow-md backdrop-blur-sm ${
+            property.property_type === 'putra'
+              ? 'bg-blue-500/90 text-white'
               : property.property_type === 'putri'
-              ? 'bg-pink-100 text-pink-800 dark:bg-pink-900/30 dark:text-pink-300'
-              : 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300'
+              ? 'bg-pink-500/90 text-white'
+              : 'bg-green-500/90 text-white'
           }`}>
-            {property.property_type === 'putra' ? 'Putra' : 
-             property.property_type === 'putri' ? 'Putri' : 'Campur'}
+            {property.property_type === 'putra' ? '👨 Putra' :
+             property.property_type === 'putri' ? '👩 Putri' : '👥 Campur'}
           </span>
         </div>
 
-        {/* Verified Badge */}
+        {/* Optimized Verified Badge - Smaller and more compact */}
         {property.is_verified && (
           <div className="absolute bottom-3 left-3">
-            <div className="flex items-center space-x-1 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 px-2 py-1 rounded-full text-xs font-medium">
+            <div className="flex items-center space-x-1 bg-green-500/90 text-white px-2 py-1 rounded-full text-xs font-bold shadow-md backdrop-blur-sm">
               <CheckCircle className="w-3 h-3" />
               <span>Terverifikasi</span>
             </div>
           </div>
         )}
+
+        {/* Optimized Rating Badge - Smaller and more compact */}
+        <div className="absolute bottom-3 right-3">
+          <div className="flex items-center space-x-1 bg-yellow-500/90 text-white px-2 py-1 rounded-full text-xs font-bold shadow-md backdrop-blur-sm">
+            <Star className="w-3 h-3 fill-current" />
+            <span>{property.rating}</span>
+          </div>
+        </div>
       </div>
 
-      {/* Content Section */}
-      <div className="p-4 space-y-3">
-        {/* Title and Rating */}
-        <div className="space-y-2">
-          <h3 className="font-semibold text-foreground line-clamp-2 group-hover:text-primary transition-colors duration-200">
+      {/* Optimized Content Section - Reduced padding for compactness */}
+      <div className="p-4 flex flex-col flex-grow">
+        {/* Title and Rating - Reduced spacing */}
+        <div className="space-y-2 mb-3">
+          <h3 className="text-base font-bold text-foreground line-clamp-2 group-hover:text-primary transition-colors duration-300 leading-tight min-h-[2.5rem]">
             {property.title}
           </h3>
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-1">
-              <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-              <span className="text-sm font-medium text-foreground">
-                {property.rating}
-              </span>
-              <span className="text-sm text-muted-foreground">
+            <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-1 bg-yellow-50 dark:bg-yellow-900/20 px-2 py-1 rounded-lg">
+                <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+                <span className="text-xs font-bold text-foreground">
+                  {property.rating}
+                </span>
+              </div>
+              <span className="text-xs text-muted-foreground">
                 ({property.review_count} ulasan)
               </span>
             </div>
-            <div className="text-sm text-muted-foreground">
+            <div className="text-xs font-semibold text-green-600 dark:text-green-400">
               {property.available_rooms} kamar tersisa
             </div>
           </div>
         </div>
 
-        {/* Location */}
-        <div className="flex items-start space-x-2">
-          <MapPin className="w-4 h-4 text-muted-foreground mt-0.5 flex-shrink-0" />
-          <div className="text-sm text-muted-foreground line-clamp-2">
-            {property.location.district}, {property.location.city}
+        {/* Location - Optimized for compactness */}
+        <div className="flex items-start space-x-2 bg-muted/30 rounded-lg p-3 mb-3">
+          <MapPin className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+          <div>
+            <div className="text-xs font-semibold text-foreground">
+              {property.location.district}, {property.location.city}
+            </div>
+            <div className="text-xs text-muted-foreground">
+              {property.location.province}
+            </div>
           </div>
         </div>
 
-        {/* Amenities */}
-        <div className="flex items-center space-x-3">
-          {property.amenities.slice(0, 3).map((amenity) => (
-            <div key={amenity.id} className="flex items-center space-x-1">
-              {amenity.icon === 'wifi' && <Wifi className="w-4 h-4 text-muted-foreground" />}
-              {amenity.icon === 'car' && <Car className="w-4 h-4 text-muted-foreground" />}
-              {amenity.icon === 'shield' && <Shield className="w-4 h-4 text-muted-foreground" />}
-              <span className="text-xs text-muted-foreground">{amenity.name}</span>
-            </div>
-          ))}
-          {property.amenities.length > 3 && (
-            <span className="text-xs text-muted-foreground">
-              +{property.amenities.length - 3} lainnya
-            </span>
-          )}
+        {/* Amenities - Optimized for compactness */}
+        <div className="space-y-2 mb-4 flex-grow">
+          <div className="text-xs font-semibold text-foreground">Fasilitas:</div>
+          <div className="flex flex-wrap gap-1.5">
+            {property.amenities.slice(0, 3).map((amenity) => (
+              <div key={amenity.id} className="flex items-center space-x-1 bg-primary/10 text-primary px-2 py-1 rounded-full text-xs font-medium">
+                {amenity.icon === 'wifi' && <Wifi className="w-3 h-3" />}
+                {amenity.icon === 'car' && <Car className="w-3 h-3" />}
+                {amenity.icon === 'shield' && <Shield className="w-3 h-3" />}
+                <span>{amenity.name}</span>
+              </div>
+            ))}
+            {property.amenities.length > 3 && (
+              <div className="bg-muted text-muted-foreground px-2 py-1 rounded-full text-xs font-medium">
+                +{property.amenities.length - 3} lainnya
+              </div>
+            )}
+          </div>
         </div>
 
-        {/* Price */}
-        <div className="pt-2 border-t border-border">
+        {/* Price - Optimized for compactness */}
+        <div className="pt-4 border-t border-border mt-auto">
           <div className="flex items-center justify-between">
             <div>
               <div className="text-lg font-bold text-primary">
                 {formatPrice(property.price_monthly)}
               </div>
-              <div className="text-sm text-muted-foreground">per bulan</div>
+              <div className="text-xs text-muted-foreground font-medium">per bulan</div>
             </div>
             <button
               onClick={() => onQuickView(property)}
-              className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors duration-200 text-sm font-medium"
+              className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all duration-300 text-xs font-bold shadow-lg hover:shadow-xl transform hover:scale-105"
             >
               Lihat Detail
             </button>
@@ -503,37 +521,44 @@ const FeaturedKosts: React.FC<FeaturedKostsProps> = () => {
   };
 
   return (
-    <section 
+    <section
       ref={sectionRef}
-      className="py-16 sm:py-20 lg:py-24 bg-background"
+      className="py-20 sm:py-24 lg:py-32 bg-muted/20 relative overflow-hidden"
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-        {/* Section Header */}
-        <div className={`text-center mb-12 sm:mb-16 transition-all duration-700 ${
+      {/* Background decoration */}
+      <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(circle_at_1px_1px,_rgb(0,0,0)_1px,_transparent_0)] bg-[length:32px_32px]"></div>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl relative">
+        {/* Laptop optimized Section Header */}
+        <div className={`text-center mb-10 md:mb-12 transition-all duration-700 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+          <div className="inline-flex items-center gap-2 md:gap-3 px-4 md:px-6 py-2 md:py-3 bg-primary/10 rounded-full border border-primary/20 mb-6 md:mb-8">
+            <span className="text-primary font-semibold text-xs md:text-sm">⭐ Pilihan Terbaik</span>
+          </div>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4 md:mb-6 leading-tight">
             Kost Unggulan
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Temukan kost terbaik dengan fasilitas lengkap dan lokasi strategis yang telah dipilih khusus untuk Anda
+          <p className="text-sm md:text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto leading-normal">
+            Temukan kost terbaik dengan fasilitas lengkap dan lokasi strategis yang telah dipilih khusus untuk Anda.
+            Semua properti telah diverifikasi dan mendapat rating tinggi dari penghuni.
           </p>
         </div>
 
-        {/* Content */}
+        {/* Enhanced Content - Laptop optimized */}
         {loading ? (
-          // Loading State
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {[...Array(8)].map((_, index) => (
-              <div key={index} className="bg-card rounded-2xl shadow-sm border border-border overflow-hidden">
-                <div className="aspect-[4/3] bg-muted animate-pulse" />
+          // Loading State - Optimized for compact cards
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {[...Array(6)].map((_, index) => (
+              <div key={index} className="bg-card/80 backdrop-blur-sm rounded-xl shadow-lg border border-border/50 overflow-hidden">
+                <div className="aspect-[3/2] bg-muted animate-pulse" />
                 <div className="p-4 space-y-3">
-                  <div className="h-4 bg-muted animate-pulse rounded" />
-                  <div className="h-3 bg-muted animate-pulse rounded w-3/4" />
-                  <div className="h-3 bg-muted animate-pulse rounded w-1/2" />
-                  <div className="flex justify-between items-center pt-2">
-                    <div className="h-6 bg-muted animate-pulse rounded w-24" />
-                    <div className="h-8 bg-muted animate-pulse rounded w-20" />
+                  <div className="h-4 bg-muted animate-pulse rounded-lg" />
+                  <div className="h-3 bg-muted animate-pulse rounded-lg w-3/4" />
+                  <div className="h-3 bg-muted animate-pulse rounded-lg w-1/2" />
+                  <div className="flex justify-between items-center pt-3 border-t border-border">
+                    <div className="h-5 bg-muted animate-pulse rounded-lg w-24" />
+                    <div className="h-8 bg-muted animate-pulse rounded-lg w-20" />
                   </div>
                 </div>
               </div>
@@ -541,53 +566,67 @@ const FeaturedKosts: React.FC<FeaturedKostsProps> = () => {
           </div>
         ) : error ? (
           // Error State
-          <div className="text-center py-12">
-            <div className="text-muted-foreground mb-4">
-              <svg className="w-16 h-16 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
-              </svg>
+          <div className="text-center py-16">
+            <div className="bg-card/80 backdrop-blur-sm rounded-2xl p-12 border border-border/50 shadow-lg max-w-md mx-auto">
+              <div className="text-muted-foreground mb-6">
+                <svg className="w-20 h-20 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-bold text-foreground mb-3">Terjadi Kesalahan</h3>
+              <p className="text-muted-foreground mb-8 leading-relaxed">{error}</p>
+              <button
+                onClick={() => window.location.reload()}
+                className="px-8 py-4 bg-primary text-primary-foreground rounded-xl hover:bg-primary/90 transition-all duration-300 font-bold shadow-lg hover:shadow-xl transform hover:scale-105"
+              >
+                Coba Lagi
+              </button>
             </div>
-            <h3 className="text-lg font-semibold text-foreground mb-2">Terjadi Kesalahan</h3>
-            <p className="text-muted-foreground mb-6">{error}</p>
-            <button
-              onClick={() => window.location.reload()}
-              className="px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors duration-200 font-medium"
-            >
-              Coba Lagi
-            </button>
           </div>
         ) : (
-          // Properties Grid
-          <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 transition-all duration-700 delay-200 ${
+          // Properties Grid - Laptop optimized 3 Column Layout
+          <div className={`transition-all duration-700 delay-200 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}>
-            {properties.map((property, index) => (
-              <div
-                key={property.id}
-                className="transition-all duration-300"
-                style={{
-                  animationDelay: isVisible ? `${index * 100}ms` : '0ms'
-                }}
-              >
-                <PropertyCard
-                  property={property}
-                  onQuickView={handleQuickView}
-                  onToggleFavorite={handleToggleFavorite}
-                  isFavorite={favorites.has(property.id)}
-                />
-              </div>
-            ))}
+            {/* Unified Grid - All properties in one consistent 3-column grid optimized for laptops */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+              {properties.map((property, index) => (
+                <div
+                  key={property.id}
+                  className="transition-all duration-500"
+                  style={{
+                    animationDelay: isVisible ? `${index * 150}ms` : '0ms'
+                  }}
+                >
+                  <PropertyCard
+                    property={property}
+                    onQuickView={handleQuickView}
+                    onToggleFavorite={handleToggleFavorite}
+                    isFavorite={favorites.has(property.id)}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         )}
 
-        {/* View More Button */}
+        {/* Enhanced View More Button - Laptop optimized */}
         {!loading && !error && properties.length > 0 && (
-          <div className={`text-center mt-12 transition-all duration-700 delay-500 ${
+          <div className={`text-center mt-10 md:mt-12 transition-all duration-700 delay-500 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}>
-            <button className="px-8 py-3 bg-secondary text-secondary-foreground rounded-lg hover:bg-accent hover:text-accent-foreground transition-colors duration-200 font-medium">
-              Lihat Semua Kost Unggulan
-            </button>
+            <div className="bg-card/50 backdrop-blur-sm rounded-2xl lg:rounded-3xl p-6 md:p-8 border border-border/50 shadow-lg">
+              <h3 className="text-lg md:text-xl font-bold text-foreground mb-2 md:mb-3">
+                Masih mencari kost yang tepat?
+              </h3>
+              <p className="text-sm md:text-base text-muted-foreground mb-4 md:mb-6 max-w-md mx-auto">
+                Jelajahi koleksi lengkap kost unggulan kami dengan berbagai pilihan lokasi dan fasilitas
+              </p>
+              <button className="px-8 md:px-10 py-3 md:py-4 bg-primary text-primary-foreground rounded-lg md:rounded-xl hover:bg-primary/90 transition-all duration-300 font-bold shadow-lg hover:shadow-xl transform hover:scale-105 group text-sm md:text-base">
+                <span className="mr-2">Lihat Semua Kost Unggulan</span>
+                <span className="group-hover:translate-x-1 transition-transform duration-200 inline-block">→</span>
+              </button>
+            </div>
           </div>
         )}
       </div>

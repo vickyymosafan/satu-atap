@@ -201,60 +201,60 @@ const QuickSearch: React.FC<ThemeProps> = () => {
   }, [showLocationDropdown]);
 
   return (
-    <section id="quick-search" className="relative py-8 sm:py-12 md:py-16 lg:py-20 bg-background transition-colors duration-300">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Simplified Header - User-Focused */}
-        <div className="text-center mb-8 sm:mb-10 md:mb-12">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 sm:mb-4">
-            Temukan Kost Impian Anda
+    <section id="quick-search" className="relative py-12 sm:py-16 lg:py-20 bg-background transition-colors duration-300">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+        {/* Laptop optimized Header */}
+        <div className="text-center mb-10 md:mb-12">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4 md:mb-6 leading-tight">
+            Cari Kost Impian Anda
           </h2>
-          <p className="text-sm sm:text-base text-muted-foreground max-w-xl mx-auto">
-            Cari kost dengan mudah berdasarkan lokasi dan budget Anda
+          <p className="text-sm md:text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto leading-normal">
+            Temukan kost yang sempurna dengan pencarian yang mudah dan cepat
           </p>
         </div>
 
-        {/* Main Search Container - User-Friendly Design */}
+        {/* Main Search Container - Laptop optimized Design */}
         <div className="max-w-4xl mx-auto">
-          <div className="bg-card rounded-xl shadow-lg border border-border overflow-hidden">
+          <div className="bg-card/80 backdrop-blur-sm rounded-xl lg:rounded-2xl shadow-lg border border-border/50 overflow-hidden">
 
-            {/* Primary Search Section */}
-            <div className="p-6 sm:p-8">
-              {/* Step Indicator - Mobile Optimized */}
-              <div className="flex items-center justify-center mb-6 sm:mb-8">
-                <div className="flex items-center space-x-3 sm:space-x-4 text-xs sm:text-sm text-muted-foreground">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-7 h-7 sm:w-8 sm:h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-xs sm:text-sm font-semibold">1</div>
-                    <span className="font-medium hidden sm:inline">Lokasi</span>
-                    <span className="font-medium sm:hidden">Lokasi</span>
+            {/* Primary Search Section - Laptop optimized */}
+            <div className="p-6 md:p-8 lg:p-10">
+              {/* Laptop optimized Progress Indicator */}
+              <div className="flex items-center justify-center mb-8 md:mb-10">
+                <div className="flex items-center space-x-4 md:space-x-6">
+                  <div className="flex items-center space-x-2 md:space-x-3">
+                    <div className="w-10 h-10 md:w-12 md:h-12 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-xs md:text-sm font-bold shadow-lg">1</div>
+                    <span className="font-semibold text-foreground hidden sm:inline text-sm md:text-base">Lokasi</span>
                   </div>
-                  <div className="w-6 sm:w-8 h-px bg-border"></div>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-7 h-7 sm:w-8 sm:h-8 bg-muted text-muted-foreground rounded-full flex items-center justify-center text-xs sm:text-sm font-semibold">2</div>
-                    <span className="hidden sm:inline">Budget</span>
-                    <span className="sm:hidden">Budget</span>
+                  <div className="w-8 md:w-12 lg:w-16 h-0.5 bg-gradient-to-r from-primary to-border rounded-full"></div>
+                  <div className="flex items-center space-x-2 md:space-x-3">
+                    <div className="w-10 h-10 md:w-12 md:h-12 bg-muted text-muted-foreground rounded-full flex items-center justify-center text-xs md:text-sm font-bold">2</div>
+                    <span className="font-semibold text-muted-foreground hidden sm:inline text-sm md:text-base">Budget</span>
                   </div>
-                  <div className="w-6 sm:w-8 h-px bg-border"></div>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-7 h-7 sm:w-8 sm:h-8 bg-muted text-muted-foreground rounded-full flex items-center justify-center text-xs sm:text-sm font-semibold">3</div>
-                    <span className="hidden sm:inline">Cari</span>
-                    <span className="sm:hidden">Cari</span>
+                  <div className="w-8 md:w-12 lg:w-16 h-0.5 bg-border rounded-full"></div>
+                  <div className="flex items-center space-x-2 md:space-x-3">
+                    <div className="w-10 h-10 md:w-12 md:h-12 bg-muted text-muted-foreground rounded-full flex items-center justify-center text-xs md:text-sm font-bold">3</div>
+                    <span className="font-semibold text-muted-foreground hidden sm:inline text-sm md:text-base">Cari</span>
                   </div>
                 </div>
               </div>
 
-              {/* Search Form - Simplified Layout */}
-              <div className="space-y-6">
+              {/* Search Form - Laptop optimized Layout */}
+              <div className="space-y-6 md:space-y-8">
 
-                {/* Location Search - User-Friendly Design */}
+                {/* Location Search - Laptop optimized Design */}
                 <div>
-                  <label className="block text-lg font-semibold text-foreground mb-3">
+                  <label className="block text-lg md:text-xl font-bold text-foreground mb-4 md:mb-6">
                     Di mana Anda ingin tinggal?
                     <span className="text-destructive ml-1">*</span>
                   </label>
+                  <p className="text-sm md:text-base text-muted-foreground mb-4 md:mb-6">
+                    Masukkan nama kota, daerah, atau landmark terdekat
+                  </p>
                   <div className="relative">
                     <div className="relative group">
-                      <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-10">
-                        <MapPin className="h-5 w-5 text-muted-foreground group-focus-within:text-foreground transition-colors duration-200" />
+                      <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none z-10">
+                        <MapPin className="h-6 w-6 text-muted-foreground group-focus-within:text-primary transition-colors duration-200" />
                       </div>
                       <input
                         ref={locationInputRef}
@@ -263,8 +263,8 @@ const QuickSearch: React.FC<ThemeProps> = () => {
                         onChange={(e) => handleLocationChange(e.target.value)}
                         onFocus={() => setShowLocationDropdown(true)}
                         onKeyDown={handleLocationKeyDown}
-                        placeholder="Coba ketik 'Jakarta', 'Bandung', atau nama daerah lainnya..."
-                        className="w-full pl-12 pr-12 py-4 text-base bg-input border-2 border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring text-foreground placeholder-muted-foreground transition-all duration-200 hover:border-accent"
+                        placeholder="Contoh: Jakarta Selatan, Bandung, atau Universitas Indonesia..."
+                        className="w-full pl-16 pr-16 py-6 text-lg bg-input border-2 border-border rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary text-foreground placeholder-muted-foreground transition-all duration-200 hover:border-accent shadow-sm"
                         required
                         aria-describedby="location-help"
                         aria-label="Masukkan lokasi kost yang diinginkan"
@@ -277,79 +277,92 @@ const QuickSearch: React.FC<ThemeProps> = () => {
                         <button
                           type="button"
                           onClick={() => handleLocationChange('')}
-                          className="absolute inset-y-0 right-0 pr-4 flex items-center text-muted-foreground hover:text-foreground transition-colors duration-200"
+                          className="absolute inset-y-0 right-0 pr-6 flex items-center text-muted-foreground hover:text-foreground transition-colors duration-200"
                           aria-label="Hapus lokasi"
                         >
-                          <X className="h-4 w-4" />
+                          <X className="h-5 w-5" />
                         </button>
                       )}
                     </div>
 
-                    {/* Enhanced Location Dropdown with Popular Cities */}
+                    {/* Enhanced Location Dropdown */}
                     {showLocationDropdown && (
                       <div
                         ref={locationDropdownRef}
-                        className="absolute top-full left-0 right-0 mt-2 bg-popover border border-border rounded-lg shadow-xl z-50 max-h-64 overflow-y-auto"
+                        className="absolute top-full left-0 right-0 mt-3 bg-popover border border-border rounded-xl shadow-2xl z-50 max-h-80 overflow-y-auto"
                         role="listbox"
                         aria-label="Pilihan lokasi"
                       >
-                      <div className="p-2">
+                      <div className="p-3">
                         {/* Show popular cities when no input */}
                         {!filters.location && (
                           <>
-                            <div className="px-3 py-2 text-xs text-muted-foreground font-medium border-b border-border mb-2">
-                              Kota populer:
+                            <div className="px-4 py-3 text-sm text-muted-foreground font-semibold border-b border-border mb-3">
+                              🏙️ Kota Populer
                             </div>
-                            {['Jakarta', 'Bandung', 'Yogyakarta', 'Surabaya', 'Semarang'].map((city) => (
-                              <button
-                                key={city}
-                                onClick={() => handleLocationChange(city)}
-                                className="w-full px-3 py-3 text-left hover:bg-accent rounded-md transition-all duration-200 group/item min-h-[44px]"
-                                role="option"
-                              >
-                                <div className="flex items-center space-x-3">
-                                  <div className="w-2 h-2 bg-muted-foreground rounded-full group-hover/item:bg-accent-foreground transition-colors duration-200"></div>
-                                  <div className="text-popover-foreground font-medium text-sm">
-                                    {city}
+                            <div className="space-y-1">
+                              {['Jakarta', 'Bandung', 'Yogyakarta', 'Surabaya', 'Semarang'].map((city) => (
+                                <button
+                                  key={city}
+                                  onClick={() => handleLocationChange(city)}
+                                  className="w-full px-4 py-4 text-left hover:bg-accent rounded-lg transition-all duration-200 group/item min-h-[52px] border border-transparent hover:border-accent"
+                                  role="option"
+                                >
+                                  <div className="flex items-center space-x-4">
+                                    <div className="w-3 h-3 bg-primary rounded-full group-hover/item:scale-110 transition-transform duration-200"></div>
+                                    <div className="text-popover-foreground font-semibold text-base">
+                                      {city}
+                                    </div>
                                   </div>
-                                </div>
-                              </button>
-                            ))}
+                                </button>
+                              ))}
+                            </div>
                           </>
                         )}
 
                         {/* Show filtered locations when typing */}
                         {filters.location && filteredLocations.length > 0 && (
                           <>
-                            {filteredLocations.slice(0, 8).map((location, index) => (
-                              <button
-                                key={location.id}
-                                onClick={() => handleLocationSelect(location)}
-                                className="w-full px-3 py-3 text-left hover:bg-accent rounded-md transition-all duration-200 group/item min-h-[44px]"
-                                role="option"
-                                aria-selected={filters.selectedLocation?.id === location.id}
-                                tabIndex={index === 0 ? 0 : -1}
-                              >
-                                <div className="flex items-center space-x-3">
-                                  <div className="w-2 h-2 bg-muted-foreground rounded-full group-hover/item:bg-accent-foreground transition-colors duration-200"></div>
-                                  <div>
-                                    <div className="text-popover-foreground font-medium text-sm">
-                                      {location.name}
-                                    </div>
-                                    <div className="text-xs text-muted-foreground">
-                                      {location.city}, {location.province}
+                            <div className="px-4 py-3 text-sm text-muted-foreground font-semibold border-b border-border mb-3">
+                              📍 Hasil Pencarian
+                            </div>
+                            <div className="space-y-1">
+                              {filteredLocations.slice(0, 6).map((location, index) => (
+                                <button
+                                  key={location.id}
+                                  onClick={() => handleLocationSelect(location)}
+                                  className="w-full px-4 py-4 text-left hover:bg-accent rounded-lg transition-all duration-200 group/item min-h-[56px] border border-transparent hover:border-accent"
+                                  role="option"
+                                  aria-selected={filters.selectedLocation?.id === location.id}
+                                  tabIndex={index === 0 ? 0 : -1}
+                                >
+                                  <div className="flex items-center space-x-4">
+                                    <div className="w-3 h-3 bg-muted-foreground rounded-full group-hover/item:bg-primary group-hover/item:scale-110 transition-all duration-200"></div>
+                                    <div>
+                                      <div className="text-popover-foreground font-semibold text-base">
+                                        {location.name}
+                                      </div>
+                                      <div className="text-sm text-muted-foreground">
+                                        {location.city}, {location.province}
+                                      </div>
                                     </div>
                                   </div>
-                                </div>
-                              </button>
-                            ))}
+                                </button>
+                              ))}
+                            </div>
                           </>
                         )}
 
                         {/* No results message */}
                         {filters.location && filteredLocations.length === 0 && (
-                          <div className="px-3 py-4 text-center text-sm text-muted-foreground">
-                            Tidak ada lokasi yang ditemukan
+                          <div className="px-4 py-6 text-center">
+                            <div className="text-muted-foreground mb-2">🔍</div>
+                            <div className="text-sm text-muted-foreground font-medium">
+                              Tidak ada lokasi yang ditemukan
+                            </div>
+                            <div className="text-xs text-muted-foreground mt-1">
+                              Coba kata kunci lain
+                            </div>
                           </div>
                         )}
                       </div>
@@ -360,22 +373,25 @@ const QuickSearch: React.FC<ThemeProps> = () => {
 
                 </div>
 
-                {/* Price Range - User-Friendly Design */}
+                {/* Price Range - Enhanced Design */}
                 <div>
-                  <label className="block text-lg font-semibold text-foreground mb-3">
+                  <label className="block text-xl font-bold text-foreground mb-4">
                     Berapa budget Anda per bulan?
-                    <span className="text-muted-foreground text-sm font-normal ml-2">(Opsional)</span>
+                    <span className="text-muted-foreground text-base font-normal ml-2">(Opsional)</span>
                   </label>
+                  <p className="text-sm text-muted-foreground mb-6">
+                    Pilih rentang harga yang sesuai dengan kemampuan Anda
+                  </p>
 
-                  {/* Quick Budget Options - Touch-Friendly */}
-                  <div className="mb-6">
-                    <span className="block text-xs text-muted-foreground font-medium mb-3">Budget populer:</span>
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                  {/* Quick Budget Options - Enhanced */}
+                  <div className="mb-8">
+                    <span className="block text-sm text-muted-foreground font-semibold mb-4">💰 Budget Populer</span>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                       {[
-                        { label: '< 1 Juta', min: 0, max: 1000000 },
-                        { label: '1-2 Juta', min: 1000000, max: 2000000 },
-                        { label: '2-3 Juta', min: 2000000, max: 3000000 },
-                        { label: '> 3 Juta', min: 3000000, max: 10000000 }
+                        { label: '< 1 Juta', min: 0, max: 1000000, icon: '💵' },
+                        { label: '1-2 Juta', min: 1000000, max: 2000000, icon: '💶' },
+                        { label: '2-3 Juta', min: 2000000, max: 3000000, icon: '💷' },
+                        { label: '> 3 Juta', min: 3000000, max: 10000000, icon: '💸' }
                       ].map((budget) => (
                         <button
                           key={budget.label}
@@ -383,104 +399,120 @@ const QuickSearch: React.FC<ThemeProps> = () => {
                           onClick={() => {
                             setFilters(prev => ({ ...prev, priceRange: [budget.min, budget.max] }));
                           }}
-                          className={`min-h-[44px] px-3 py-2 text-sm rounded-lg transition-colors duration-200 border font-medium ${
+                          className={`min-h-[56px] px-4 py-3 text-sm rounded-xl transition-all duration-200 border font-semibold shadow-sm hover:shadow-md transform hover:scale-105 ${
                             filters.priceRange[0] === budget.min && filters.priceRange[1] === budget.max
-                              ? 'bg-primary text-primary-foreground border-primary'
-                              : 'bg-secondary text-secondary-foreground border-border hover:bg-accent hover:text-accent-foreground'
+                              ? 'bg-primary text-primary-foreground border-primary shadow-lg scale-105'
+                              : 'bg-card text-card-foreground border-border hover:bg-accent hover:text-accent-foreground hover:border-accent'
                           }`}
                         >
-                          {budget.label}
+                          <div className="text-lg mb-1">{budget.icon}</div>
+                          <div>{budget.label}</div>
                         </button>
                       ))}
                     </div>
                   </div>
 
-                  {/* Custom Range Inputs */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-card-foreground mb-2">
-                        Minimum
-                      </label>
-                      <div className="relative">
-                        <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground text-sm">
-                          Rp
-                        </span>
-                        <input
-                          type="number"
-                          value={filters.priceRange[0]}
-                          onChange={(e) => handlePriceRangeChange(0, parseInt(e.target.value) || 0)}
-                          placeholder="500000"
-                          className="w-full pl-8 pr-4 py-3 text-base bg-input border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring text-foreground placeholder-muted-foreground transition-all duration-200"
-                        />
+                  {/* Custom Range Inputs - Enhanced */}
+                  <div className="bg-muted/30 rounded-xl p-6 border border-border/50">
+                    <h4 className="text-base font-semibold text-foreground mb-4">
+                      Atau atur budget custom:
+                    </h4>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-semibold text-foreground mb-3">
+                          Harga Minimum
+                        </label>
+                        <div className="relative">
+                          <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground text-base font-medium">
+                            Rp
+                          </span>
+                          <input
+                            type="number"
+                            value={filters.priceRange[0]}
+                            onChange={(e) => handlePriceRangeChange(0, parseInt(e.target.value) || 0)}
+                            placeholder="500000"
+                            className="w-full pl-10 pr-4 py-4 text-base bg-input border-2 border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary text-foreground placeholder-muted-foreground transition-all duration-200 shadow-sm"
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-semibold text-foreground mb-3">
+                          Harga Maksimum
+                        </label>
+                        <div className="relative">
+                          <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground text-base font-medium">
+                            Rp
+                          </span>
+                          <input
+                            type="number"
+                            value={filters.priceRange[1]}
+                            onChange={(e) => handlePriceRangeChange(1, parseInt(e.target.value) || 0)}
+                            placeholder="2000000"
+                            className="w-full pl-10 pr-4 py-4 text-base bg-input border-2 border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary text-foreground placeholder-muted-foreground transition-all duration-200 shadow-sm"
+                          />
+                        </div>
                       </div>
                     </div>
-                    <div>
-                      <label className="block text-sm font-medium text-card-foreground mb-2">
-                        Maksimum
-                      </label>
-                      <div className="relative">
-                        <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground text-sm">
-                          Rp
-                        </span>
-                        <input
-                          type="number"
-                          value={filters.priceRange[1]}
-                          onChange={(e) => handlePriceRangeChange(1, parseInt(e.target.value) || 0)}
-                          placeholder="2000000"
-                          className="w-full pl-8 pr-4 py-3 text-base bg-input border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring text-foreground placeholder-muted-foreground transition-all duration-200"
-                        />
-                      </div>
-                    </div>
-                  </div>
 
-                  {/* Budget Display */}
-                  <div className="mt-3 p-3 bg-muted rounded-lg">
-                    <div className="text-sm text-muted-foreground">
-                      <span className="font-medium">Budget Anda: </span>
-                      {formatPrice(filters.priceRange[0])} - {formatPrice(filters.priceRange[1])}
+                    {/* Budget Display - Enhanced */}
+                    <div className="mt-6 p-4 bg-card rounded-xl border border-border shadow-sm">
+                      <div className="text-center">
+                        <div className="text-sm text-muted-foreground mb-1">Budget yang dipilih:</div>
+                        <div className="text-lg font-bold text-primary">
+                          {formatPrice(filters.priceRange[0])} - {formatPrice(filters.priceRange[1])}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
 
               </div>
 
-              {/* Search Button - User-Friendly Design */}
-              <div className="mt-8">
+              {/* Search Button - Enhanced Design */}
+              <div className="mt-10">
                 <button
                   onClick={handleSearch}
                   disabled={isSearching || !filters.location.trim()}
-                  className="w-full h-14 px-8 bg-primary text-primary-foreground font-bold rounded-lg hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-3 shadow-lg hover:shadow-xl text-lg transform hover:scale-[1.02] active:scale-[0.98]"
+                  className="w-full h-16 px-8 bg-gradient-to-r from-primary to-primary/90 text-primary-foreground font-bold rounded-2xl hover:from-primary/90 hover:to-primary focus:outline-none focus:ring-4 focus:ring-primary/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center gap-4 shadow-xl hover:shadow-2xl text-xl transform hover:scale-[1.02] active:scale-[0.98] group"
                   aria-label={isSearching ? 'Sedang mencari kost' : 'Mulai pencarian kost'}
                 >
                   {isSearching ? (
                     <>
-                      <div className="animate-spin rounded-full h-5 w-5 border-2 border-primary-foreground border-t-transparent flex-shrink-0"></div>
-                      <span>Mencari kost terbaik...</span>
+                      <div className="animate-spin rounded-full h-6 w-6 border-3 border-primary-foreground border-t-transparent flex-shrink-0"></div>
+                      <span>Mencari kost terbaik untuk Anda...</span>
                     </>
                   ) : (
                     <>
-                      <Search className="w-5 h-5 flex-shrink-0" />
+                      <Search className="w-6 h-6 flex-shrink-0 group-hover:scale-110 transition-transform duration-200" />
                       <span>Cari Kost Sekarang</span>
+                      <div className="ml-2 text-primary-foreground/70 group-hover:text-primary-foreground transition-colors duration-200">
+                        →
+                      </div>
                     </>
                   )}
                 </button>
 
-                {/* Helper Text & Search Summary */}
-                <div className="mt-3 text-center">
+                {/* Enhanced Helper Text & Search Summary */}
+                <div className="mt-6 text-center">
                   {!filters.location.trim() ? (
-                    <p className="text-sm text-muted-foreground">
-                      Masukkan lokasi untuk mulai mencari kost
-                    </p>
-                  ) : (
-                    <div className="space-y-1">
-                      <p className="text-sm text-card-foreground">
-                        Siap mencari kost di <span className="font-semibold">{filters.selectedLocation?.name || filters.location}</span>
+                    <div className="bg-muted/50 rounded-xl p-4 border border-border/50">
+                      <p className="text-sm text-muted-foreground">
+                        📍 Masukkan lokasi untuk mulai mencari kost impian Anda
                       </p>
-                      {filters.amenities.length > 0 && (
-                        <p className="text-xs text-muted-foreground">
-                          dengan {filters.amenities.length} fasilitas pilihan
+                    </div>
+                  ) : (
+                    <div className="bg-primary/5 rounded-xl p-4 border border-primary/20">
+                      <div className="space-y-2">
+                        <p className="text-base text-foreground font-semibold">
+                          ✅ Siap mencari kost di <span className="text-primary">{filters.selectedLocation?.name || filters.location}</span>
                         </p>
-                      )}
+                        <div className="flex items-center justify-center gap-4 text-sm text-muted-foreground">
+                          <span>Budget: {formatPrice(filters.priceRange[0])} - {formatPrice(filters.priceRange[1])}</span>
+                          {filters.amenities.length > 0 && (
+                            <span>• {filters.amenities.length} fasilitas dipilih</span>
+                          )}
+                        </div>
+                      </div>
                     </div>
                   )}
                 </div>
