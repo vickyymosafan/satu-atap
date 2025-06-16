@@ -167,20 +167,7 @@ const IntegratedKostSearch: React.FC<ThemeProps> = () => {
     setShowLocationDropdown(false);
   };
 
-  // Handle price range change
-  const handlePriceRangeChange = (index: number, value: number) => {
-    setFilters(prev => {
-      const newRange: [number, number] = [...prev.priceRange];
-      newRange[index] = value;
-      // Ensure min doesn't exceed max and vice versa
-      if (index === 0 && value > newRange[1]) {
-        newRange[1] = value;
-      } else if (index === 1 && value < newRange[0]) {
-        newRange[0] = value;
-      }
-      return { ...prev, priceRange: newRange };
-    });
-  };
+
 
   // Handle amenity toggle
   const handleAmenityToggle = (amenityId: string) => {
@@ -618,7 +605,7 @@ const IntegratedKostSearch: React.FC<ThemeProps> = () => {
             ) : (
               // Properties Grid
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {properties.map((property, index) => (
+                {properties.map((property) => (
                   <PropertyCard
                     key={property.id}
                     property={property}
