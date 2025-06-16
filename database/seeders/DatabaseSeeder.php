@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             KostLocationSeeder::class,
             KostAmenitySeeder::class,
             KostPropertySeeder::class,
+            KostPropertyAmenitySeeder::class,
             KostImageSeeder::class,
         ]);
     }

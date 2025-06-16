@@ -48,6 +48,77 @@ class KostAmenitySeeder extends Seeder
                 'category' => 'basic',
                 'is_popular' => true,
             ],
+            // Additional Indonesian amenities
+            [
+                'id' => 6,
+                'name' => 'AC',
+                'icon' => 'snowflake',
+                'category' => 'comfort',
+                'is_popular' => true,
+            ],
+            [
+                'id' => 7,
+                'name' => 'Dapur Bersama',
+                'icon' => 'chef-hat',
+                'category' => 'basic',
+                'is_popular' => true,
+            ],
+            [
+                'id' => 8,
+                'name' => 'TV Kabel',
+                'icon' => 'tv',
+                'category' => 'comfort',
+                'is_popular' => false,
+            ],
+            [
+                'id' => 9,
+                'name' => 'Listrik Termasuk',
+                'icon' => 'zap',
+                'category' => 'basic',
+                'is_popular' => false,
+            ],
+            [
+                'id' => 10,
+                'name' => 'Air Bersih',
+                'icon' => 'waves',
+                'category' => 'basic',
+                'is_popular' => false,
+            ],
+            [
+                'id' => 11,
+                'name' => 'Kamar Furnished',
+                'icon' => 'home',
+                'category' => 'comfort',
+                'is_popular' => true,
+            ],
+            [
+                'id' => 12,
+                'name' => 'Mushola',
+                'icon' => 'home',
+                'category' => 'basic',
+                'is_popular' => true,
+            ],
+            [
+                'id' => 13,
+                'name' => 'Kantin',
+                'icon' => 'utensils',
+                'category' => 'comfort',
+                'is_popular' => false,
+            ],
+            [
+                'id' => 14,
+                'name' => 'Taman',
+                'icon' => 'tree-pine',
+                'category' => 'comfort',
+                'is_popular' => false,
+            ],
+            [
+                'id' => 15,
+                'name' => 'Ruang Tamu',
+                'icon' => 'sofa',
+                'category' => 'comfort',
+                'is_popular' => false,
+            ],
         ];
 
         foreach ($amenities as $amenity) {

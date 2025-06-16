@@ -38,6 +38,10 @@ Route::prefix('kosts')->group(function () {
     Route::get('/search', [App\Http\Controllers\KostController::class, 'search'])
         ->name('api.kosts.search');
 
+    // Get location suggestions for autocomplete
+    Route::get('/locations/suggestions', [App\Http\Controllers\KostController::class, 'getLocationSuggestions'])
+        ->name('api.kosts.locations.suggestions');
+
     // Get property details by ID
     Route::get('/{id}', function ($id) {
         // TODO: Implement KostController@show
