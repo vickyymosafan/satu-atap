@@ -523,32 +523,32 @@ const FeaturedKosts: React.FC<FeaturedKostsProps> = () => {
   return (
     <section
       ref={sectionRef}
-      className="py-20 sm:py-24 lg:py-32 bg-muted/20 relative overflow-hidden"
+      className="py-16 sm:py-20 lg:py-24 bg-muted/20 relative overflow-hidden"
     >
       {/* Background decoration */}
       <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(circle_at_1px_1px,_rgb(0,0,0)_1px,_transparent_0)] bg-[length:32px_32px]"></div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl relative">
-        {/* Laptop optimized Section Header */}
-        <div className={`text-center mb-10 md:mb-12 transition-all duration-700 ${
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl relative">
+        {/* Section Header - Matching reference image */}
+        <div className={`text-center mb-8 md:mb-12 transition-all duration-700 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
-          <div className="inline-flex items-center gap-2 md:gap-3 px-4 md:px-6 py-2 md:py-3 bg-primary/10 rounded-full border border-primary/20 mb-6 md:mb-8">
-            <span className="text-primary font-semibold text-xs md:text-sm">⭐ Pilihan Terbaik</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary/10 rounded-full border border-primary/20 mb-4">
+            <span className="text-primary font-semibold text-xs">⭐ Pilihan Terbaik</span>
           </div>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4 md:mb-6 leading-tight">
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3 md:mb-4 leading-tight">
             Kost Unggulan
           </h2>
-          <p className="text-sm md:text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto leading-normal">
+          <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Temukan kost terbaik dengan fasilitas lengkap dan lokasi strategis yang telah dipilih khusus untuk Anda.
             Semua properti telah diverifikasi dan mendapat rating tinggi dari penghuni.
           </p>
         </div>
 
-        {/* Enhanced Content - Laptop optimized */}
+        {/* Content Section */}
         {loading ? (
           // Loading State - Optimized for compact cards
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[...Array(6)].map((_, index) => (
               <div key={index} className="bg-card/80 backdrop-blur-sm rounded-xl shadow-lg border border-border/50 overflow-hidden">
                 <div className="aspect-[3/2] bg-muted animate-pulse" />
@@ -566,30 +566,30 @@ const FeaturedKosts: React.FC<FeaturedKostsProps> = () => {
           </div>
         ) : error ? (
           // Error State
-          <div className="text-center py-16">
-            <div className="bg-card/80 backdrop-blur-sm rounded-2xl p-12 border border-border/50 shadow-lg max-w-md mx-auto">
+          <div className="text-center py-12">
+            <div className="bg-card/80 backdrop-blur-sm rounded-2xl p-8 border border-border/50 shadow-lg max-w-md mx-auto">
               <div className="text-muted-foreground mb-6">
-                <svg className="w-20 h-20 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-16 h-16 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-bold text-foreground mb-3">Terjadi Kesalahan</h3>
-              <p className="text-muted-foreground mb-8 leading-relaxed">{error}</p>
+              <h3 className="text-lg font-bold text-foreground mb-3">Terjadi Kesalahan</h3>
+              <p className="text-muted-foreground mb-6 leading-relaxed">{error}</p>
               <button
                 onClick={() => window.location.reload()}
-                className="px-8 py-4 bg-primary text-primary-foreground rounded-xl hover:bg-primary/90 transition-all duration-300 font-bold shadow-lg hover:shadow-xl transform hover:scale-105"
+                className="px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:scale-105"
               >
                 Coba Lagi
               </button>
             </div>
           </div>
         ) : (
-          // Properties Grid - Laptop optimized 3 Column Layout
+          // Properties Grid - Standard 3 Column Layout
           <div className={`transition-all duration-700 delay-200 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}>
-            {/* Unified Grid - All properties in one consistent 3-column grid optimized for laptops */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {/* Properties Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {properties.map((property, index) => (
                 <div
                   key={property.id}
@@ -610,19 +610,19 @@ const FeaturedKosts: React.FC<FeaturedKostsProps> = () => {
           </div>
         )}
 
-        {/* Enhanced View More Button - Laptop optimized */}
+        {/* View More Button */}
         {!loading && !error && properties.length > 0 && (
-          <div className={`text-center mt-10 md:mt-12 transition-all duration-700 delay-500 ${
+          <div className={`text-center mt-10 transition-all duration-700 delay-500 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}>
-            <div className="bg-card/50 backdrop-blur-sm rounded-2xl lg:rounded-3xl p-6 md:p-8 border border-border/50 shadow-lg">
-              <h3 className="text-lg md:text-xl font-bold text-foreground mb-2 md:mb-3">
+            <div className="bg-card/50 backdrop-blur-sm rounded-xl p-6 border border-border/50 shadow-lg">
+              <h3 className="text-lg font-bold text-foreground mb-2">
                 Masih mencari kost yang tepat?
               </h3>
-              <p className="text-sm md:text-base text-muted-foreground mb-4 md:mb-6 max-w-md mx-auto">
+              <p className="text-sm text-muted-foreground mb-4 max-w-md mx-auto">
                 Jelajahi koleksi lengkap kost unggulan kami dengan berbagai pilihan lokasi dan fasilitas
               </p>
-              <button className="px-8 md:px-10 py-3 md:py-4 bg-primary text-primary-foreground rounded-lg md:rounded-xl hover:bg-primary/90 transition-all duration-300 font-bold shadow-lg hover:shadow-xl transform hover:scale-105 group text-sm md:text-base">
+              <button className="px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:scale-105 group">
                 <span className="mr-2">Lihat Semua Kost Unggulan</span>
                 <span className="group-hover:translate-x-1 transition-transform duration-200 inline-block">→</span>
               </button>
