@@ -24,180 +24,7 @@ interface ThemeProps {
 // Component props type - uses ThemeProps directly
 type FeaturedKostsProps = ThemeProps;
 
-// Mock data for featured properties (will be replaced with API call)
-const mockFeaturedProperties: KostProperty[] = [
-  {
-    id: '1',
-    title: 'Kost Nyaman Dekat Kampus UI',
-    description: 'Kost modern dengan fasilitas lengkap, lokasi strategis dekat Universitas Indonesia',
-    price_monthly: 1500000,
-    property_type: 'campur',
-    room_type: 'single',
-    available_rooms: 3,
-    total_rooms: 20,
-    images: [
-      { id: '1', url: 'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=800&h=600&fit=crop', alt: 'Kamar kost modern', is_primary: true, order: 1 },
-      { id: '2', url: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop', alt: 'Ruang bersama', is_primary: false, order: 2 },
-      { id: '3', url: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop', alt: 'Dapur bersama', is_primary: false, order: 3 }
-    ],
-    amenities: [
-      { id: 'wifi', name: 'WiFi Gratis', icon: 'wifi', category: 'connectivity', is_popular: true },
-      { id: 'parking', name: 'Parkir Motor', icon: 'car', category: 'basic', is_popular: true },
-      { id: 'security', name: 'Keamanan 24 Jam', icon: 'shield', category: 'security', is_popular: true }
-    ],
-    location: {
-      id: '1',
-      address: 'Jl. Margonda Raya No. 123',
-      district: 'Beji',
-      city: 'Depok',
-      province: 'Jawa Barat',
-      postal_code: '16424',
-      nearby_landmarks: ['Universitas Indonesia', 'Stasiun UI', 'Mall Depok']
-    },
-    rating: 4.8,
-    review_count: 124,
-    is_featured: true,
-    is_verified: true,
-    owner: {
-      id: '1',
-      name: 'Bu Sari',
-      phone: '+62812345678',
-      response_rate: 95,
-      response_time: '< 1 jam'
-    },
-    rules: ['Tidak boleh merokok', 'Tidak boleh membawa tamu menginap', 'Jam malam 22:00'],
-    facilities: ['Kamar mandi dalam', 'AC', 'Kasur + lemari', 'Meja belajar'],
-    created_at: '2024-01-15T00:00:00Z',
-    updated_at: '2024-01-20T00:00:00Z'
-  },
-  {
-    id: '2',
-    title: 'Kost Eksklusif Jakarta Selatan',
-    description: 'Kost premium dengan fasilitas hotel, cocok untuk profesional muda',
-    price_monthly: 2800000,
-    property_type: 'putra',
-    room_type: 'single',
-    available_rooms: 1,
-    total_rooms: 15,
-    images: [
-      { id: '4', url: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&h=600&fit=crop', alt: 'Kamar premium', is_primary: true, order: 1 },
-      { id: '5', url: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop', alt: 'Lobby modern', is_primary: false, order: 2 }
-    ],
-    amenities: [
-      { id: 'wifi', name: 'WiFi Gratis', icon: 'wifi', category: 'connectivity', is_popular: true },
-      { id: 'gym', name: 'Gym', icon: 'dumbbell', category: 'comfort', is_popular: false },
-      { id: 'laundry', name: 'Laundry', icon: 'washing-machine', category: 'basic', is_popular: true }
-    ],
-    location: {
-      id: '2',
-      address: 'Jl. Kemang Raya No. 45',
-      district: 'Kemang',
-      city: 'Jakarta Selatan',
-      province: 'DKI Jakarta',
-      postal_code: '12560',
-      nearby_landmarks: ['Kemang Village', 'Stasiun MRT Cipete', 'Mall Kemang']
-    },
-    rating: 4.9,
-    review_count: 89,
-    is_featured: true,
-    is_verified: true,
-    owner: {
-      id: '2',
-      name: 'Pak Budi',
-      phone: '+62812345679',
-      response_rate: 98,
-      response_time: '< 30 menit'
-    },
-    rules: ['Khusus pria', 'Tidak boleh merokok', 'Jam malam 23:00'],
-    facilities: ['Kamar mandi dalam', 'AC', 'Smart TV', 'Mini fridge', 'Balkon'],
-    created_at: '2024-01-10T00:00:00Z',
-    updated_at: '2024-01-18T00:00:00Z'
-  },
-  {
-    id: '3',
-    title: 'Kost Strategis Dekat Stasiun',
-    description: 'Kost dengan akses mudah ke transportasi umum, cocok untuk pekerja',
-    price_monthly: 1200000,
-    property_type: 'putri',
-    room_type: 'single',
-    available_rooms: 5,
-    total_rooms: 25,
-    images: [
-      { id: '6', url: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&h=600&fit=crop', alt: 'Kamar nyaman', is_primary: true, order: 1 },
-      { id: '7', url: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop', alt: 'Area bersama', is_primary: false, order: 2 }
-    ],
-    amenities: [
-      { id: 'wifi', name: 'WiFi Gratis', icon: 'wifi', category: 'connectivity', is_popular: true },
-      { id: 'security', name: 'Keamanan 24 Jam', icon: 'shield', category: 'security', is_popular: true },
-      { id: 'laundry', name: 'Laundry', icon: 'washing-machine', category: 'basic', is_popular: true }
-    ],
-    location: {
-      id: '3',
-      address: 'Jl. Sudirman No. 89',
-      district: 'Tanah Abang',
-      city: 'Jakarta Pusat',
-      province: 'DKI Jakarta',
-      postal_code: '10270',
-      nearby_landmarks: ['Stasiun Sudirman', 'Plaza Indonesia', 'Grand Indonesia']
-    },
-    rating: 4.6,
-    review_count: 67,
-    is_featured: true,
-    is_verified: true,
-    owner: {
-      id: '3',
-      name: 'Ibu Rina',
-      phone: '+62812345680',
-      response_rate: 92,
-      response_time: '< 2 jam'
-    },
-    rules: ['Khusus wanita', 'Tidak boleh merokok', 'Jam malam 21:30'],
-    facilities: ['Kamar mandi dalam', 'AC', 'Lemari pakaian', 'Meja kerja'],
-    created_at: '2024-01-12T00:00:00Z',
-    updated_at: '2024-01-19T00:00:00Z'
-  },
-  {
-    id: '4',
-    title: 'Kost Budget Friendly',
-    description: 'Kost terjangkau dengan fasilitas lengkap untuk mahasiswa',
-    price_monthly: 800000,
-    property_type: 'campur',
-    room_type: 'shared',
-    available_rooms: 8,
-    total_rooms: 30,
-    images: [
-      { id: '8', url: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&h=600&fit=crop', alt: 'Kamar bersama', is_primary: true, order: 1 }
-    ],
-    amenities: [
-      { id: 'wifi', name: 'WiFi Gratis', icon: 'wifi', category: 'connectivity', is_popular: true },
-      { id: 'parking', name: 'Parkir Motor', icon: 'car', category: 'basic', is_popular: true }
-    ],
-    location: {
-      id: '4',
-      address: 'Jl. Kebon Jeruk No. 45',
-      district: 'Kebon Jeruk',
-      city: 'Jakarta Barat',
-      province: 'DKI Jakarta',
-      postal_code: '11530',
-      nearby_landmarks: ['Universitas Trisakti', 'Mall Taman Anggrek', 'Stasiun Palmerah']
-    },
-    rating: 4.3,
-    review_count: 45,
-    is_featured: true,
-    is_verified: false,
-    owner: {
-      id: '4',
-      name: 'Pak Joko',
-      phone: '+62812345681',
-      response_rate: 88,
-      response_time: '< 3 jam'
-    },
-    rules: ['Tidak boleh merokok', 'Jam malam 22:30'],
-    facilities: ['Kamar mandi bersama', 'Kipas angin', 'Lemari bersama'],
-    created_at: '2024-01-08T00:00:00Z',
-    updated_at: '2024-01-17T00:00:00Z'
-  }
-];
+// Mock data removed - now using API
 
 // Price formatting utility
 const formatPrice = (price: number): string => {
@@ -464,15 +291,21 @@ const FeaturedKosts: React.FC<FeaturedKostsProps> = () => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
-  // Simulate API call to fetch featured properties
+  // Fetch featured properties from API
   useEffect(() => {
     const fetchFeaturedProperties = async () => {
       try {
         setLoading(true);
-        // Simulate API delay
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        setProperties(mockFeaturedProperties);
-      } catch {
+        const response = await fetch('/api/kosts/featured');
+        const data = await response.json();
+
+        if (data.success) {
+          setProperties(data.data);
+        } else {
+          setError(data.message || 'Gagal memuat kost unggulan.');
+        }
+      } catch (error) {
+        console.error('Error fetching featured properties:', error);
         setError('Gagal memuat kost unggulan. Silakan coba lagi.');
       } finally {
         setLoading(false);
@@ -723,7 +556,7 @@ const QuickViewModal: React.FC<QuickViewModalProps> = ({
             <div className="space-y-4">
               <div className="relative aspect-[4/3] rounded-xl overflow-hidden">
                 <img
-                  src={property.images[currentImageIndex]?.url || '/images/placeholder-kost.jpg'}
+                  src={property.images[currentImageIndex]?.url || 'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=800&h=600&fit=crop'}
                   alt={property.images[currentImageIndex]?.alt || property.title}
                   className="w-full h-full object-cover"
                 />

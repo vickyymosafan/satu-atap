@@ -31,30 +31,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Public routes (no authentication required)
 Route::prefix('kosts')->group(function () {
     // Get featured properties for landing page
-    Route::get('/featured', function () {
-        // TODO: Implement KostController@getFeatured
-        return response()->json([
-            'success' => true,
-            'data' => [],
-            'message' => 'Featured properties retrieved successfully'
-        ]);
-    })->name('api.kosts.featured');
+    Route::get('/featured', [App\Http\Controllers\KostController::class, 'getFeatured'])
+        ->name('api.kosts.featured');
 
     // Search properties with filters
-    Route::get('/search', function (Request $request) {
-        // TODO: Implement KostController@search
-        return response()->json([
-            'success' => true,
-            'data' => [],
-            'pagination' => [
-                'current_page' => 1,
-                'per_page' => 12,
-                'total' => 0,
-                'last_page' => 1
-            ],
-            'message' => 'Properties search completed'
-        ]);
-    })->name('api.kosts.search');
+    Route::get('/search', [App\Http\Controllers\KostController::class, 'search'])
+        ->name('api.kosts.search');
 
     // Get property details by ID
     Route::get('/{id}', function ($id) {

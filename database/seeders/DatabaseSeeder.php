@@ -19,5 +19,13 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        // Seed kost-related data
+        $this->call([
+            KostLocationSeeder::class,
+            KostAmenitySeeder::class,
+            KostPropertySeeder::class,
+            KostImageSeeder::class,
+        ]);
     }
 }
