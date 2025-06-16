@@ -8,6 +8,12 @@ interface ThemeProps {
   getThemeIcon: () => React.ReactElement;
 }
 
+// Extended props interface for QuickSearch
+interface QuickSearchProps extends ThemeProps {
+  onSearch: (filters: SearchFilters) => Promise<void>;
+  isSearching?: boolean;
+}
+
 // Location data interface
 interface LocationData {
   id: string;
@@ -70,7 +76,7 @@ const formatPrice = (price: number): string => {
   }).format(price);
 };
 
-const QuickSearch: React.FC<ThemeProps> = () => {
+const QuickSearch: React.FC<QuickSearchProps> = ({ onSearch, isSearching = false }) => {
   // Search state management
   const [filters, setFilters] = useState<SearchFilters>({
     location: '',
@@ -81,7 +87,6 @@ const QuickSearch: React.FC<ThemeProps> = () => {
 
   // UI state
   const [showLocationDropdown, setShowLocationDropdown] = useState(false);
-  const [isSearching, setIsSearching] = useState(false);
   const [showAdvancedFilters, setShowAdvancedFilters] = useState(false);
 
   // Refs for click outside handling
@@ -164,21 +169,10 @@ const QuickSearch: React.FC<ThemeProps> = () => {
 
   // Handle search submission
   const handleSearch = async () => {
-    setIsSearching(true);
-    
-    // Simulate API call
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // Here you would typically make an API call with the filters
-      console.log('Search filters:', filters);
-      
-      // For now, just log the search
-      alert(`Mencari kost di ${filters.selectedLocation?.name || filters.location} dengan budget ${formatPrice(filters.priceRange[0])} - ${formatPrice(filters.priceRange[1])}`);
+      await onSearch(filters);
     } catch (error) {
       console.error('Search error:', error);
-    } finally {
-      setIsSearching(false);
     }
   };
 

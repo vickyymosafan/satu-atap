@@ -21,8 +21,14 @@ interface ThemeProps {
   getThemeIcon: () => React.ReactElement;
 }
 
-// Component props type - uses ThemeProps directly
-type FeaturedKostsProps = ThemeProps;
+// Extended props interface for FeaturedKosts
+interface FeaturedKostsProps extends ThemeProps {
+  searchResults?: KostProperty[];
+  isSearchActive?: boolean;
+  searchLoading?: boolean;
+  searchError?: string | null;
+  onResetSearch?: () => void;
+}
 
 // Mock data removed - now using API
 
@@ -282,8 +288,14 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
   );
 };
 
-const FeaturedKosts: React.FC<FeaturedKostsProps> = () => {
-  const [properties, setProperties] = useState<KostProperty[]>([]);
+const FeaturedKosts: React.FC<FeaturedKostsProps> = ({
+  searchResults = [],
+  isSearchActive = false,
+  searchLoading = false,
+  searchError = null,
+  onResetSearch
+}) => {
+  const [featuredProperties, setFeaturedProperties] = useState<KostProperty[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedProperty, setSelectedProperty] = useState<KostProperty | null>(null);
@@ -291,29 +303,36 @@ const FeaturedKosts: React.FC<FeaturedKostsProps> = () => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
-  // Fetch featured properties from API
+  // Determine which properties to display
+  const displayProperties = isSearchActive ? searchResults : featuredProperties;
+  const displayLoading = isSearchActive ? searchLoading : loading;
+  const displayError = isSearchActive ? searchError : error;
+
+  // Fetch featured properties from API (only when not showing search results)
   useEffect(() => {
-    const fetchFeaturedProperties = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch('/api/kosts/featured');
-        const data = await response.json();
+    if (!isSearchActive) {
+      const fetchFeaturedProperties = async () => {
+        try {
+          setLoading(true);
+          const response = await fetch('/api/kosts/featured');
+          const data = await response.json();
 
-        if (data.success) {
-          setProperties(data.data);
-        } else {
-          setError(data.message || 'Gagal memuat kost unggulan.');
+          if (data.success) {
+            setFeaturedProperties(data.data);
+          } else {
+            setError(data.message || 'Gagal memuat kost unggulan.');
+          }
+        } catch (error) {
+          console.error('Error fetching featured properties:', error);
+          setError('Gagal memuat kost unggulan. Silakan coba lagi.');
+        } finally {
+          setLoading(false);
         }
-      } catch (error) {
-        console.error('Error fetching featured properties:', error);
-        setError('Gagal memuat kost unggulan. Silakan coba lagi.');
-      } finally {
-        setLoading(false);
-      }
-    };
+      };
 
-    fetchFeaturedProperties();
-  }, []);
+      fetchFeaturedProperties();
+    }
+  }, [isSearchActive]);
 
   // Intersection Observer for animations
   useEffect(() => {
@@ -362,24 +381,56 @@ const FeaturedKosts: React.FC<FeaturedKostsProps> = () => {
       <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(circle_at_1px_1px,_rgb(0,0,0)_1px,_transparent_0)] bg-[length:32px_32px]"></div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl relative">
-        {/* Section Header - Matching reference image */}
+        {/* Section Header - Dynamic based on search state */}
         <div className={`text-center mb-8 md:mb-12 transition-all duration-700 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary/10 rounded-full border border-primary/20 mb-4">
-            <span className="text-primary font-semibold text-xs">⭐ Pilihan Terbaik</span>
-          </div>
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3 md:mb-4 leading-tight">
-            Kost Unggulan
-          </h2>
-          <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Temukan kost terbaik dengan fasilitas lengkap dan lokasi strategis yang telah dipilih khusus untuk Anda.
-            Semua properti telah diverifikasi dan mendapat rating tinggi dari penghuni.
-          </p>
+          {isSearchActive ? (
+            // Search Results Header
+            <>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-500/10 rounded-full border border-blue-500/20 mb-4">
+                <span className="text-blue-600 font-semibold text-xs">🔍 Hasil Pencarian</span>
+              </div>
+              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3 md:mb-4 leading-tight">
+                {displayProperties.length > 0
+                  ? `Ditemukan ${displayProperties.length} Kost`
+                  : 'Tidak Ada Kost Ditemukan'
+                }
+              </h2>
+              <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                {displayProperties.length > 0
+                  ? 'Berikut adalah kost yang sesuai dengan kriteria pencarian Anda. Semua properti telah diverifikasi.'
+                  : 'Maaf, tidak ada kost yang sesuai dengan kriteria pencarian Anda. Coba ubah filter pencarian.'
+                }
+              </p>
+              {onResetSearch && (
+                <button
+                  onClick={onResetSearch}
+                  className="mt-4 px-4 py-2 text-sm bg-muted hover:bg-accent text-muted-foreground hover:text-accent-foreground rounded-lg transition-colors duration-200"
+                >
+                  ← Kembali ke Kost Unggulan
+                </button>
+              )}
+            </>
+          ) : (
+            // Featured Kosts Header
+            <>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary/10 rounded-full border border-primary/20 mb-4">
+                <span className="text-primary font-semibold text-xs">⭐ Pilihan Terbaik</span>
+              </div>
+              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3 md:mb-4 leading-tight">
+                Kost Unggulan
+              </h2>
+              <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                Temukan kost terbaik dengan fasilitas lengkap dan lokasi strategis yang telah dipilih khusus untuk Anda.
+                Semua properti telah diverifikasi dan mendapat rating tinggi dari penghuni.
+              </p>
+            </>
+          )}
         </div>
 
         {/* Content Section */}
-        {loading ? (
+        {displayLoading ? (
           // Loading State - Optimized for compact cards
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[...Array(6)].map((_, index) => (
@@ -397,7 +448,7 @@ const FeaturedKosts: React.FC<FeaturedKostsProps> = () => {
               </div>
             ))}
           </div>
-        ) : error ? (
+        ) : displayError ? (
           // Error State
           <div className="text-center py-12">
             <div className="bg-card/80 backdrop-blur-sm rounded-2xl p-8 border border-border/50 shadow-lg max-w-md mx-auto">
@@ -407,7 +458,7 @@ const FeaturedKosts: React.FC<FeaturedKostsProps> = () => {
                 </svg>
               </div>
               <h3 className="text-lg font-bold text-foreground mb-3">Terjadi Kesalahan</h3>
-              <p className="text-muted-foreground mb-6 leading-relaxed">{error}</p>
+              <p className="text-muted-foreground mb-6 leading-relaxed">{displayError}</p>
               <button
                 onClick={() => window.location.reload()}
                 className="px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:scale-105"
@@ -423,7 +474,7 @@ const FeaturedKosts: React.FC<FeaturedKostsProps> = () => {
           }`}>
             {/* Properties Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {properties.map((property, index) => (
+              {displayProperties.map((property, index) => (
                 <div
                   key={property.id}
                   className="transition-all duration-500"
@@ -443,8 +494,8 @@ const FeaturedKosts: React.FC<FeaturedKostsProps> = () => {
           </div>
         )}
 
-        {/* View More Button */}
-        {!loading && !error && properties.length > 0 && (
+        {/* View More Button - Only show for featured kosts, not search results */}
+        {!displayLoading && !displayError && displayProperties.length > 0 && !isSearchActive && (
           <div className={`text-center mt-10 transition-all duration-700 delay-500 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}>
@@ -459,6 +510,77 @@ const FeaturedKosts: React.FC<FeaturedKostsProps> = () => {
                 <span className="mr-2">Lihat Semua Kost Unggulan</span>
                 <span className="group-hover:translate-x-1 transition-transform duration-200 inline-block">→</span>
               </button>
+            </div>
+          </div>
+        )}
+
+        {/* Search Results Actions */}
+        {!displayLoading && !displayError && isSearchActive && (
+          <div className={`text-center mt-10 transition-all duration-700 delay-500 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>
+            <div className="bg-card/50 backdrop-blur-sm rounded-xl p-6 border border-border/50 shadow-lg">
+              {displayProperties.length > 0 ? (
+                <>
+                  <h3 className="text-lg font-bold text-foreground mb-2">
+                    Ingin melihat lebih banyak pilihan?
+                  </h3>
+                  <p className="text-sm text-muted-foreground mb-4 max-w-md mx-auto">
+                    Coba ubah kriteria pencarian atau lihat kost unggulan kami
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                    <button
+                      onClick={() => {
+                        const searchSection = document.getElementById('quick-search');
+                        if (searchSection) {
+                          searchSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                      }}
+                      className="px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:scale-105"
+                    >
+                      Ubah Pencarian
+                    </button>
+                    {onResetSearch && (
+                      <button
+                        onClick={onResetSearch}
+                        className="px-6 py-3 bg-muted hover:bg-accent text-muted-foreground hover:text-accent-foreground rounded-lg transition-all duration-300 font-medium"
+                      >
+                        Lihat Kost Unggulan
+                      </button>
+                    )}
+                  </div>
+                </>
+              ) : (
+                <>
+                  <h3 className="text-lg font-bold text-foreground mb-2">
+                    Tidak menemukan yang Anda cari?
+                  </h3>
+                  <p className="text-sm text-muted-foreground mb-4 max-w-md mx-auto">
+                    Coba ubah kriteria pencarian atau lihat rekomendasi kost unggulan kami
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                    <button
+                      onClick={() => {
+                        const searchSection = document.getElementById('quick-search');
+                        if (searchSection) {
+                          searchSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                      }}
+                      className="px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:scale-105"
+                    >
+                      Coba Pencarian Lain
+                    </button>
+                    {onResetSearch && (
+                      <button
+                        onClick={onResetSearch}
+                        className="px-6 py-3 bg-muted hover:bg-accent text-muted-foreground hover:text-accent-foreground rounded-lg transition-all duration-300 font-medium"
+                      >
+                        Lihat Kost Unggulan
+                      </button>
+                    )}
+                  </div>
+                </>
+              )}
             </div>
           </div>
         )}
