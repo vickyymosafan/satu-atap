@@ -50,20 +50,20 @@ const Hero: React.FC<ThemeProps> = () => {
 
   return (
     <section className="relative min-h-screen bg-gradient-to-br from-background via-background to-muted/20 pt-20 sm:pt-24 lg:pt-32 transition-colors duration-300">
-      {/* Consistent Background with subtle pattern */}
+      {/* Background */}
       <div className="absolute inset-0 z-0">
         <div className="w-full h-full bg-gradient-to-br from-background via-background to-muted/20"></div>
-        {/* Subtle pattern overlay */}
         <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(circle_at_1px_1px,_rgb(0,0,0)_1px,_transparent_0)] bg-[length:24px_24px]"></div>
       </div>
 
-      {/* Consistent Container */}
-      <div className="relative z-10 w-full min-h-[calc(100vh-5rem)] sm:min-h-[calc(100vh-6rem)] lg:min-h-[calc(100vh-8rem)]">
+      {/* Content */}
+      <div className="relative z-10 w-full">
+        <div className="flex items-center justify-center min-h-[calc(100vh-5rem)] sm:min-h-[calc(100vh-6rem)] lg:min-h-[calc(100vh-8rem)]">
 
-        {/* Mobile Hero Layout - Consistent and clean */}
-        <div className="lg:hidden">
-          {/* Mobile Content Stack */}
-          <div className="flex flex-col min-h-[calc(100vh-5rem)] px-4 sm:px-6 py-12 sm:py-16">
+          {/* Mobile Layout */}
+          <div className="lg:hidden w-full">
+            <div className="container mx-auto px-4 sm:px-6 max-w-lg">
+              <div className="flex flex-col justify-center min-h-[calc(100vh-5rem)] py-12 sm:py-16 text-center">
 
             {/* Mobile Hero Header - Consistent spacing */}
             <div className={`text-center mb-12 transition-all duration-1000 ${
@@ -195,14 +195,16 @@ const Hero: React.FC<ThemeProps> = () => {
             </div>
           </div>
         </div>
+        </div>
 
         {/* Desktop Layout - Laptop optimized */}
-        <div className="hidden lg:block">
-          <div className="max-w-6xl mx-auto px-6 lg:px-8 py-16 lg:py-20 flex items-center justify-center min-h-[calc(100vh-6rem)]">
-            <div className="grid grid-cols-12 gap-12 lg:gap-16 items-center w-full">
+        <div className="hidden lg:block w-full">
+          <div className="container mx-auto px-6 lg:px-8 max-w-7xl">
+            <div className="flex items-center justify-center min-h-[calc(100vh-8rem)]">
+              <div className="grid grid-cols-12 gap-12 lg:gap-16 items-center w-full max-w-6xl">
 
               {/* Desktop Left Column - Improved */}
-              <div className={`col-span-7 flex flex-col justify-center text-left transition-all duration-1000 ${
+              <div className={`col-span-7 flex flex-col justify-center pr-8 transition-all duration-1000 ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}>
 
@@ -223,11 +225,11 @@ const Hero: React.FC<ThemeProps> = () => {
                 {/* Desktop Headline - Laptop optimized */}
                 <h1 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-foreground mb-6 lg:mb-8 leading-tight tracking-tight">
                   Temukan Kost Impian di{' '}
-                  <span className="relative inline-block">
-                    <span className="text-primary transition-all duration-500">
+                  <span className="block text-primary mt-2 relative">
+                    <span className="transition-all duration-500">
                       {popularLocations[currentLocationIndex]}
                     </span>
-                    <div className="absolute -bottom-2 left-0 right-0 h-1.5 bg-primary/20 rounded-full transform scale-x-100"></div>
+                    <div className="absolute -bottom-2 left-0 w-24 lg:w-32 h-1.5 bg-primary/30 rounded-full"></div>
                   </span>
                 </h1>
 
@@ -372,8 +374,11 @@ const Hero: React.FC<ThemeProps> = () => {
                   </div>
                 </div>
               </div>
+              </div>
             </div>
           </div>
+        </div>
+
         </div>
       </div>
 
