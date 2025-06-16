@@ -19,7 +19,7 @@ class KostImageSeeder extends Seeder
         Storage::disk('public')->makeDirectory('kost-images');
 
         $imageData = [
-            // Property 1 images
+            // Property 1 images - Kost Nyaman Dekat Kampus UI
             [
                 'property_id' => 1,
                 'url' => 'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=800&h=600&fit=crop',
@@ -41,7 +41,7 @@ class KostImageSeeder extends Seeder
                 'is_primary' => false,
                 'order' => 3,
             ],
-            // Property 2 images
+            // Property 2 images - Kost Eksklusif Jakarta Selatan
             [
                 'property_id' => 2,
                 'url' => 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&h=600&fit=crop',
@@ -56,7 +56,7 @@ class KostImageSeeder extends Seeder
                 'is_primary' => false,
                 'order' => 2,
             ],
-            // Property 3 images
+            // Property 3 images - Kost Strategis Dekat Stasiun
             [
                 'property_id' => 3,
                 'url' => 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&h=600&fit=crop',
@@ -66,18 +66,115 @@ class KostImageSeeder extends Seeder
             ],
             [
                 'property_id' => 3,
-                'url' => 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop',
+                'url' => 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&h=600&fit=crop',
                 'alt' => 'Area bersama',
                 'is_primary' => false,
                 'order' => 2,
             ],
-            // Property 4 images
+            // Property 4 images - Kost Budget Friendly
             [
                 'property_id' => 4,
                 'url' => 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&h=600&fit=crop',
                 'alt' => 'Kamar bersama',
                 'is_primary' => true,
                 'order' => 1,
+            ],
+            [
+                'property_id' => 4,
+                'url' => 'https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=800&h=600&fit=crop',
+                'alt' => 'Fasilitas umum',
+                'is_primary' => false,
+                'order' => 2,
+            ],
+            // Property 5 images - Kost Dago Bandung Premium
+            [
+                'property_id' => 5,
+                'url' => 'https://images.unsplash.com/photo-1571508601891-ca5e7a713859?w=800&h=600&fit=crop',
+                'alt' => 'Kamar premium Bandung',
+                'is_primary' => true,
+                'order' => 1,
+            ],
+            [
+                'property_id' => 5,
+                'url' => 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop',
+                'alt' => 'Pemandangan kota Bandung',
+                'is_primary' => false,
+                'order' => 2,
+            ],
+            // Property 6 images - Kost Malioboro Jogja Strategis
+            [
+                'property_id' => 6,
+                'url' => 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=800&h=600&fit=crop',
+                'alt' => 'Kamar kost Jogja',
+                'is_primary' => true,
+                'order' => 1,
+            ],
+            [
+                'property_id' => 6,
+                'url' => 'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800&h=600&fit=crop',
+                'alt' => 'Ruang tamu Jogja',
+                'is_primary' => false,
+                'order' => 2,
+            ],
+            // Property 7 images - Kost Simpang Lima Semarang
+            [
+                'property_id' => 7,
+                'url' => 'https://images.unsplash.com/photo-1540518614846-7eded433c457?w=800&h=600&fit=crop',
+                'alt' => 'Kamar modern Semarang',
+                'is_primary' => true,
+                'order' => 1,
+            ],
+            [
+                'property_id' => 7,
+                'url' => 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&h=600&fit=crop',
+                'alt' => 'Fasilitas keamanan',
+                'is_primary' => false,
+                'order' => 2,
+            ],
+            // Property 8 images - Kost Mahasiswa Malang Murah
+            [
+                'property_id' => 8,
+                'url' => 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&h=600&fit=crop',
+                'alt' => 'Kamar mahasiswa Malang',
+                'is_primary' => true,
+                'order' => 1,
+            ],
+            [
+                'property_id' => 8,
+                'url' => 'https://images.unsplash.com/photo-1467987506553-8f3916508521?w=800&h=600&fit=crop',
+                'alt' => 'Dapur bersama Malang',
+                'is_primary' => false,
+                'order' => 2,
+            ],
+            // Property 9 images - Kost Surabaya Darmo Elite
+            [
+                'property_id' => 9,
+                'url' => 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&h=600&fit=crop',
+                'alt' => 'Kamar elite Surabaya',
+                'is_primary' => true,
+                'order' => 1,
+            ],
+            [
+                'property_id' => 9,
+                'url' => 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&h=600&fit=crop',
+                'alt' => 'Balkon pribadi',
+                'is_primary' => false,
+                'order' => 2,
+            ],
+            // Property 10 images - Kost Denpasar Bali Nyaman
+            [
+                'property_id' => 10,
+                'url' => 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&h=600&fit=crop',
+                'alt' => 'Kamar nuansa Bali',
+                'is_primary' => true,
+                'order' => 1,
+            ],
+            [
+                'property_id' => 10,
+                'url' => 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
+                'alt' => 'Taman Bali',
+                'is_primary' => false,
+                'order' => 2,
             ],
         ];
 
