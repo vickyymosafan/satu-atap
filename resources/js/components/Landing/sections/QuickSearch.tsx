@@ -45,14 +45,22 @@ interface Amenity {
 const fetchCities = async (search?: string, limit?: number): Promise<LocationData[]> => {
   try {
     const params = new URLSearchParams();
-    if (search) params.append('search', search);
+    if (search) params.append('q', search);
     if (limit) params.append('limit', limit.toString());
 
-    const response = await fetch(`/api/cities/autocomplete?${params}`);
+    const response = await fetch(`/api/kosts/locations/suggestions?${params}`);
     const data = await response.json();
 
     if (data.success) {
-      return data.data;
+      return data.data.map((item: any) => ({
+        id: item.id,
+        name: item.name,
+        city: item.city,
+        province: item.province,
+        type: item.type || 'city',
+        full_name: item.full_name || `${item.name}, ${item.province}`,
+        is_popular: item.is_popular || false,
+      }));
     } else {
       console.error('Failed to fetch cities:', data.message);
       return [];
@@ -63,36 +71,86 @@ const fetchCities = async (search?: string, limit?: number): Promise<LocationDat
   }
 };
 
-// API service for fetching unique cities
+// API service for fetching popular cities
 const fetchUniqueCities = async (): Promise<LocationData[]> => {
   try {
-    const response = await fetch('/api/cities/unique');
+    const response = await fetch('/api/cities/popular');
     const data = await response.json();
 
     if (data.success) {
-      return data.data;
+      return data.data.map((item: any) => ({
+        id: item.id,
+        name: item.name,
+        city: item.city,
+        province: item.province,
+        type: item.type || 'city',
+        full_name: item.full_name || `${item.name}, ${item.province}`,
+        is_popular: item.is_popular || false,
+      }));
     } else {
-      console.error('Failed to fetch unique cities:', data.message);
+      console.error('Failed to fetch popular cities:', data.message);
       return [];
     }
   } catch (error) {
-    console.error('Error fetching unique cities:', error);
+    console.error('Error fetching popular cities:', error);
     return [];
   }
 };
 
-// Available amenities with Indonesian labels
-const availableAmenities: Amenity[] = [
-  { id: 'wifi', name: 'WiFi Gratis', icon: <Wifi className="w-4 h-4" />, popular: true },
-  { id: 'parking', name: 'Parkir Motor', icon: <Car className="w-4 h-4" />, popular: true },
-  { id: 'ac', name: 'AC', icon: <Snowflake className="w-4 h-4" />, popular: true },
-  { id: 'kitchen', name: 'Dapur Bersama', icon: <ChefHat className="w-4 h-4" />, popular: true },
-  { id: 'tv', name: 'TV Kabel', icon: <Tv className="w-4 h-4" />, popular: false },
-  { id: 'security', name: 'Keamanan 24 Jam', icon: <Shield className="w-4 h-4" />, popular: true },
-  { id: 'electricity', name: 'Listrik Termasuk', icon: <Zap className="w-4 h-4" />, popular: false },
-  { id: 'water', name: 'Air Bersih', icon: <Waves className="w-4 h-4" />, popular: false },
-  { id: 'furnished', name: 'Kamar Furnished', icon: <Home className="w-4 h-4" />, popular: true },
-];
+// Amenity interface for API data
+interface ApiAmenity {
+  id: string;
+  name: string;
+  icon: string;
+  category: string;
+  is_popular: boolean;
+}
+
+// Icon mapping for amenities
+const getAmenityIcon = (iconName: string): React.ReactElement => {
+  const iconMap: Record<string, React.ReactElement> = {
+    'wifi': <Wifi className="w-4 h-4" />,
+    'car': <Car className="w-4 h-4" />,
+    'snowflake': <Snowflake className="w-4 h-4" />,
+    'chef-hat': <ChefHat className="w-4 h-4" />,
+    'tv': <Tv className="w-4 h-4" />,
+    'shield': <Shield className="w-4 h-4" />,
+    'zap': <Zap className="w-4 h-4" />,
+    'waves': <Waves className="w-4 h-4" />,
+    'home': <Home className="w-4 h-4" />,
+    'refrigerator': <Home className="w-4 h-4" />,
+    'cup': <Waves className="w-4 h-4" />,
+    'shirt': <Home className="w-4 h-4" />,
+    'bath': <Waves className="w-4 h-4" />,
+    'building': <Home className="w-4 h-4" />,
+    'clock': <Zap className="w-4 h-4" />,
+    'video': <Shield className="w-4 h-4" />,
+  };
+  return iconMap[iconName] || <Home className="w-4 h-4" />;
+};
+
+// API service for fetching amenities
+const fetchAmenities = async (): Promise<Amenity[]> => {
+  try {
+    const response = await fetch('/api/kosts/amenities');
+    const data = await response.json();
+
+    if (data.success) {
+      return data.data.all.map((amenity: ApiAmenity) => ({
+        id: amenity.id,
+        name: amenity.name,
+        icon: getAmenityIcon(amenity.icon),
+        popular: amenity.is_popular,
+      }));
+    } else {
+      console.error('Failed to fetch amenities:', data.message);
+      return [];
+    }
+  } catch (error) {
+    console.error('Error fetching amenities:', error);
+    return [];
+  }
+};
 
 // Price formatting utility
 const formatPrice = (price: number): string => {
@@ -119,6 +177,8 @@ const QuickSearch: React.FC<QuickSearchProps> = ({ onSearch, isSearching = false
   const [locations, setLocations] = useState<LocationData[]>([]);
   const [uniqueCities, setUniqueCities] = useState<LocationData[]>([]);
   const [loadingLocations, setLoadingLocations] = useState(false);
+  const [availableAmenities, setAvailableAmenities] = useState<Amenity[]>([]);
+  const [loadingAmenities, setLoadingAmenities] = useState(false);
 
   // Refs for click outside handling
   const locationDropdownRef = useRef<HTMLDivElement>(null);
@@ -127,13 +187,20 @@ const QuickSearch: React.FC<QuickSearchProps> = ({ onSearch, isSearching = false
   // Filtered locations based on search input
   const filteredLocations = locations;
 
-  // Fetch unique cities on component mount
+  // Fetch unique cities and amenities on component mount
   useEffect(() => {
-    const loadUniqueCities = async () => {
+    const loadInitialData = async () => {
+      // Load cities
       const cities = await fetchUniqueCities();
       setUniqueCities(cities);
+
+      // Load amenities
+      setLoadingAmenities(true);
+      const amenities = await fetchAmenities();
+      setAvailableAmenities(amenities);
+      setLoadingAmenities(false);
     };
-    loadUniqueCities();
+    loadInitialData();
   }, []);
 
   // Fetch locations based on search input
@@ -329,11 +396,11 @@ const QuickSearch: React.FC<QuickSearchProps> = ({ onSearch, isSearching = false
                               {uniqueCities.map((location) => (
                                 <button
                                   key={location.id}
-                                  onClick={() => handleLocationChange(location.city)}
+                                  onClick={() => handleLocationChange(location.name)}
                                   className="w-full px-3 py-2 text-left hover:bg-accent rounded-md transition-colors duration-200 text-sm"
                                   role="option"
                                 >
-                                  <div className="font-medium">{location.city}</div>
+                                  <div className="font-medium">{location.name}</div>
                                   <div className="text-xs text-muted-foreground">{location.province}</div>
                                 </button>
                               ))}

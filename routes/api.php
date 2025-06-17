@@ -42,15 +42,29 @@ Route::prefix('kosts')->group(function () {
     Route::get('/locations/suggestions', [App\Http\Controllers\KostController::class, 'getLocationSuggestions'])
         ->name('api.kosts.locations.suggestions');
 
+    // Get all amenities
+    Route::get('/amenities', [App\Http\Controllers\KostController::class, 'getAmenities'])
+        ->name('api.kosts.amenities');
+
+    // Get all cities with property counts
+    Route::get('/cities', [App\Http\Controllers\KostController::class, 'getCities'])
+        ->name('api.kosts.cities');
+
+    // Get properties by city
+    Route::get('/city/{cityName}', [App\Http\Controllers\KostController::class, 'getPropertiesByCity'])
+        ->name('api.kosts.city');
+
+    // Get statistics for dashboard
+    Route::get('/statistics', [App\Http\Controllers\KostController::class, 'getStatistics'])
+        ->name('api.kosts.statistics');
+
+    // Get nearby properties
+    Route::get('/nearby', [App\Http\Controllers\KostController::class, 'getNearbyProperties'])
+        ->name('api.kosts.nearby');
+
     // Get property details by ID
-    Route::get('/{id}', function ($id) {
-        // TODO: Implement KostController@show
-        return response()->json([
-            'success' => true,
-            'data' => null,
-            'message' => 'Property details retrieved successfully'
-        ]);
-    })->name('api.kosts.show');
+    Route::get('/{id}', [App\Http\Controllers\KostController::class, 'show'])
+        ->name('api.kosts.show');
 
     // Get property images
     Route::get('/{id}/images', function ($id) {
@@ -108,6 +122,14 @@ Route::prefix('cities')->group(function () {
     // Get unique cities (grouped by city name)
     Route::get('/unique', [App\Http\Controllers\Api\CityController::class, 'unique'])
         ->name('api.cities.unique');
+
+    // Get cities with property statistics
+    Route::get('/with-stats', [App\Http\Controllers\Api\CityController::class, 'withStats'])
+        ->name('api.cities.with-stats');
+
+    // Get city statistics summary
+    Route::get('/statistics', [App\Http\Controllers\Api\CityController::class, 'statistics'])
+        ->name('api.cities.statistics');
 
     // Get specific city by ID
     Route::get('/{city}', [App\Http\Controllers\Api\CityController::class, 'show'])

@@ -107,6 +107,100 @@ class KostPropertyAmenitySeeder extends Seeder
             ['property_id' => 10, 'amenity_id' => 12], // Mushola
             ['property_id' => 10, 'amenity_id' => 14], // Taman
             ['property_id' => 10, 'amenity_id' => 15], // Ruang Tamu
+
+            // Property 11: Kost Bekasi Cyber Park Modern
+            ['property_id' => 11, 'amenity_id' => 1], // WiFi Gratis
+            ['property_id' => 11, 'amenity_id' => 2], // Parkir Motor
+            ['property_id' => 11, 'amenity_id' => 3], // Keamanan 24 Jam
+            ['property_id' => 11, 'amenity_id' => 6], // AC
+
+            // Property 12: Kost Bogor Dekat IPB
+            ['property_id' => 12, 'amenity_id' => 1], // WiFi Gratis
+            ['property_id' => 12, 'amenity_id' => 2], // Parkir Motor
+            ['property_id' => 12, 'amenity_id' => 7], // Dapur Bersama
+            ['property_id' => 12, 'amenity_id' => 14], // Taman
+
+            // Property 13: Kost Tangerang UMN Premium
+            ['property_id' => 13, 'amenity_id' => 1], // WiFi Gratis
+            ['property_id' => 13, 'amenity_id' => 3], // Keamanan 24 Jam
+            ['property_id' => 13, 'amenity_id' => 4], // Gym
+            ['property_id' => 13, 'amenity_id' => 5], // Laundry
+            ['property_id' => 13, 'amenity_id' => 6], // AC
+
+            // Property 14: Kost BSD Serpong Elite
+            ['property_id' => 14, 'amenity_id' => 1], // WiFi Gratis
+            ['property_id' => 14, 'amenity_id' => 6], // AC
+            ['property_id' => 14, 'amenity_id' => 8], // TV Kabel
+            ['property_id' => 14, 'amenity_id' => 11], // Kamar Furnished
+
+            // Property 15: Kost Jakarta Utara Ancol
+            ['property_id' => 15, 'amenity_id' => 1], // WiFi Gratis
+            ['property_id' => 15, 'amenity_id' => 2], // Parkir Motor
+            ['property_id' => 15, 'amenity_id' => 6], // AC
+            ['property_id' => 15, 'amenity_id' => 7], // Dapur Bersama
+
+            // Property 16: Kost Jakarta Timur Cakung
+            ['property_id' => 16, 'amenity_id' => 1], // WiFi Gratis
+            ['property_id' => 16, 'amenity_id' => 2], // Parkir Motor
+            ['property_id' => 16, 'amenity_id' => 7], // Dapur Bersama
+            ['property_id' => 16, 'amenity_id' => 12], // Mushola
+
+            // Property 17: Kost Solo Laweyan Heritage
+            ['property_id' => 17, 'amenity_id' => 1], // WiFi Gratis
+            ['property_id' => 17, 'amenity_id' => 2], // Parkir Motor
+            ['property_id' => 17, 'amenity_id' => 6], // AC
+            ['property_id' => 17, 'amenity_id' => 15], // Ruang Tamu
+
+            // Property 18: Kost Medan USU Modern
+            ['property_id' => 18, 'amenity_id' => 1], // WiFi Gratis
+            ['property_id' => 18, 'amenity_id' => 3], // Keamanan 24 Jam
+            ['property_id' => 18, 'amenity_id' => 5], // Laundry
+            ['property_id' => 18, 'amenity_id' => 6], // AC
+
+            // Property 19: Kost Padang Unand Strategis
+            ['property_id' => 19, 'amenity_id' => 1], // WiFi Gratis
+            ['property_id' => 19, 'amenity_id' => 2], // Parkir Motor
+            ['property_id' => 19, 'amenity_id' => 7], // Dapur Bersama
+            ['property_id' => 19, 'amenity_id' => 12], // Mushola
+
+            // Property 20: Kost Pekanbaru Unri Premium
+            ['property_id' => 20, 'amenity_id' => 1], // WiFi Gratis
+            ['property_id' => 20, 'amenity_id' => 5], // Laundry
+            ['property_id' => 20, 'amenity_id' => 6], // AC
+            ['property_id' => 20, 'amenity_id' => 11], // Kamar Furnished
+
+            // Property 21: Kost Batam UIB Exclusive
+            ['property_id' => 21, 'amenity_id' => 1], // WiFi Gratis
+            ['property_id' => 21, 'amenity_id' => 3], // Keamanan 24 Jam
+            ['property_id' => 21, 'amenity_id' => 4], // Gym
+            ['property_id' => 21, 'amenity_id' => 6], // AC
+            ['property_id' => 21, 'amenity_id' => 11], // Kamar Furnished
+
+            // Property 22: Kost Palembang Unsri Nyaman
+            ['property_id' => 22, 'amenity_id' => 1], // WiFi Gratis
+            ['property_id' => 22, 'amenity_id' => 2], // Parkir Motor
+            ['property_id' => 22, 'amenity_id' => 6], // AC
+            ['property_id' => 22, 'amenity_id' => 7], // Dapur Bersama
+
+            // Property 23: Kost Balikpapan Uniba Modern
+            ['property_id' => 23, 'amenity_id' => 1], // WiFi Gratis
+            ['property_id' => 23, 'amenity_id' => 3], // Keamanan 24 Jam
+            ['property_id' => 23, 'amenity_id' => 4], // Gym
+            ['property_id' => 23, 'amenity_id' => 5], // Laundry
+            ['property_id' => 23, 'amenity_id' => 6], // AC
+
+            // Property 24: Kost Manado Unsrat Strategis
+            ['property_id' => 24, 'amenity_id' => 1], // WiFi Gratis
+            ['property_id' => 24, 'amenity_id' => 2], // Parkir Motor
+            ['property_id' => 24, 'amenity_id' => 6], // AC
+            ['property_id' => 24, 'amenity_id' => 14], // Taman
+
+            // Property 25: Kost Makassar Unhas Premium
+            ['property_id' => 25, 'amenity_id' => 1], // WiFi Gratis
+            ['property_id' => 25, 'amenity_id' => 5], // Laundry
+            ['property_id' => 25, 'amenity_id' => 6], // AC
+            ['property_id' => 25, 'amenity_id' => 11], // Kamar Furnished
+            ['property_id' => 25, 'amenity_id' => 15], // Ruang Tamu
         ];
 
         foreach ($propertyAmenities as $propertyAmenity) {

@@ -119,6 +119,77 @@ class KostAmenitySeeder extends Seeder
                 'category' => 'comfort',
                 'is_popular' => false,
             ],
+            // Additional Indonesian-specific amenities
+            [
+                'id' => 16,
+                'name' => 'Parkir Mobil',
+                'icon' => 'car',
+                'category' => 'basic',
+                'is_popular' => false,
+            ],
+            [
+                'id' => 17,
+                'name' => 'CCTV',
+                'icon' => 'video',
+                'category' => 'security',
+                'is_popular' => true,
+            ],
+            [
+                'id' => 18,
+                'name' => 'Kulkas Bersama',
+                'icon' => 'refrigerator',
+                'category' => 'basic',
+                'is_popular' => false,
+            ],
+            [
+                'id' => 19,
+                'name' => 'Dispenser',
+                'icon' => 'cup',
+                'category' => 'basic',
+                'is_popular' => true,
+            ],
+            [
+                'id' => 20,
+                'name' => 'Jemuran',
+                'icon' => 'shirt',
+                'category' => 'basic',
+                'is_popular' => true,
+            ],
+            [
+                'id' => 21,
+                'name' => 'Kamar Mandi Dalam',
+                'icon' => 'bath',
+                'category' => 'comfort',
+                'is_popular' => true,
+            ],
+            [
+                'id' => 22,
+                'name' => 'Kamar Mandi Luar',
+                'icon' => 'bath',
+                'category' => 'basic',
+                'is_popular' => false,
+            ],
+            [
+                'id' => 23,
+                'name' => 'Balkon',
+                'icon' => 'home',
+                'category' => 'comfort',
+                'is_popular' => false,
+            ],
+            [
+                'id' => 24,
+                'name' => 'Rooftop',
+                'icon' => 'building',
+                'category' => 'comfort',
+                'is_popular' => false,
+            ],
+            [
+                'id' => 25,
+                'name' => 'Akses 24 Jam',
+                'icon' => 'clock',
+                'category' => 'basic',
+                'is_popular' => true,
+            ],
         ];
 
         foreach ($amenities as $amenity) {

@@ -176,6 +176,231 @@ class KostImageSeeder extends Seeder
                 'is_primary' => false,
                 'order' => 2,
             ],
+            // Property 11 images - Kost Bekasi Cyber Park Modern
+            [
+                'property_id' => 11,
+                'url' => 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop',
+                'alt' => 'Kamar modern Bekasi',
+                'is_primary' => true,
+                'order' => 1,
+            ],
+            [
+                'property_id' => 11,
+                'url' => 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&h=600&fit=crop',
+                'alt' => 'Fasilitas keamanan Bekasi',
+                'is_primary' => false,
+                'order' => 2,
+            ],
+            // Property 12 images - Kost Bogor Dekat IPB
+            [
+                'property_id' => 12,
+                'url' => 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&h=600&fit=crop',
+                'alt' => 'Kamar nyaman Bogor',
+                'is_primary' => true,
+                'order' => 1,
+            ],
+            [
+                'property_id' => 12,
+                'url' => 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
+                'alt' => 'Taman hijau Bogor',
+                'is_primary' => false,
+                'order' => 2,
+            ],
+            // Property 13 images - Kost Tangerang UMN Premium
+            [
+                'property_id' => 13,
+                'url' => 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&h=600&fit=crop',
+                'alt' => 'Kamar premium Tangerang',
+                'is_primary' => true,
+                'order' => 1,
+            ],
+            [
+                'property_id' => 13,
+                'url' => 'https://images.unsplash.com/photo-1571508601891-ca5e7a713859?w=800&h=600&fit=crop',
+                'alt' => 'Fasilitas gym Tangerang',
+                'is_primary' => false,
+                'order' => 2,
+            ],
+            // Property 14 images - Kost BSD Serpong Elite
+            [
+                'property_id' => 14,
+                'url' => 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&h=600&fit=crop',
+                'alt' => 'Kamar elite BSD',
+                'is_primary' => true,
+                'order' => 1,
+            ],
+            [
+                'property_id' => 14,
+                'url' => 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&h=600&fit=crop',
+                'alt' => 'Balkon pribadi BSD',
+                'is_primary' => false,
+                'order' => 2,
+            ],
+            // Property 15 images - Kost Jakarta Utara Ancol
+            [
+                'property_id' => 15,
+                'url' => 'https://images.unsplash.com/photo-1540518614846-7eded433c457?w=800&h=600&fit=crop',
+                'alt' => 'Kamar Jakarta Utara',
+                'is_primary' => true,
+                'order' => 1,
+            ],
+            [
+                'property_id' => 15,
+                'url' => 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop',
+                'alt' => 'Dapur bersama Ancol',
+                'is_primary' => false,
+                'order' => 2,
+            ],
+            // Property 16 images - Kost Jakarta Timur Cakung
+            [
+                'property_id' => 16,
+                'url' => 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&h=600&fit=crop',
+                'alt' => 'Kamar Jakarta Timur',
+                'is_primary' => true,
+                'order' => 1,
+            ],
+            [
+                'property_id' => 16,
+                'url' => 'https://images.unsplash.com/photo-1467987506553-8f3916508521?w=800&h=600&fit=crop',
+                'alt' => 'Mushola Cakung',
+                'is_primary' => false,
+                'order' => 2,
+            ],
+            // Property 17 images - Kost Solo Laweyan Heritage
+            [
+                'property_id' => 17,
+                'url' => 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=800&h=600&fit=crop',
+                'alt' => 'Kamar heritage Solo',
+                'is_primary' => true,
+                'order' => 1,
+            ],
+            [
+                'property_id' => 17,
+                'url' => 'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800&h=600&fit=crop',
+                'alt' => 'Ruang tamu Solo',
+                'is_primary' => false,
+                'order' => 2,
+            ],
+            // Property 18 images - Kost Medan USU Modern
+            [
+                'property_id' => 18,
+                'url' => 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&h=600&fit=crop',
+                'alt' => 'Kamar modern Medan',
+                'is_primary' => true,
+                'order' => 1,
+            ],
+            [
+                'property_id' => 18,
+                'url' => 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&h=600&fit=crop',
+                'alt' => 'Fasilitas laundry Medan',
+                'is_primary' => false,
+                'order' => 2,
+            ],
+            // Property 19 images - Kost Padang Unand Strategis
+            [
+                'property_id' => 19,
+                'url' => 'https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=800&h=600&fit=crop',
+                'alt' => 'Kamar strategis Padang',
+                'is_primary' => true,
+                'order' => 1,
+            ],
+            [
+                'property_id' => 19,
+                'url' => 'https://images.unsplash.com/photo-1467987506553-8f3916508521?w=800&h=600&fit=crop',
+                'alt' => 'Dapur bersama Padang',
+                'is_primary' => false,
+                'order' => 2,
+            ],
+            // Property 20 images - Kost Pekanbaru Unri Premium
+            [
+                'property_id' => 20,
+                'url' => 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop',
+                'alt' => 'Kamar premium Pekanbaru',
+                'is_primary' => true,
+                'order' => 1,
+            ],
+            [
+                'property_id' => 20,
+                'url' => 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop',
+                'alt' => 'Fasilitas laundry Pekanbaru',
+                'is_primary' => false,
+                'order' => 2,
+            ],
+            // Property 21 images - Kost Batam UIB Exclusive
+            [
+                'property_id' => 21,
+                'url' => 'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=800&h=600&fit=crop',
+                'alt' => 'Kamar exclusive Batam',
+                'is_primary' => true,
+                'order' => 1,
+            ],
+            [
+                'property_id' => 21,
+                'url' => 'https://images.unsplash.com/photo-1571508601891-ca5e7a713859?w=800&h=600&fit=crop',
+                'alt' => 'Gym exclusive Batam',
+                'is_primary' => false,
+                'order' => 2,
+            ],
+            // Property 22 images - Kost Palembang Unsri Nyaman
+            [
+                'property_id' => 22,
+                'url' => 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&h=600&fit=crop',
+                'alt' => 'Kamar nyaman Palembang',
+                'is_primary' => true,
+                'order' => 1,
+            ],
+            [
+                'property_id' => 22,
+                'url' => 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop',
+                'alt' => 'Dapur bersama Palembang',
+                'is_primary' => false,
+                'order' => 2,
+            ],
+            // Property 23 images - Kost Balikpapan Uniba Modern
+            [
+                'property_id' => 23,
+                'url' => 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&h=600&fit=crop',
+                'alt' => 'Kamar modern Balikpapan',
+                'is_primary' => true,
+                'order' => 1,
+            ],
+            [
+                'property_id' => 23,
+                'url' => 'https://images.unsplash.com/photo-1571508601891-ca5e7a713859?w=800&h=600&fit=crop',
+                'alt' => 'Fasilitas gym Balikpapan',
+                'is_primary' => false,
+                'order' => 2,
+            ],
+            // Property 24 images - Kost Manado Unsrat Strategis
+            [
+                'property_id' => 24,
+                'url' => 'https://images.unsplash.com/photo-1540518614846-7eded433c457?w=800&h=600&fit=crop',
+                'alt' => 'Kamar strategis Manado',
+                'is_primary' => true,
+                'order' => 1,
+            ],
+            [
+                'property_id' => 24,
+                'url' => 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
+                'alt' => 'Taman Manado',
+                'is_primary' => false,
+                'order' => 2,
+            ],
+            // Property 25 images - Kost Makassar Unhas Premium
+            [
+                'property_id' => 25,
+                'url' => 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&h=600&fit=crop',
+                'alt' => 'Kamar premium Makassar',
+                'is_primary' => true,
+                'order' => 1,
+            ],
+            [
+                'property_id' => 25,
+                'url' => 'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800&h=600&fit=crop',
+                'alt' => 'Ruang tamu Makassar',
+                'is_primary' => false,
+                'order' => 2,
+            ],
         ];
 
         foreach ($imageData as $index => $image) {

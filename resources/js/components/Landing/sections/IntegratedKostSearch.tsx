@@ -36,18 +36,60 @@ interface Amenity {
   popular: boolean;
 }
 
-// Available amenities with Indonesian labels
-const availableAmenities: Amenity[] = [
-  { id: 'wifi', name: 'WiFi Gratis', icon: <Wifi className="w-4 h-4" />, popular: true },
-  { id: 'car', name: 'Parkir Motor', icon: <Car className="w-4 h-4" />, popular: true },
-  { id: 'snowflake', name: 'AC', icon: <Snowflake className="w-4 h-4" />, popular: true },
-  { id: 'chef-hat', name: 'Dapur Bersama', icon: <ChefHat className="w-4 h-4" />, popular: true },
-  { id: 'tv', name: 'TV Kabel', icon: <Tv className="w-4 h-4" />, popular: false },
-  { id: 'shield', name: 'Keamanan 24 Jam', icon: <Shield className="w-4 h-4" />, popular: true },
-  { id: 'zap', name: 'Listrik Termasuk', icon: <Zap className="w-4 h-4" />, popular: false },
-  { id: 'waves', name: 'Air Bersih', icon: <Waves className="w-4 h-4" />, popular: false },
-  { id: 'home', name: 'Kamar Furnished', icon: <Home className="w-4 h-4" />, popular: true },
-];
+// Amenity interface for API data
+interface ApiAmenity {
+  id: string;
+  name: string;
+  icon: string;
+  category: string;
+  is_popular: boolean;
+}
+
+// Icon mapping for amenities
+const getAmenityIcon = (iconName: string): React.ReactElement => {
+  const iconMap: Record<string, React.ReactElement> = {
+    'wifi': <Wifi className="w-4 h-4" />,
+    'car': <Car className="w-4 h-4" />,
+    'snowflake': <Snowflake className="w-4 h-4" />,
+    'chef-hat': <ChefHat className="w-4 h-4" />,
+    'tv': <Tv className="w-4 h-4" />,
+    'shield': <Shield className="w-4 h-4" />,
+    'zap': <Zap className="w-4 h-4" />,
+    'waves': <Waves className="w-4 h-4" />,
+    'home': <Home className="w-4 h-4" />,
+    'refrigerator': <Home className="w-4 h-4" />,
+    'cup': <Waves className="w-4 h-4" />,
+    'shirt': <Home className="w-4 h-4" />,
+    'bath': <Waves className="w-4 h-4" />,
+    'building': <Home className="w-4 h-4" />,
+    'clock': <Zap className="w-4 h-4" />,
+    'video': <Shield className="w-4 h-4" />,
+  };
+  return iconMap[iconName] || <Home className="w-4 h-4" />;
+};
+
+// API service for fetching amenities
+const fetchAmenities = async (): Promise<Amenity[]> => {
+  try {
+    const response = await fetch('/api/kosts/amenities');
+    const data = await response.json();
+
+    if (data.success) {
+      return data.data.all.map((amenity: ApiAmenity) => ({
+        id: amenity.id,
+        name: amenity.name,
+        icon: getAmenityIcon(amenity.icon),
+        popular: amenity.is_popular,
+      }));
+    } else {
+      console.error('Failed to fetch amenities:', data.message);
+      return [];
+    }
+  } catch (error) {
+    console.error('Error fetching amenities:', error);
+    return [];
+  }
+};
 
 // Price formatting utility
 const formatPrice = (price: number): string => {
@@ -83,34 +125,44 @@ const IntegratedKostSearch: React.FC<ThemeProps> = () => {
   const [selectedProperty, setSelectedProperty] = useState<KostProperty | null>(null);
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
   const [isVisible, setIsVisible] = useState(false);
+  const [availableAmenities, setAvailableAmenities] = useState<Amenity[]>([]);
+  const [loadingAmenities, setLoadingAmenities] = useState(false);
 
   // Refs for click outside handling
   const locationDropdownRef = useRef<HTMLDivElement>(null);
   const locationInputRef = useRef<HTMLInputElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
-  // Fetch featured properties on component mount
+  // Fetch featured properties and amenities on component mount
   useEffect(() => {
-    const fetchFeaturedProperties = async () => {
+    const fetchInitialData = async () => {
       try {
+        // Fetch featured properties
         setFeaturedLoading(true);
-        const response = await fetch('/api/kosts/featured');
-        const data = await response.json();
+        const propertiesResponse = await fetch('/api/kosts/featured');
+        const propertiesData = await propertiesResponse.json();
 
-        if (data.success) {
-          setFeaturedProperties(data.data);
+        if (propertiesData.success) {
+          setFeaturedProperties(propertiesData.data);
         } else {
-          setError(data.message || 'Gagal memuat kost unggulan.');
+          setError(propertiesData.message || 'Gagal memuat kost unggulan.');
         }
+
+        // Fetch amenities
+        setLoadingAmenities(true);
+        const amenities = await fetchAmenities();
+        setAvailableAmenities(amenities);
+        setLoadingAmenities(false);
+
       } catch (error) {
-        console.error('Error fetching featured properties:', error);
-        setError('Gagal memuat kost unggulan. Silakan coba lagi.');
+        console.error('Error fetching initial data:', error);
+        setError('Gagal memuat data. Silakan coba lagi.');
       } finally {
         setFeaturedLoading(false);
       }
     };
 
-    fetchFeaturedProperties();
+    fetchInitialData();
   }, []);
 
   // Intersection Observer for animations
