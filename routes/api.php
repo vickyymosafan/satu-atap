@@ -81,6 +81,41 @@ Route::prefix('kosts')->group(function () {
 
 /*
 |--------------------------------------------------------------------------
+| Cities Routes
+|--------------------------------------------------------------------------
+|
+| Routes for city data including search, autocomplete, and filtering.
+|
+*/
+
+Route::prefix('cities')->group(function () {
+    // Get all cities with optional filtering
+    Route::get('/', [App\Http\Controllers\Api\CityController::class, 'index'])
+        ->name('api.cities.index');
+
+    // Get autocomplete suggestions for cities
+    Route::get('/autocomplete', [App\Http\Controllers\Api\CityController::class, 'autocomplete'])
+        ->name('api.cities.autocomplete');
+
+    // Get all provinces
+    Route::get('/provinces', [App\Http\Controllers\Api\CityController::class, 'provinces'])
+        ->name('api.cities.provinces');
+
+    // Get popular cities
+    Route::get('/popular', [App\Http\Controllers\Api\CityController::class, 'popular'])
+        ->name('api.cities.popular');
+
+    // Get unique cities (grouped by city name)
+    Route::get('/unique', [App\Http\Controllers\Api\CityController::class, 'unique'])
+        ->name('api.cities.unique');
+
+    // Get specific city by ID
+    Route::get('/{city}', [App\Http\Controllers\Api\CityController::class, 'show'])
+        ->name('api.cities.show');
+});
+
+/*
+|--------------------------------------------------------------------------
 | Location Routes
 |--------------------------------------------------------------------------
 |
@@ -90,15 +125,9 @@ Route::prefix('kosts')->group(function () {
 */
 
 Route::prefix('locations')->group(function () {
-    // Location autocomplete for search
-    Route::get('/autocomplete', function (Request $request) {
-        // TODO: Implement LocationController@autocomplete
-        return response()->json([
-            'success' => true,
-            'data' => [],
-            'message' => 'Location suggestions retrieved successfully'
-        ]);
-    })->name('api.locations.autocomplete');
+    // Location autocomplete for search (legacy - use cities/autocomplete instead)
+    Route::get('/autocomplete', [App\Http\Controllers\Api\CityController::class, 'autocomplete'])
+        ->name('api.locations.autocomplete');
 
     // Get nearby landmarks for a location
     Route::get('/{id}/landmarks', function ($id) {

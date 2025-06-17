@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
 
         // Seed kost-related data
         $this->call([
+            CitySeeder::class, // Add cities first
             KostLocationSeeder::class,
             KostAmenitySeeder::class,
             KostPropertySeeder::class,

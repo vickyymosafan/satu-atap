@@ -16,11 +16,13 @@ interface QuickSearchProps extends ThemeProps {
 
 // Location data interface
 interface LocationData {
-  id: string;
+  id: string | number;
   name: string;
   city: string;
   province: string;
   type: 'city' | 'district' | 'area';
+  full_name?: string;
+  is_popular?: boolean;
 }
 
 // Search filters interface
@@ -39,19 +41,45 @@ interface Amenity {
   popular: boolean;
 }
 
-// Mock location data for autocomplete
-const mockLocations: LocationData[] = [
-  { id: '1', name: 'Jakarta Pusat', city: 'Jakarta', province: 'DKI Jakarta', type: 'city' },
-  { id: '2', name: 'Jakarta Selatan', city: 'Jakarta', province: 'DKI Jakarta', type: 'city' },
-  { id: '3', name: 'Jakarta Barat', city: 'Jakarta', province: 'DKI Jakarta', type: 'city' },
-  { id: '4', name: 'Jakarta Utara', city: 'Jakarta', province: 'DKI Jakarta', type: 'city' },
-  { id: '5', name: 'Jakarta Timur', city: 'Jakarta', province: 'DKI Jakarta', type: 'city' },
-  { id: '6', name: 'Bandung', city: 'Bandung', province: 'Jawa Barat', type: 'city' },
-  { id: '7', name: 'Surabaya', city: 'Surabaya', province: 'Jawa Timur', type: 'city' },
-  { id: '8', name: 'Yogyakarta', city: 'Yogyakarta', province: 'DI Yogyakarta', type: 'city' },
-  { id: '9', name: 'Semarang', city: 'Semarang', province: 'Jawa Tengah', type: 'city' },
-  { id: '10', name: 'Malang', city: 'Malang', province: 'Jawa Timur', type: 'city' },
-];
+// API service for fetching cities
+const fetchCities = async (search?: string, limit?: number): Promise<LocationData[]> => {
+  try {
+    const params = new URLSearchParams();
+    if (search) params.append('search', search);
+    if (limit) params.append('limit', limit.toString());
+
+    const response = await fetch(`/api/cities/autocomplete?${params}`);
+    const data = await response.json();
+
+    if (data.success) {
+      return data.data;
+    } else {
+      console.error('Failed to fetch cities:', data.message);
+      return [];
+    }
+  } catch (error) {
+    console.error('Error fetching cities:', error);
+    return [];
+  }
+};
+
+// API service for fetching unique cities
+const fetchUniqueCities = async (): Promise<LocationData[]> => {
+  try {
+    const response = await fetch('/api/cities/unique');
+    const data = await response.json();
+
+    if (data.success) {
+      return data.data;
+    } else {
+      console.error('Failed to fetch unique cities:', data.message);
+      return [];
+    }
+  } catch (error) {
+    console.error('Error fetching unique cities:', error);
+    return [];
+  }
+};
 
 // Available amenities with Indonesian labels
 const availableAmenities: Amenity[] = [
@@ -88,17 +116,42 @@ const QuickSearch: React.FC<QuickSearchProps> = ({ onSearch, isSearching = false
   // UI state
   const [showLocationDropdown, setShowLocationDropdown] = useState(false);
   const [showAdvancedFilters, setShowAdvancedFilters] = useState(false);
+  const [locations, setLocations] = useState<LocationData[]>([]);
+  const [uniqueCities, setUniqueCities] = useState<LocationData[]>([]);
+  const [loadingLocations, setLoadingLocations] = useState(false);
 
   // Refs for click outside handling
   const locationDropdownRef = useRef<HTMLDivElement>(null);
   const locationInputRef = useRef<HTMLInputElement>(null);
 
-  // Filter locations based on search input
-  const filteredLocations = mockLocations.filter(location =>
-    location.name.toLowerCase().includes(filters.location.toLowerCase()) ||
-    location.city.toLowerCase().includes(filters.location.toLowerCase()) ||
-    location.province.toLowerCase().includes(filters.location.toLowerCase())
-  );
+  // Filtered locations based on search input
+  const filteredLocations = locations;
+
+  // Fetch unique cities on component mount
+  useEffect(() => {
+    const loadUniqueCities = async () => {
+      const cities = await fetchUniqueCities();
+      setUniqueCities(cities);
+    };
+    loadUniqueCities();
+  }, []);
+
+  // Fetch locations based on search input
+  useEffect(() => {
+    const loadLocations = async () => {
+      if (filters.location.trim()) {
+        setLoadingLocations(true);
+        const searchResults = await fetchCities(filters.location, 10);
+        setLocations(searchResults);
+        setLoadingLocations(false);
+      } else {
+        setLocations([]);
+      }
+    };
+
+    const timeoutId = setTimeout(loadLocations, 300); // Debounce search
+    return () => clearTimeout(timeoutId);
+  }, [filters.location]);
 
   // Handle location input change
   const handleLocationChange = (value: string) => {
@@ -266,21 +319,22 @@ const QuickSearch: React.FC<QuickSearchProps> = ({ onSearch, isSearching = false
                       aria-label="Pilihan lokasi"
                     >
                       <div className="p-2">
-                        {/* Show popular cities when no input */}
+                        {/* Show all cities when no input */}
                         {!filters.location && (
                           <>
                             <div className="px-3 py-2 text-xs text-muted-foreground font-medium border-b border-border mb-2">
-                              Kota Populer
+                              Kota
                             </div>
-                            <div className="space-y-1">
-                              {['Jakarta', 'Bandung', 'Yogyakarta', 'Surabaya', 'Semarang'].map((city) => (
+                            <div className="space-y-1 max-h-48 overflow-y-auto">
+                              {uniqueCities.map((location) => (
                                 <button
-                                  key={city}
-                                  onClick={() => handleLocationChange(city)}
+                                  key={location.id}
+                                  onClick={() => handleLocationChange(location.city)}
                                   className="w-full px-3 py-2 text-left hover:bg-accent rounded-md transition-colors duration-200 text-sm"
                                   role="option"
                                 >
-                                  {city}
+                                  <div className="font-medium">{location.city}</div>
+                                  <div className="text-xs text-muted-foreground">{location.province}</div>
                                 </button>
                               ))}
                             </div>
@@ -288,34 +342,41 @@ const QuickSearch: React.FC<QuickSearchProps> = ({ onSearch, isSearching = false
                         )}
 
                         {/* Show filtered locations when typing */}
-                        {filters.location && filteredLocations.length > 0 && (
-                          <div className="space-y-1">
-                            {filteredLocations.slice(0, 5).map((location) => (
-                              <button
-                                key={location.id}
-                                onClick={() => handleLocationSelect(location)}
-                                className="w-full px-3 py-2 text-left hover:bg-accent rounded-md transition-colors duration-200"
-                                role="option"
-                                aria-selected={filters.selectedLocation?.id === location.id}
-                              >
-                                <div className="text-sm font-medium text-popover-foreground">
-                                  {location.name}
+                        {filters.location && (
+                          <>
+                            {loadingLocations ? (
+                              <div className="px-3 py-4 text-center">
+                                <div className="text-sm text-muted-foreground">
+                                  Mencari lokasi...
                                 </div>
-                                <div className="text-xs text-muted-foreground">
-                                  {location.city}, {location.province}
+                              </div>
+                            ) : filteredLocations.length > 0 ? (
+                              <div className="space-y-1">
+                                {filteredLocations.slice(0, 5).map((location) => (
+                                  <button
+                                    key={location.id}
+                                    onClick={() => handleLocationSelect(location)}
+                                    className="w-full px-3 py-2 text-left hover:bg-accent rounded-md transition-colors duration-200"
+                                    role="option"
+                                    aria-selected={filters.selectedLocation?.id === location.id}
+                                  >
+                                    <div className="text-sm font-medium text-popover-foreground">
+                                      {location.name}
+                                    </div>
+                                    <div className="text-xs text-muted-foreground">
+                                      {location.city}, {location.province}
+                                    </div>
+                                  </button>
+                                ))}
+                              </div>
+                            ) : (
+                              <div className="px-3 py-4 text-center">
+                                <div className="text-sm text-muted-foreground">
+                                  Tidak ada lokasi yang ditemukan
                                 </div>
-                              </button>
-                            ))}
-                          </div>
-                        )}
-
-                        {/* No results message */}
-                        {filters.location && filteredLocations.length === 0 && (
-                          <div className="px-3 py-4 text-center">
-                            <div className="text-sm text-muted-foreground">
-                              Tidak ada lokasi yang ditemukan
-                            </div>
-                          </div>
+                              </div>
+                            )}
+                          </>
                         )}
                       </div>
                     </div>

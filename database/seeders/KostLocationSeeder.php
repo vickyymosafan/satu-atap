@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\KostLocation;
+use App\Models\City;
 use Illuminate\Database\Seeder;
 
 class KostLocationSeeder extends Seeder
@@ -12,13 +13,25 @@ class KostLocationSeeder extends Seeder
      */
     public function run(): void
     {
+        // Get cities from database to ensure consistency
+        $depok = City::where('city', 'Depok')->first();
+        $jakartaSelatan = City::where('name', 'Jakarta Selatan')->first();
+        $jakartaPusat = City::where('name', 'Jakarta Pusat')->first();
+        $jakartaBarat = City::where('name', 'Jakarta Barat')->first();
+        $bandung = City::where('city', 'Bandung')->first();
+        $yogyakarta = City::where('city', 'Yogyakarta')->first();
+        $semarang = City::where('city', 'Semarang')->first();
+        $malang = City::where('city', 'Malang')->first();
+        $surabaya = City::where('city', 'Surabaya')->first();
+        $denpasar = City::where('city', 'Denpasar')->first();
+
         $locations = [
             [
                 'id' => 1,
                 'address' => 'Jl. Margonda Raya No. 123',
                 'district' => 'Beji',
-                'city' => 'Depok',
-                'province' => 'Jawa Barat',
+                'city' => $depok ? $depok->city : 'Depok',
+                'province' => $depok ? $depok->province : 'Jawa Barat',
                 'postal_code' => '16424',
                 'latitude' => -6.3728,
                 'longitude' => 106.8317,
@@ -28,8 +41,8 @@ class KostLocationSeeder extends Seeder
                 'id' => 2,
                 'address' => 'Jl. Kemang Raya No. 45',
                 'district' => 'Kemang',
-                'city' => 'Jakarta Selatan',
-                'province' => 'DKI Jakarta',
+                'city' => $jakartaSelatan ? $jakartaSelatan->city : 'Jakarta Selatan',
+                'province' => $jakartaSelatan ? $jakartaSelatan->province : 'DKI Jakarta',
                 'postal_code' => '12560',
                 'latitude' => -6.2615,
                 'longitude' => 106.8106,
@@ -39,8 +52,8 @@ class KostLocationSeeder extends Seeder
                 'id' => 3,
                 'address' => 'Jl. Sudirman No. 89',
                 'district' => 'Tanah Abang',
-                'city' => 'Jakarta Pusat',
-                'province' => 'DKI Jakarta',
+                'city' => $jakartaPusat ? $jakartaPusat->city : 'Jakarta Pusat',
+                'province' => $jakartaPusat ? $jakartaPusat->province : 'DKI Jakarta',
                 'postal_code' => '10270',
                 'latitude' => -6.2088,
                 'longitude' => 106.8229,
@@ -50,8 +63,8 @@ class KostLocationSeeder extends Seeder
                 'id' => 4,
                 'address' => 'Jl. Kebon Jeruk No. 45',
                 'district' => 'Kebon Jeruk',
-                'city' => 'Jakarta Barat',
-                'province' => 'DKI Jakarta',
+                'city' => $jakartaBarat ? $jakartaBarat->city : 'Jakarta Barat',
+                'province' => $jakartaBarat ? $jakartaBarat->province : 'DKI Jakarta',
                 'postal_code' => '11530',
                 'latitude' => -6.1944,
                 'longitude' => 106.7831,
@@ -62,8 +75,8 @@ class KostLocationSeeder extends Seeder
                 'id' => 5,
                 'address' => 'Jl. Dago No. 78',
                 'district' => 'Coblong',
-                'city' => 'Bandung',
-                'province' => 'Jawa Barat',
+                'city' => $bandung ? $bandung->city : 'Bandung',
+                'province' => $bandung ? $bandung->province : 'Jawa Barat',
                 'postal_code' => '40135',
                 'latitude' => -6.8951,
                 'longitude' => 107.6084,
@@ -73,8 +86,8 @@ class KostLocationSeeder extends Seeder
                 'id' => 6,
                 'address' => 'Jl. Malioboro No. 156',
                 'district' => 'Gedongtengen',
-                'city' => 'Yogyakarta',
-                'province' => 'DI Yogyakarta',
+                'city' => $yogyakarta ? $yogyakarta->city : 'Yogyakarta',
+                'province' => $yogyakarta ? $yogyakarta->province : 'DI Yogyakarta',
                 'postal_code' => '55271',
                 'latitude' => -7.7956,
                 'longitude' => 110.3695,
@@ -84,8 +97,8 @@ class KostLocationSeeder extends Seeder
                 'id' => 7,
                 'address' => 'Jl. Pemuda No. 89',
                 'district' => 'Semarang Tengah',
-                'city' => 'Semarang',
-                'province' => 'Jawa Tengah',
+                'city' => $semarang ? $semarang->city : 'Semarang',
+                'province' => $semarang ? $semarang->province : 'Jawa Tengah',
                 'postal_code' => '50132',
                 'latitude' => -6.9667,
                 'longitude' => 110.4167,
@@ -95,8 +108,8 @@ class KostLocationSeeder extends Seeder
                 'id' => 8,
                 'address' => 'Jl. Veteran No. 234',
                 'district' => 'Lowokwaru',
-                'city' => 'Malang',
-                'province' => 'Jawa Timur',
+                'city' => $malang ? $malang->city : 'Malang',
+                'province' => $malang ? $malang->province : 'Jawa Timur',
                 'postal_code' => '65145',
                 'latitude' => -7.9666,
                 'longitude' => 112.6326,
@@ -106,8 +119,8 @@ class KostLocationSeeder extends Seeder
                 'id' => 9,
                 'address' => 'Jl. Raya Darmo No. 67',
                 'district' => 'Wonokromo',
-                'city' => 'Surabaya',
-                'province' => 'Jawa Timur',
+                'city' => $surabaya ? $surabaya->city : 'Surabaya',
+                'province' => $surabaya ? $surabaya->province : 'Jawa Timur',
                 'postal_code' => '60241',
                 'latitude' => -7.2575,
                 'longitude' => 112.7521,
@@ -117,8 +130,8 @@ class KostLocationSeeder extends Seeder
                 'id' => 10,
                 'address' => 'Jl. Gajah Mada No. 123',
                 'district' => 'Denpasar Barat',
-                'city' => 'Denpasar',
-                'province' => 'Bali',
+                'city' => $denpasar ? $denpasar->city : 'Denpasar',
+                'province' => $denpasar ? $denpasar->province : 'Bali',
                 'postal_code' => '80119',
                 'latitude' => -8.6500,
                 'longitude' => 115.2167,
