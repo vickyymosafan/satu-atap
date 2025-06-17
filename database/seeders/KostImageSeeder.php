@@ -418,14 +418,23 @@ class KostImageSeeder extends Seeder
             $response = Http::timeout(30)->get($imageData['url']);
             
             if ($response->successful()) {
-                // Generate filename
-                $extension = 'jpg'; // Unsplash images are typically JPG
+                // Convert image to WEBP format
+                $imageContent = $response->body();
+                $webpContent = $this->convertToWebp($imageContent);
+
+                // Check if conversion was successful (webpContent should be different from original)
+                if (empty($webpContent)) {
+                    throw new \Exception('WEBP conversion failed - empty result');
+                }
+
+                // Generate filename with WEBP extension
+                $extension = 'webp';
                 $filename = "kost-image-{$imageId}-" . Str::random(8) . ".{$extension}";
                 $path = "kost-images/{$filename}";
-                
-                // Store the image
-                Storage::disk('public')->put($path, $response->body());
-                
+
+                // Store the converted WEBP image
+                Storage::disk('public')->put($path, $webpContent);
+
                 // Create database record
                 KostImage::create([
                     'property_id' => $imageData['property_id'],
@@ -436,8 +445,8 @@ class KostImageSeeder extends Seeder
                     'alt' => $imageData['alt'],
                     'is_primary' => $imageData['is_primary'],
                     'order' => $imageData['order'],
-                    'mime_type' => 'image/jpeg',
-                    'size' => strlen($response->body()),
+                    'mime_type' => 'image/webp',
+                    'size' => strlen($webpContent),
                 ]);
                 
                 $this->command->info("Downloaded and stored: {$filename}");
@@ -448,6 +457,40 @@ class KostImageSeeder extends Seeder
         } catch (\Exception $e) {
             $this->command->error("Error downloading image: {$e->getMessage()}");
             $this->createFallbackImage($imageData, $imageId);
+        }
+    }
+
+    /**
+     * Convert image content to WEBP format.
+     */
+    private function convertToWebp(string $imageContent): string
+    {
+        try {
+            // Create image resource from string
+            $image = imagecreatefromstring($imageContent);
+
+            if ($image === false) {
+                throw new \Exception('Failed to create image from content');
+            }
+
+            // Start output buffering to capture the WEBP data
+            ob_start();
+
+            // Convert to WEBP with quality 85 (good balance between quality and size)
+            imagewebp($image, null, 85);
+
+            // Get the WEBP content
+            $webpContent = ob_get_contents();
+            ob_end_clean();
+
+            // Clean up memory
+            imagedestroy($image);
+
+            return $webpContent;
+        } catch (\Exception $e) {
+            $this->command->error("Failed to convert image to WEBP: {$e->getMessage()}");
+            // Return original content as fallback
+            return $imageContent;
         }
     }
 
@@ -465,10 +508,10 @@ class KostImageSeeder extends Seeder
             'alt' => $imageData['alt'],
             'is_primary' => $imageData['is_primary'],
             'order' => $imageData['order'],
-            'mime_type' => 'image/jpeg',
+            'mime_type' => 'image/webp',
             'size' => 0,
         ]);
-        
+
         $this->command->info("Created fallback record for image {$imageId}");
     }
 }
