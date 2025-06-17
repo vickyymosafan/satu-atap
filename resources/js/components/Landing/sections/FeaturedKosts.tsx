@@ -491,25 +491,7 @@ const FeaturedKosts: React.FC<FeaturedKostsProps> = ({
           </div>
         )}
 
-        {/* View More Button - Only show for featured kosts, not search results */}
-        {!displayLoading && !displayError && displayProperties.length > 0 && !isSearchActive && (
-          <div className={`text-center mt-10 transition-all duration-700 delay-500 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}>
-            <div className="bg-card/50 backdrop-blur-sm rounded-xl p-6 border border-border/50 shadow-lg">
-              <h3 className="text-lg font-bold text-foreground mb-2">
-                Masih mencari kost yang tepat?
-              </h3>
-              <p className="text-sm text-muted-foreground mb-4 max-w-md mx-auto">
-                Jelajahi koleksi lengkap kost kami dengan berbagai pilihan lokasi dan fasilitas
-              </p>
-              <button className="px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:scale-105 group">
-                <span className="mr-2">Lihat Semua Kost</span>
-                <span className="group-hover:translate-x-1 transition-transform duration-200 inline-block">→</span>
-              </button>
-            </div>
-          </div>
-        )}
+
 
         {/* Search Results Actions */}
         {!displayLoading && !displayError && isSearchActive && (
