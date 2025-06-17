@@ -320,11 +320,11 @@ const FeaturedKosts: React.FC<FeaturedKostsProps> = ({
           if (data.success) {
             setFeaturedProperties(data.data);
           } else {
-            setError(data.message || 'Gagal memuat kost unggulan.');
+            setError(data.message || 'Gagal memuat kost.');
           }
         } catch (error) {
           console.error('Error fetching featured properties:', error);
-          setError('Gagal memuat kost unggulan. Silakan coba lagi.');
+          setError('Gagal memuat kost. Silakan coba lagi.');
         } finally {
           setLoading(false);
         }
@@ -408,18 +408,15 @@ const FeaturedKosts: React.FC<FeaturedKostsProps> = ({
                   onClick={onResetSearch}
                   className="mt-4 px-4 py-2 text-sm bg-muted hover:bg-accent text-muted-foreground hover:text-accent-foreground rounded-lg transition-colors duration-200"
                 >
-                  ← Kembali ke Kost Unggulan
+                  ← Kembali ke Kost
                 </button>
               )}
             </>
           ) : (
             // Featured Kosts Header
             <>
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary/10 rounded-full border border-primary/20 mb-4">
-                <span className="text-primary font-semibold text-xs">⭐ Pilihan Terbaik</span>
-              </div>
               <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3 md:mb-4 leading-tight">
-                Kost Unggulan
+                Kost
               </h2>
               <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
                 Temukan kost terbaik dengan fasilitas lengkap dan lokasi strategis yang telah dipilih khusus untuk Anda.
@@ -504,10 +501,10 @@ const FeaturedKosts: React.FC<FeaturedKostsProps> = ({
                 Masih mencari kost yang tepat?
               </h3>
               <p className="text-sm text-muted-foreground mb-4 max-w-md mx-auto">
-                Jelajahi koleksi lengkap kost unggulan kami dengan berbagai pilihan lokasi dan fasilitas
+                Jelajahi koleksi lengkap kost kami dengan berbagai pilihan lokasi dan fasilitas
               </p>
               <button className="px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:scale-105 group">
-                <span className="mr-2">Lihat Semua Kost Unggulan</span>
+                <span className="mr-2">Lihat Semua Kost</span>
                 <span className="group-hover:translate-x-1 transition-transform duration-200 inline-block">→</span>
               </button>
             </div>
@@ -545,7 +542,7 @@ const FeaturedKosts: React.FC<FeaturedKostsProps> = ({
                         onClick={onResetSearch}
                         className="px-6 py-3 bg-muted hover:bg-accent text-muted-foreground hover:text-accent-foreground rounded-lg transition-all duration-300 font-medium"
                       >
-                        Lihat Kost Unggulan
+                        Lihat Kost
                       </button>
                     )}
                   </div>
@@ -556,7 +553,7 @@ const FeaturedKosts: React.FC<FeaturedKostsProps> = ({
                     Tidak menemukan yang Anda cari?
                   </h3>
                   <p className="text-sm text-muted-foreground mb-4 max-w-md mx-auto">
-                    Coba ubah kriteria pencarian atau lihat rekomendasi kost unggulan kami
+                    Coba ubah kriteria pencarian atau lihat rekomendasi kost kami
                   </p>
                   <div className="flex flex-col sm:flex-row gap-3 justify-center">
                     <button
@@ -575,7 +572,7 @@ const FeaturedKosts: React.FC<FeaturedKostsProps> = ({
                         onClick={onResetSearch}
                         className="px-6 py-3 bg-muted hover:bg-accent text-muted-foreground hover:text-accent-foreground rounded-lg transition-all duration-300 font-medium"
                       >
-                        Lihat Kost Unggulan
+                        Lihat Kost
                       </button>
                     )}
                   </div>

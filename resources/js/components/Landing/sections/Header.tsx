@@ -18,7 +18,7 @@ interface NavLink {
 const navLinks: NavLink[] = [
   { label: 'Beranda', href: '#hero', id: 'hero' },
   { label: 'Cari Kost', href: '#quick-search', id: 'quick-search' },
-  { label: 'Kost Unggulan', href: '#featured', id: 'featured' },
+  { label: 'Kost', href: '#featured', id: 'featured' },
   { label: 'Tentang', href: '#about', id: 'about' },
   { label: 'Kontak', href: '#contact', id: 'contact' },
 ];

@@ -127,7 +127,7 @@ const LandingPage: React.FC = () => {
           <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent opacity-50"></div>
         </section>
 
-        {/* Featured Kosts Section - Kost Unggulan */}
+        {/* Featured Kosts Section - Kost */}
         <section id="featured" className="relative bg-muted/20">
           <FeaturedKosts
             {...themeProps}
