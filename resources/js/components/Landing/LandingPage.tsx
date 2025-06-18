@@ -142,28 +142,6 @@ const LandingPage: React.FC = () => {
           <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent opacity-50"></div>
         </section>
 
-        {/* About Section - Laptop optimized styling */}
-        <section id="about" className="relative py-12 sm:py-16 lg:py-20 bg-background">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
-            <div className="text-center">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4 md:mb-6 leading-tight">
-                Tentang Satu Atap
-              </h2>
-              <p className="text-sm md:text-base lg:text-lg text-muted-foreground mb-8 md:mb-10 max-w-2xl mx-auto leading-normal">
-                Platform terpercaya untuk mencari kost yang aman, nyaman, dan terjangkau di seluruh Indonesia.
-                Kami menghubungkan pencari kost dengan pemilik properti terbaik.
-              </p>
-              <div className="bg-card/80 backdrop-blur-sm rounded-xl p-6 md:p-8 border border-border/50 shadow-lg">
-                <p className="text-sm md:text-base text-muted-foreground leading-normal">
-                  Konten lengkap akan segera hadir. Saat ini kami fokus mengembangkan fitur pencarian dan katalog kost terbaik untuk Anda.
-                </p>
-              </div>
-            </div>
-          </div>
-          {/* Consistent Section Divider */}
-          <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent opacity-50"></div>
-        </section>
-
         {/* Why Choose Us Section */}
         <section id="why-choose-us" className="relative">
           <WhyChooseUs {...themeProps} />

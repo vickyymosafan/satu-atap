@@ -19,7 +19,7 @@ const navLinks: NavLink[] = [
   { label: 'Beranda', href: '#hero', id: 'hero' },
   { label: 'Cari Kost', href: '#quick-search', id: 'quick-search' },
   { label: 'Kost', href: '#featured', id: 'featured' },
-  { label: 'Tentang', href: '#about', id: 'about' },
+  { label: 'Tentang', href: '#why-choose-us', id: 'why-choose-us' },
   { label: 'Kontak', href: '#contact', id: 'contact' },
 ];
 
