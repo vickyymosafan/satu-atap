@@ -557,17 +557,16 @@ const ContactSupport: React.FC = () => {
           {/* Social Media Links */}
           <div className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-6 lg:p-8 shadow-xl border border-gray-100 dark:border-gray-700">
               <div className="mb-8">
-                <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white flex items-center mb-3">
-                  <div className="p-2 bg-gradient-to-r from-red-400 to-pink-500 rounded-lg mr-4 animate-pulse">
-                    <Heart className="h-6 w-6 text-white" />
+                <div className="flex items-center mb-4">
+                  <div className="p-3 bg-gradient-to-r from-red-400 to-pink-500 rounded-xl mr-4 shadow-lg">
+                    <Heart className="h-7 w-7 text-white" />
                   </div>
-                  Ikuti Kami
-                  <span className="ml-3 text-sm bg-gradient-to-r from-blue-500 to-purple-600 text-white px-3 py-1 rounded-full font-medium animate-bounce">
-                    Stay Connected
-                  </span>
-                </h3>
-                <p className="text-lg text-gray-600 dark:text-gray-300">
-                  Tetap terhubung dengan kami di media sosial
+                  <h3 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white whitespace-nowrap">
+                    Ikuti Kami
+                  </h3>
+                </div>
+                <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                  Tetap terhubung dengan kami di media sosial untuk mendapatkan update terbaru
                 </p>
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4">
