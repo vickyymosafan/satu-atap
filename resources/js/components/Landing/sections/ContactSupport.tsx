@@ -532,7 +532,7 @@ const ContactSupport: React.FC = () => {
                   Tetap terhubung dengan kami di media sosial
                 </p>
               </div>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4">
                 {data.social_media.map((social) => (
                   <a
                     key={social.id}
@@ -590,8 +590,8 @@ const ContactSupport: React.FC = () => {
         </div>
 
         {/* FAQ Section */}
-        <div className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-8 shadow-xl border border-gray-100 dark:border-gray-700">
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between mb-8 gap-4">
+        <div className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-6 lg:p-8 shadow-xl border border-gray-100 dark:border-gray-700">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between mb-6 lg:mb-8 gap-4">
             <div className="flex-1">
               <h3 className="text-3xl font-bold text-gray-900 dark:text-white flex items-center mb-3">
                 <div className="p-2 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-lg mr-4">
@@ -603,7 +603,7 @@ const ContactSupport: React.FC = () => {
                 Temukan jawaban cepat untuk pertanyaan yang sering diajukan oleh pengguna kami
               </p>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
               <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400 bg-white dark:bg-gray-800 px-4 py-2 rounded-full shadow-md border border-gray-200 dark:border-gray-600">
                 <Eye className="h-4 w-4 text-blue-500" />
                 <span className="font-medium">{faqs.length} pertanyaan</span>
@@ -616,8 +616,8 @@ const ContactSupport: React.FC = () => {
           </div>
 
           {/* FAQ Filters */}
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 mb-8">
-            <div className="flex flex-col lg:flex-row gap-4">
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-4 lg:p-6 shadow-lg border border-gray-200 dark:border-gray-700 mb-6 lg:mb-8">
+            <div className="flex flex-col lg:flex-row gap-3 lg:gap-4">
               <div className="flex-1 relative group">
                 <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400 group-focus-within:text-blue-500 transition-colors" />
                 <input
@@ -625,7 +625,7 @@ const ContactSupport: React.FC = () => {
                   placeholder="Cari pertanyaan atau kata kunci..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-12 pr-12 py-4 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white dark:focus:bg-gray-800 transition-all duration-200"
+                  className="w-full pl-12 pr-12 py-3 lg:py-4 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white dark:focus:bg-gray-800 transition-all duration-200"
                 />
                 {searchQuery && (
                   <button
@@ -639,12 +639,12 @@ const ContactSupport: React.FC = () => {
                 )}
               </div>
 
-              <div className="lg:w-64 relative group">
+              <div className="lg:w-64 xl:w-72 relative group">
                 <Filter className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400 group-focus-within:text-blue-500 transition-colors" />
                 <select
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white dark:focus:bg-gray-800 appearance-none cursor-pointer transition-all duration-200"
+                  className="w-full pl-12 pr-4 py-3 lg:py-4 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white dark:focus:bg-gray-800 appearance-none cursor-pointer transition-all duration-200"
                 >
                   <option value="all">Semua Kategori</option>
                   {data.faq_categories && Object.entries(data.faq_categories).map(([key, label]) => (
@@ -659,10 +659,10 @@ const ContactSupport: React.FC = () => {
           </div>
 
           {/* Category Pills */}
-          <div className="flex flex-wrap gap-3 mb-8">
+          <div className="flex flex-wrap gap-2 sm:gap-3 mb-6 lg:mb-8">
             <button
               onClick={() => setSelectedCategory('all')}
-              className={`px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 transform hover:scale-105 ${
+              className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 transform hover:scale-105 ${
                 selectedCategory === 'all'
                   ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-500/25'
                   : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-600 hover:border-blue-300 dark:hover:border-blue-500'
@@ -688,7 +688,7 @@ const ContactSupport: React.FC = () => {
                 <button
                   key={key}
                   onClick={() => setSelectedCategory(key)}
-                  className={`px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 transform hover:scale-105 ${
+                  className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 transform hover:scale-105 ${
                     selectedCategory === key
                       ? `bg-gradient-to-r ${colorClass} text-white shadow-lg`
                       : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-600 hover:border-blue-300 dark:hover:border-blue-500'
@@ -722,12 +722,12 @@ const ContactSupport: React.FC = () => {
                 >
                   <button
                     onClick={() => toggleFaq(faq.id)}
-                    className="w-full px-6 py-5 text-left bg-gradient-to-r from-gray-50 to-white dark:from-gray-800/50 dark:to-gray-800/30 hover:from-blue-50 hover:to-blue-25 dark:hover:from-blue-900/20 dark:hover:to-blue-800/20 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500/20 group-hover:shadow-md"
+                    className="w-full px-4 sm:px-6 py-4 sm:py-5 text-left bg-gradient-to-r from-gray-50 to-white dark:from-gray-800/50 dark:to-gray-800/30 hover:from-blue-50 hover:to-blue-25 dark:hover:from-blue-900/20 dark:hover:to-blue-800/20 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500/20 group-hover:shadow-md"
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex-1">
-                        <div className="flex items-center mb-3">
-                          <h4 className="text-lg font-semibold text-gray-900 dark:text-white pr-4 group-hover:text-blue-600 transition-colors leading-relaxed">
+                        <div className="flex flex-col sm:flex-row sm:items-center mb-3 gap-2">
+                          <h4 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 transition-colors leading-relaxed">
                             {faq.question}
                           </h4>
                           {faq.is_featured && (
@@ -737,7 +737,7 @@ const ContactSupport: React.FC = () => {
                             </span>
                           )}
                         </div>
-                        <div className="flex items-center space-x-4 text-sm">
+                        <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm">
                           <span className={`px-3 py-1 rounded-full font-medium shadow-sm ${
                             faq.category === 'general' ? 'bg-gradient-to-r from-blue-100 to-blue-200 dark:from-blue-900/30 dark:to-blue-800/30 text-blue-800 dark:text-blue-300' :
                             faq.category === 'booking' ? 'bg-gradient-to-r from-green-100 to-green-200 dark:from-green-900/30 dark:to-green-800/30 text-green-800 dark:text-green-300' :
@@ -767,14 +767,14 @@ const ContactSupport: React.FC = () => {
                   </button>
 
                   {expandedFaq === faq.id && (
-                    <div className="px-6 py-6 bg-gradient-to-br from-blue-50 to-white dark:from-gray-900 dark:to-gray-800 border-t border-blue-200 dark:border-blue-800 animate-in slide-in-from-top duration-300">
+                    <div className="px-4 sm:px-6 py-4 sm:py-6 bg-gradient-to-br from-blue-50 to-white dark:from-gray-900 dark:to-gray-800 border-t border-blue-200 dark:border-blue-800 animate-in slide-in-from-top duration-300">
                       <div className="prose prose-gray dark:prose-invert max-w-none">
                         <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-base whitespace-pre-line">
                           {faq.answer}
                         </p>
                       </div>
 
-                      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mt-8 pt-6 border-t border-gray-200 dark:border-gray-700 gap-4">
+                      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-gray-200 dark:border-gray-700 gap-3 sm:gap-4">
                         <div className="flex items-center space-x-4">
                           <button
                             onClick={() => copyToClipboard(faq.question, `faq-${faq.id}`)}
@@ -800,14 +800,14 @@ const ContactSupport: React.FC = () => {
                             Apakah ini membantu?
                           </span>
                         </div>
-                        <div className="flex items-center space-x-3">
-                          <button className="flex items-center gap-2 px-4 py-2 bg-green-50 hover:bg-green-100 dark:bg-green-900/30 dark:hover:bg-green-900/50 text-green-700 dark:text-green-300 rounded-lg transition-all duration-200 hover:scale-105">
-                            <span className="text-lg">👍</span>
-                            <span className="text-sm font-medium">Ya</span>
+                        <div className="flex items-center gap-2 sm:gap-3">
+                          <button className="flex items-center gap-1 sm:gap-2 px-3 sm:px-4 py-2 bg-green-50 hover:bg-green-100 dark:bg-green-900/30 dark:hover:bg-green-900/50 text-green-700 dark:text-green-300 rounded-lg transition-all duration-200 hover:scale-105">
+                            <span className="text-base sm:text-lg">👍</span>
+                            <span className="text-xs sm:text-sm font-medium">Ya</span>
                           </button>
-                          <button className="flex items-center gap-2 px-4 py-2 bg-red-50 hover:bg-red-100 dark:bg-red-900/30 dark:hover:bg-red-900/50 text-red-700 dark:text-red-300 rounded-lg transition-all duration-200 hover:scale-105">
-                            <span className="text-lg">👎</span>
-                            <span className="text-sm font-medium">Tidak</span>
+                          <button className="flex items-center gap-1 sm:gap-2 px-3 sm:px-4 py-2 bg-red-50 hover:bg-red-100 dark:bg-red-900/30 dark:hover:bg-red-900/50 text-red-700 dark:text-red-300 rounded-lg transition-all duration-200 hover:scale-105">
+                            <span className="text-base sm:text-lg">👎</span>
+                            <span className="text-xs sm:text-sm font-medium">Tidak</span>
                           </button>
                         </div>
                       </div>

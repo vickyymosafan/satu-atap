@@ -181,19 +181,7 @@ export interface ContactFormSubmission {
     message: string;
 }
 
-export interface SupportHotline {
-    id: string;
-    title: string;
-    phone_number: string;
-    whatsapp_number?: string;
-    description: string;
-    available_hours: string;
-    hotline_type: 'general' | 'emergency' | 'technical' | 'billing';
-    is_active: boolean;
-    sort_order: number;
-    created_at: string;
-    updated_at: string;
-}
+
 
 export interface SocialMediaLink {
     id: string;
@@ -222,8 +210,11 @@ export interface FaqItem {
     updated_at: string;
 }
 
-export interface ContactSupportData {
+export interface ContactData {
     social_media: SocialMediaLink[];
     featured_faqs: FaqItem[];
     faq_categories: Record<string, string>;
 }
+
+// Legacy alias for backward compatibility
+export type ContactSupportData = ContactData;
