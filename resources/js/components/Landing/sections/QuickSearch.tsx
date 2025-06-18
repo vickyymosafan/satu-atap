@@ -274,10 +274,25 @@ const QuickSearch: React.FC<QuickSearchProps> = ({ onSearch, isSearching = false
     }));
   };
 
-  // Handle search submission
+  // Handle search submission with navigation to featured section
   const handleSearch = async () => {
     try {
       await onSearch(filters);
+
+      // Navigate to featured section (Kost section) after search completes
+      const featuredSection = document.getElementById('featured');
+      if (featuredSection) {
+        const headerHeight = 100; // Account for fixed header
+        const targetPosition = featuredSection.offsetTop - headerHeight;
+
+        // Add a small delay to ensure search results are processed
+        setTimeout(() => {
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }, 300);
+      }
     } catch (error) {
       console.error('Search error:', error);
     }
