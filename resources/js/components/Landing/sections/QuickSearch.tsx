@@ -41,6 +41,17 @@ interface Amenity {
   popular: boolean;
 }
 
+// API response interfaces
+interface CityApiResponse {
+  id: number;
+  name: string;
+  city: string;
+  province: string;
+  type?: 'city' | 'district' | 'area';
+  full_name?: string;
+  is_popular?: boolean;
+}
+
 // API service for fetching cities
 const fetchCities = async (search?: string, limit?: number): Promise<LocationData[]> => {
   try {
@@ -52,7 +63,7 @@ const fetchCities = async (search?: string, limit?: number): Promise<LocationDat
     const data = await response.json();
 
     if (data.success) {
-      return data.data.map((item: any) => ({
+      return data.data.map((item: CityApiResponse) => ({
         id: String(item.id),
         name: item.name,
         city: item.city,
@@ -78,7 +89,7 @@ const fetchUniqueCities = async (): Promise<LocationData[]> => {
     const data = await response.json();
 
     if (data.success) {
-      return data.data.map((item: any) => ({
+      return data.data.map((item: CityApiResponse) => ({
         id: String(item.id),
         name: item.name,
         city: item.city,
@@ -152,15 +163,7 @@ const fetchAmenities = async (): Promise<Amenity[]> => {
   }
 };
 
-// Price formatting utility
-const formatPrice = (price: number): string => {
-  return new Intl.NumberFormat('id-ID', {
-    style: 'currency',
-    currency: 'IDR',
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  }).format(price);
-};
+
 
 const QuickSearch: React.FC<QuickSearchProps> = ({ onSearch, isSearching = false }) => {
   // Search state management
@@ -178,7 +181,6 @@ const QuickSearch: React.FC<QuickSearchProps> = ({ onSearch, isSearching = false
   const [uniqueCities, setUniqueCities] = useState<LocationData[]>([]);
   const [loadingLocations, setLoadingLocations] = useState(false);
   const [availableAmenities, setAvailableAmenities] = useState<Amenity[]>([]);
-  const [loadingAmenities, setLoadingAmenities] = useState(false);
 
   // Refs for click outside handling
   const locationDropdownRef = useRef<HTMLDivElement>(null);
@@ -195,10 +197,8 @@ const QuickSearch: React.FC<QuickSearchProps> = ({ onSearch, isSearching = false
       setUniqueCities(cities);
 
       // Load amenities
-      setLoadingAmenities(true);
       const amenities = await fetchAmenities();
       setAvailableAmenities(amenities);
-      setLoadingAmenities(false);
     };
     loadInitialData();
   }, []);
@@ -262,20 +262,7 @@ const QuickSearch: React.FC<QuickSearchProps> = ({ onSearch, isSearching = false
     setShowLocationDropdown(false);
   };
 
-  // Handle price range change
-  const handlePriceRangeChange = (index: number, value: number) => {
-    setFilters(prev => {
-      const newRange: [number, number] = [...prev.priceRange];
-      newRange[index] = value;
-      // Ensure min doesn't exceed max and vice versa
-      if (index === 0 && value > newRange[1]) {
-        newRange[1] = value;
-      } else if (index === 1 && value < newRange[0]) {
-        newRange[0] = value;
-      }
-      return { ...prev, priceRange: newRange };
-    });
-  };
+
 
   // Handle amenity toggle
   const handleAmenityToggle = (amenityId: string) => {

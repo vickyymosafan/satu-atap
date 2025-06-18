@@ -20,6 +20,17 @@ interface LocationData {
   full_name?: string;
 }
 
+// Location API response interface
+interface LocationApiResponse {
+  id: number;
+  name: string;
+  city: string;
+  province: string;
+  type?: 'city' | 'district' | 'area';
+  district?: string;
+  full_name?: string;
+}
+
 // Search filters interface
 interface SearchFilters {
   location: string;
@@ -126,7 +137,7 @@ const IntegratedKostSearch: React.FC<ThemeProps> = () => {
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
   const [isVisible, setIsVisible] = useState(false);
   const [availableAmenities, setAvailableAmenities] = useState<Amenity[]>([]);
-  const [loadingAmenities, setLoadingAmenities] = useState(false);
+
 
   // Refs for click outside handling
   const locationDropdownRef = useRef<HTMLDivElement>(null);
@@ -149,10 +160,8 @@ const IntegratedKostSearch: React.FC<ThemeProps> = () => {
         }
 
         // Fetch amenities
-        setLoadingAmenities(true);
         const amenities = await fetchAmenities();
         setAvailableAmenities(amenities);
-        setLoadingAmenities(false);
 
       } catch (error) {
         console.error('Error fetching initial data:', error);
@@ -190,8 +199,7 @@ const IntegratedKostSearch: React.FC<ThemeProps> = () => {
       const data = await response.json();
 
       if (data.success) {
-        // Ensure ID is converted to string for consistency
-        const transformedData = data.data.map((item: any) => ({
+        const transformedData = data.data.map((item: LocationApiResponse) => ({
           ...item,
           id: String(item.id)
         }));
