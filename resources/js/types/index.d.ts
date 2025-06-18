@@ -157,3 +157,74 @@ export interface WhyChooseUsData {
     statistics: PlatformStatistic[];
     verification_badges: VerificationBadge[];
 }
+
+// Contact & Support section interfaces
+export interface ContactForm {
+    id: string;
+    name: string;
+    email: string;
+    phone?: string;
+    subject: string;
+    message: string;
+    status: 'pending' | 'in_progress' | 'resolved' | 'closed';
+    responded_at?: string;
+    admin_notes?: string;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface ContactFormSubmission {
+    name: string;
+    email: string;
+    phone?: string;
+    subject: string;
+    message: string;
+}
+
+export interface SupportHotline {
+    id: string;
+    title: string;
+    phone_number: string;
+    whatsapp_number?: string;
+    description: string;
+    available_hours: string;
+    hotline_type: 'general' | 'emergency' | 'technical' | 'billing';
+    is_active: boolean;
+    sort_order: number;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface SocialMediaLink {
+    id: string;
+    platform_name: string;
+    platform_url: string;
+    icon: string;
+    display_name?: string;
+    username?: string;
+    platform_type: 'social' | 'messaging' | 'professional' | 'other';
+    is_active: boolean;
+    sort_order: number;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface FaqItem {
+    id: string;
+    question: string;
+    answer: string;
+    category: 'general' | 'booking' | 'payment' | 'property' | 'account' | 'technical';
+    is_featured: boolean;
+    is_active: boolean;
+    sort_order: number;
+    view_count: number;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface ContactSupportData {
+    hotlines: SupportHotline[];
+    social_media: SocialMediaLink[];
+    featured_faqs: FaqItem[];
+    faq_categories: Record<string, string>;
+}

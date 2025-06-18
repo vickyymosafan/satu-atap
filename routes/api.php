@@ -259,3 +259,30 @@ Route::prefix('why-choose-us')->group(function () {
     Route::get('/verification-badges', [App\Http\Controllers\WhyChooseUsController::class, 'getVerificationBadges'])
         ->name('api.why-choose-us.verification-badges');
 });
+
+// Contact & Support section routes
+Route::prefix('contact-support')->group(function () {
+    // Get all Contact & Support data
+    Route::get('/', [App\Http\Controllers\ContactSupportController::class, 'index'])
+        ->name('api.contact-support.index');
+
+    // Submit contact form
+    Route::post('/contact-form', [App\Http\Controllers\ContactSupportController::class, 'submitContactForm'])
+        ->name('api.contact-support.contact-form');
+
+    // Get support hotlines
+    Route::get('/hotlines', [App\Http\Controllers\ContactSupportController::class, 'getHotlines'])
+        ->name('api.contact-support.hotlines');
+
+    // Get social media links
+    Route::get('/social-media', [App\Http\Controllers\ContactSupportController::class, 'getSocialMediaLinks'])
+        ->name('api.contact-support.social-media');
+
+    // Get FAQ items
+    Route::get('/faqs', [App\Http\Controllers\ContactSupportController::class, 'getFaqs'])
+        ->name('api.contact-support.faqs');
+
+    // Increment FAQ view count
+    Route::post('/faqs/{id}/view', [App\Http\Controllers\ContactSupportController::class, 'incrementFaqView'])
+        ->name('api.contact-support.faqs.view');
+});

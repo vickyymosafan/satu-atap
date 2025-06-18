@@ -37,6 +37,10 @@ class DatabaseSeeder extends Seeder
             TrustIndicatorSeeder::class,
             PlatformStatisticSeeder::class,
             VerificationBadgeSeeder::class,
+            // Contact & Support section data
+            SupportHotlineSeeder::class,
+            SocialMediaLinkSeeder::class,
+            FaqItemSeeder::class,
         ]);
     }
 }
