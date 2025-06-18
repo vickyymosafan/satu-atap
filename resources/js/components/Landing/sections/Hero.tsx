@@ -72,7 +72,7 @@ const floatingAnimation = `
   }
 `;
 
-const Hero: React.FC<ThemeProps> = () => {
+const Hero: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const heroRef = useRef<HTMLElement>(null);
@@ -142,7 +142,7 @@ const Hero: React.FC<ThemeProps> = () => {
     <>
       <section
         ref={heroRef}
-        className="relative min-h-screen overflow-hidden"
+        className="relative min-h-screen overflow-hidden bg-background transition-colors duration-300"
       >
         {/* Slider Background */}
         <div className="absolute inset-0">
@@ -162,13 +162,36 @@ const Hero: React.FC<ThemeProps> = () => {
               {/* Gradient Overlay */}
               <div className={`absolute inset-0 bg-gradient-to-br ${slide.gradient}`} />
 
-              {/* Dark Overlay for better text readability */}
-              <div className="absolute inset-0 bg-black/40" />
+              {/* Theme-aware Overlay for better text readability */}
+              <div className={`absolute inset-0 ${
+                currentTheme === 'dark'
+                  ? 'bg-black/50'
+                  : 'bg-black/40'
+              }`} />
 
-              {/* Modern Blur Pattern */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
+              {/* Modern Blur Pattern - Theme-aware */}
+              <div className={`absolute inset-0 ${
+                currentTheme === 'dark'
+                  ? 'bg-gradient-to-t from-black/70 via-transparent to-black/30'
+                  : 'bg-gradient-to-t from-black/60 via-transparent to-black/20'
+              }`} />
             </div>
           ))}
+        </div>
+
+        {/* Theme Toggle Button - Floating */}
+        <div className="absolute top-6 right-6 z-30">
+          <button
+            onClick={toggleTheme}
+            className={`p-3 ${
+              currentTheme === 'dark'
+                ? 'bg-card/20 border-border/30 text-foreground hover:bg-card/30'
+                : 'bg-white/10 border-white/20 text-white hover:bg-white/20'
+            } backdrop-blur-md rounded-full border transition-all duration-300 hover:scale-110 shadow-lg`}
+            aria-label={`Switch to ${currentTheme === 'light' ? 'dark' : 'light'} mode`}
+          >
+            {getThemeIcon()}
+          </button>
         </div>
 
         {/* Floating Highlight Cards */}
@@ -181,14 +204,24 @@ const Hero: React.FC<ThemeProps> = () => {
               animationDuration: '3s'
             }}
           >
-            <div className={`bg-white/10 backdrop-blur-md rounded-2xl px-4 py-3 border border-white/20 shadow-xl transition-all duration-700 hover:scale-105 hover:bg-white/20 ${highlight.delay} ${
+            <div className={`${
+              currentTheme === 'dark'
+                ? 'bg-card/20 border-border/30 hover:bg-card/30'
+                : 'bg-white/10 border-white/20 hover:bg-white/20'
+            } backdrop-blur-md rounded-2xl px-4 py-3 border shadow-xl transition-all duration-700 hover:scale-105 ${highlight.delay} ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}>
               <div className="flex items-center gap-3">
-                <div className="text-white/90 bg-white/20 p-2 rounded-xl">
+                <div className={`${
+                  currentTheme === 'dark'
+                    ? 'text-foreground bg-muted/50'
+                    : 'text-white/90 bg-white/20'
+                } p-2 rounded-xl`}>
                   {highlight.icon}
                 </div>
-                <span className="text-white font-semibold text-sm whitespace-nowrap">
+                <span className={`${
+                  currentTheme === 'dark' ? 'text-foreground' : 'text-white'
+                } font-semibold text-sm whitespace-nowrap`}>
                   {highlight.text}
                 </span>
               </div>
@@ -201,7 +234,11 @@ const Hero: React.FC<ThemeProps> = () => {
           <div className="text-center max-w-4xl mx-auto">
 
             {/* Brand Badge */}
-            <div className={`inline-flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-md rounded-full border border-white/20 mb-8 transition-all duration-1000 ${
+            <div className={`inline-flex items-center gap-2 px-6 py-3 ${
+              currentTheme === 'dark'
+                ? 'bg-card/20 border-border/30'
+                : 'bg-white/10 border-white/20'
+            } backdrop-blur-md rounded-full border mb-8 transition-all duration-1000 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}>
               <div className="flex items-center gap-1">
@@ -209,29 +246,39 @@ const Hero: React.FC<ThemeProps> = () => {
                   <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
                 ))}
               </div>
-              <span className="text-white font-bold text-sm">
+              <span className={`${
+                currentTheme === 'dark' ? 'text-foreground' : 'text-white'
+              } font-bold text-sm`}>
                 Dipercaya 5000+ pengguna
               </span>
             </div>
 
             {/* Dynamic Headline */}
-            <h1 className={`text-4xl sm:text-5xl lg:text-7xl font-black text-white mb-6 leading-tight transition-all duration-1000 delay-200 ${
+            <h1 className={`text-4xl sm:text-5xl lg:text-7xl font-black ${
+              currentTheme === 'dark' ? 'text-foreground' : 'text-white'
+            } mb-6 leading-tight transition-all duration-1000 delay-200 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}>
               <span className="block mb-2">Temukan</span>
               <span className="block bg-gradient-to-r from-orange-400 via-red-400 to-pink-400 bg-clip-text text-transparent">
                 Kost Impian
               </span>
-              <span className="block text-2xl sm:text-3xl lg:text-4xl font-bold mt-4 text-white/90">
+              <span className={`block text-2xl sm:text-3xl lg:text-4xl font-bold mt-4 ${
+                currentTheme === 'dark' ? 'text-foreground/90' : 'text-white/90'
+              }`}>
                 di {heroSlides[currentSlide].city}
               </span>
-              <span className="block text-lg sm:text-xl font-medium mt-2 text-white/70">
+              <span className={`block text-lg sm:text-xl font-medium mt-2 ${
+                currentTheme === 'dark' ? 'text-muted-foreground' : 'text-white/70'
+              }`}>
                 {heroSlides[currentSlide].highlight}
               </span>
             </h1>
 
             {/* Subtitle */}
-            <p className={`text-lg sm:text-xl text-white/80 mb-8 max-w-2xl mx-auto leading-relaxed transition-all duration-1000 delay-400 ${
+            <p className={`text-lg sm:text-xl ${
+              currentTheme === 'dark' ? 'text-muted-foreground' : 'text-white/80'
+            } mb-8 max-w-2xl mx-auto leading-relaxed transition-all duration-1000 delay-400 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}>
               {heroSlides[currentSlide].subtitle} • Terverifikasi, aman, dan terjangkau
@@ -251,7 +298,11 @@ const Hero: React.FC<ThemeProps> = () => {
 
               <button
                 onClick={handleWatchDemo}
-                className="group bg-white/10 backdrop-blur-md text-white font-semibold px-8 py-4 rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-300 flex items-center gap-3 min-w-[200px]"
+                className={`group ${
+                  currentTheme === 'dark'
+                    ? 'bg-card/20 border-border/30 text-foreground hover:bg-card/30'
+                    : 'bg-white/10 border-white/20 text-white hover:bg-white/20'
+                } backdrop-blur-md font-semibold px-8 py-4 rounded-2xl border transition-all duration-300 flex items-center gap-3 min-w-[200px]`}
               >
                 <Play className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
                 <span>Tonton Demo</span>
@@ -270,13 +321,21 @@ const Hero: React.FC<ThemeProps> = () => {
               ].map((stat, index) => (
                 <div
                   key={stat.label}
-                  className="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-105"
+                  className={`${
+                    currentTheme === 'dark'
+                      ? 'bg-card/20 border-border/30 hover:bg-card/30'
+                      : 'bg-white/10 border-white/20 hover:bg-white/20'
+                  } backdrop-blur-md rounded-2xl p-4 border transition-all duration-300 hover:scale-105`}
                   style={{ transitionDelay: `${index * 100}ms` }}
                 >
-                  <div className="text-2xl font-black text-white mb-1">
+                  <div className={`text-2xl font-black ${
+                    currentTheme === 'dark' ? 'text-foreground' : 'text-white'
+                  } mb-1`}>
                     {stat.number}
                   </div>
-                  <div className="text-sm text-white/70 font-medium">
+                  <div className={`text-sm ${
+                    currentTheme === 'dark' ? 'text-muted-foreground' : 'text-white/70'
+                  } font-medium`}>
                     {stat.label}
                   </div>
                 </div>
@@ -291,7 +350,11 @@ const Hero: React.FC<ThemeProps> = () => {
             {/* Navigation Buttons */}
             <button
               onClick={prevSlide}
-              className="p-3 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-white hover:bg-white/20 transition-all duration-300 hover:scale-110"
+              className={`p-3 ${
+                currentTheme === 'dark'
+                  ? 'bg-card/20 border-border/30 text-foreground hover:bg-card/30'
+                  : 'bg-white/10 border-white/20 text-white hover:bg-white/20'
+              } backdrop-blur-md rounded-full border transition-all duration-300 hover:scale-110`}
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
@@ -304,8 +367,12 @@ const Hero: React.FC<ThemeProps> = () => {
                   onClick={() => goToSlide(index)}
                   className={`w-3 h-3 rounded-full transition-all duration-300 ${
                     index === currentSlide
-                      ? 'bg-white scale-125'
-                      : 'bg-white/40 hover:bg-white/60'
+                      ? currentTheme === 'dark'
+                        ? 'bg-primary scale-125'
+                        : 'bg-white scale-125'
+                      : currentTheme === 'dark'
+                        ? 'bg-muted hover:bg-muted-foreground/50'
+                        : 'bg-white/40 hover:bg-white/60'
                   }`}
                 />
               ))}
@@ -313,7 +380,11 @@ const Hero: React.FC<ThemeProps> = () => {
 
             <button
               onClick={nextSlide}
-              className="p-3 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-white hover:bg-white/20 transition-all duration-300 hover:scale-110"
+              className={`p-3 ${
+                currentTheme === 'dark'
+                  ? 'bg-card/20 border-border/30 text-foreground hover:bg-card/30'
+                  : 'bg-white/10 border-white/20 text-white hover:bg-white/20'
+              } backdrop-blur-md rounded-full border transition-all duration-300 hover:scale-110`}
             >
               <ChevronRight className="w-5 h-5" />
             </button>

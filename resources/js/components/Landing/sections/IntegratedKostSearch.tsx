@@ -190,7 +190,12 @@ const IntegratedKostSearch: React.FC<ThemeProps> = () => {
       const data = await response.json();
 
       if (data.success) {
-        setLocationSuggestions(data.data);
+        // Ensure ID is converted to string for consistency
+        const transformedData = data.data.map((item: any) => ({
+          ...item,
+          id: String(item.id)
+        }));
+        setLocationSuggestions(transformedData);
       }
     } catch (error) {
       console.error('Error fetching location suggestions:', error);

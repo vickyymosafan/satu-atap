@@ -16,7 +16,7 @@ interface QuickSearchProps extends ThemeProps {
 
 // Location data interface
 interface LocationData {
-  id: string | number;
+  id: string;
   name: string;
   city: string;
   province: string;
@@ -53,7 +53,7 @@ const fetchCities = async (search?: string, limit?: number): Promise<LocationDat
 
     if (data.success) {
       return data.data.map((item: any) => ({
-        id: item.id,
+        id: String(item.id),
         name: item.name,
         city: item.city,
         province: item.province,
@@ -79,7 +79,7 @@ const fetchUniqueCities = async (): Promise<LocationData[]> => {
 
     if (data.success) {
       return data.data.map((item: any) => ({
-        id: item.id,
+        id: String(item.id),
         name: item.name,
         city: item.city,
         province: item.province,
