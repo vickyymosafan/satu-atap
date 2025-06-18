@@ -315,329 +315,313 @@ const QuickSearch: React.FC<QuickSearchProps> = ({ onSearch, isSearching = false
   }, [showLocationDropdown]);
 
   return (
-    <section id="quick-search" className="relative py-8 sm:py-12 lg:py-16 bg-background transition-colors duration-300">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
-        {/* Simplified Header */}
-        <div className="text-center mb-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">
-            Cari Kost Impian Anda
+    <section id="quick-search" className="relative py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-background via-background to-muted/20 transition-colors duration-300">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(circle_at_1px_1px,_rgb(0,0,0)_1px,_transparent_0)] bg-[length:32px_32px]"></div>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl relative">
+        {/* Modern Header with Badge */}
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full border border-primary/20 mb-6">
+            <Search className="w-4 h-4 text-primary" />
+            <span className="text-primary font-semibold text-sm">Pencarian Cerdas</span>
+          </div>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4 leading-tight">
+            Temukan Kost
+            <span className="block bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
+              Impian Anda
+            </span>
           </h2>
-          <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto">
-            Temukan kost yang sempurna dengan pencarian yang mudah dan cepat
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            Pencarian yang mudah, cepat, dan akurat untuk menemukan hunian terbaik
           </p>
         </div>
 
-        {/* Main Search Container - Simplified Design */}
-        <div className="bg-card rounded-xl shadow-lg border border-border overflow-hidden">
-          {/* Primary Search Section */}
-          <div className="p-6 md:p-8">
-            {/* Search Form - Clean Layout */}
-            <div className="space-y-6">
-
-              {/* Location Search - Simplified Design */}
-              <div>
-                <label className="block text-lg font-semibold text-foreground mb-3">
-                  Di mana Anda ingin tinggal?
-                  <span className="text-destructive ml-1">*</span>
-                </label>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Masukkan nama kota, daerah, atau landmark terdekat
+        {/* Modern Search Container */}
+        <div className="bg-card/80 backdrop-blur-sm rounded-2xl shadow-2xl border border-border/50 overflow-hidden">
+          {/* Floating Search Section */}
+          <div className="p-8 md:p-10">
+            {/* Location Search - Modern Design */}
+            <div className="space-y-8">
+              <div className="text-center">
+                <h3 className="text-xl font-bold text-foreground mb-2">
+                  Mulai Pencarian Anda
+                </h3>
+                <p className="text-muted-foreground">
+                  Masukkan lokasi untuk menemukan kost terbaik
                 </p>
-                <div className="relative">
-                  <div className="relative group">
-                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-10">
-                      <MapPin className="h-5 w-5 text-muted-foreground group-focus-within:text-primary transition-colors duration-200" />
-                    </div>
-                    <input
-                      ref={locationInputRef}
-                      type="text"
-                      value={filters.location}
-                      onChange={(e) => handleLocationChange(e.target.value)}
-                      onFocus={() => setShowLocationDropdown(true)}
-                      onKeyDown={handleLocationKeyDown}
-                      placeholder="Contoh: Jakarta Selatan, Bandung..."
-                      className="w-full pl-12 pr-12 py-4 text-base bg-input border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary text-foreground placeholder-muted-foreground transition-all duration-200"
-                      required
-                      aria-describedby="location-help"
-                      aria-label="Masukkan lokasi kost yang diinginkan"
-                      aria-expanded={showLocationDropdown}
-                      aria-haspopup="listbox"
-                      role="combobox"
-                      autoComplete="off"
-                    />
-                    {filters.location && (
-                      <button
-                        type="button"
-                        onClick={() => handleLocationChange('')}
-                        className="absolute inset-y-0 right-0 pr-4 flex items-center text-muted-foreground hover:text-foreground transition-colors duration-200"
-                        aria-label="Hapus lokasi"
-                      >
-                        <X className="h-4 w-4" />
-                      </button>
-                    )}
+              </div>
+
+              <div className="relative">
+                <div className="relative group">
+                  {/* Floating Label */}
+                  <label className={`absolute left-4 transition-all duration-200 pointer-events-none z-10 ${
+                    filters.location
+                      ? 'top-2 text-xs text-primary font-medium'
+                      : 'top-1/2 -translate-y-1/2 text-base text-muted-foreground'
+                  }`}>
+                    {filters.location ? 'Lokasi' : 'Di mana Anda ingin tinggal?'}
+                  </label>
+
+                  {/* Location Icon */}
+                  <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none z-10">
+                    <MapPin className="h-5 w-5 text-muted-foreground group-focus-within:text-primary transition-colors duration-200" />
                   </div>
 
-                  {/* Simplified Location Dropdown */}
-                  {showLocationDropdown && (
-                    <div
-                      ref={locationDropdownRef}
-                      className="absolute top-full left-0 right-0 mt-2 bg-popover border border-border rounded-lg shadow-lg z-50 max-h-64 overflow-y-auto"
-                      role="listbox"
-                      aria-label="Pilihan lokasi"
+                  <input
+                    ref={locationInputRef}
+                    type="text"
+                    value={filters.location}
+                    onChange={(e) => handleLocationChange(e.target.value)}
+                    onFocus={() => setShowLocationDropdown(true)}
+                    onKeyDown={handleLocationKeyDown}
+                    placeholder=""
+                    className={`w-full px-4 pr-12 py-6 text-lg bg-background/50 border-2 border-border rounded-xl focus:outline-none focus:ring-4 focus:ring-primary/20 focus:border-primary text-foreground transition-all duration-300 ${
+                      filters.location ? 'pt-8 pb-4' : ''
+                    }`}
+                    required
+                    aria-describedby="location-help"
+                    aria-label="Masukkan lokasi kost yang diinginkan"
+                    aria-expanded={showLocationDropdown}
+                    aria-haspopup="listbox"
+                    role="combobox"
+                    autoComplete="off"
+                  />
+
+                  {/* Clear Button */}
+                  {filters.location && (
+                    <button
+                      type="button"
+                      onClick={() => handleLocationChange('')}
+                      className="absolute top-1/2 -translate-y-1/2 right-12 p-1 text-muted-foreground hover:text-foreground hover:bg-muted rounded-full transition-all duration-200"
+                      aria-label="Hapus lokasi"
                     >
-                      <div className="p-2">
-                        {/* Show all cities when no input */}
-                        {!filters.location && (
-                          <>
-                            <div className="px-3 py-2 text-xs text-muted-foreground font-medium border-b border-border mb-2">
-                              Kota
+                      <X className="h-4 w-4" />
+                    </button>
+                  )}
+                </div>
+
+                {/* Modern Location Dropdown */}
+                {showLocationDropdown && (
+                  <div
+                    ref={locationDropdownRef}
+                    className="absolute top-full left-0 right-0 mt-3 bg-popover/95 backdrop-blur-md border border-border/50 rounded-xl shadow-2xl z-50 max-h-80 overflow-hidden"
+                    role="listbox"
+                    aria-label="Pilihan lokasi"
+                  >
+                    <div className="p-3">
+                      {/* Show all cities when no input */}
+                      {!filters.location && (
+                        <>
+                          <div className="px-4 py-3 text-sm text-muted-foreground font-semibold border-b border-border/30 mb-3">
+                            🏙️ Kota Populer
+                          </div>
+                          <div className="space-y-2 max-h-64 overflow-y-auto">
+                            {uniqueCities.map((location) => (
+                              <button
+                                key={location.id}
+                                onClick={() => handleLocationChange(location.name)}
+                                className="w-full px-4 py-3 text-left hover:bg-accent/80 rounded-lg transition-all duration-200 group"
+                                role="option"
+                              >
+                                <div className="flex items-center gap-3">
+                                  <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                                    <MapPin className="w-4 h-4 text-primary" />
+                                  </div>
+                                  <div>
+                                    <div className="font-semibold text-foreground">{location.name}</div>
+                                    <div className="text-sm text-muted-foreground">{location.province}</div>
+                                  </div>
+                                </div>
+                              </button>
+                            ))}
+                          </div>
+                        </>
+                      )}
+
+                      {/* Show filtered locations when typing */}
+                      {filters.location && (
+                        <>
+                          {loadingLocations ? (
+                            <div className="px-4 py-8 text-center">
+                              <div className="animate-spin rounded-full h-6 w-6 border-2 border-primary border-t-transparent mx-auto mb-3"></div>
+                              <div className="text-sm text-muted-foreground">
+                                Mencari lokasi...
+                              </div>
                             </div>
-                            <div className="space-y-1 max-h-48 overflow-y-auto">
-                              {uniqueCities.map((location) => (
+                          ) : filteredLocations.length > 0 ? (
+                            <div className="space-y-2">
+                              {filteredLocations.slice(0, 6).map((location) => (
                                 <button
                                   key={location.id}
-                                  onClick={() => handleLocationChange(location.name)}
-                                  className="w-full px-3 py-2 text-left hover:bg-accent rounded-md transition-colors duration-200 text-sm"
+                                  onClick={() => handleLocationSelect(location)}
+                                  className="w-full px-4 py-3 text-left hover:bg-accent/80 rounded-lg transition-all duration-200 group"
                                   role="option"
+                                  aria-selected={filters.selectedLocation?.id === location.id}
                                 >
-                                  <div className="font-medium">{location.name}</div>
-                                  <div className="text-xs text-muted-foreground">{location.province}</div>
+                                  <div className="flex items-center gap-3">
+                                    <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                                      <MapPin className="w-4 h-4 text-primary" />
+                                    </div>
+                                    <div>
+                                      <div className="font-semibold text-popover-foreground">
+                                        {location.name}
+                                      </div>
+                                      <div className="text-sm text-muted-foreground">
+                                        {location.city}, {location.province}
+                                      </div>
+                                    </div>
+                                  </div>
                                 </button>
                               ))}
                             </div>
-                          </>
-                        )}
-
-                        {/* Show filtered locations when typing */}
-                        {filters.location && (
-                          <>
-                            {loadingLocations ? (
-                              <div className="px-3 py-4 text-center">
-                                <div className="text-sm text-muted-foreground">
-                                  Mencari lokasi...
-                                </div>
+                          ) : (
+                            <div className="px-4 py-8 text-center">
+                              <div className="text-4xl mb-3">🔍</div>
+                              <div className="text-sm text-muted-foreground">
+                                Tidak ada lokasi yang ditemukan
                               </div>
-                            ) : filteredLocations.length > 0 ? (
-                              <div className="space-y-1">
-                                {filteredLocations.slice(0, 5).map((location) => (
-                                  <button
-                                    key={location.id}
-                                    onClick={() => handleLocationSelect(location)}
-                                    className="w-full px-3 py-2 text-left hover:bg-accent rounded-md transition-colors duration-200"
-                                    role="option"
-                                    aria-selected={filters.selectedLocation?.id === location.id}
-                                  >
-                                    <div className="text-sm font-medium text-popover-foreground">
-                                      {location.name}
-                                    </div>
-                                    <div className="text-xs text-muted-foreground">
-                                      {location.city}, {location.province}
-                                    </div>
-                                  </button>
-                                ))}
-                              </div>
-                            ) : (
-                              <div className="px-3 py-4 text-center">
-                                <div className="text-sm text-muted-foreground">
-                                  Tidak ada lokasi yang ditemukan
-                                </div>
-                              </div>
-                            )}
-                          </>
-                        )}
-                      </div>
+                            </div>
+                          )}
+                        </>
+                      )}
                     </div>
-                  )}
-                </div>
+                  </div>
+                )}
               </div>
-
-              {/* Price Range - Simplified Design */}
-              <div>
-                <label className="block text-lg font-semibold text-foreground mb-3">
-                  Budget per bulan
-                  <span className="text-muted-foreground text-sm font-normal ml-2">(Opsional)</span>
-                </label>
-
-                {/* Quick Budget Options - Simplified */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4">
-                  {[
-                    { label: '< 1 Juta', min: 0, max: 1000000 },
-                    { label: '1-2 Juta', min: 1000000, max: 2000000 },
-                    { label: '2-3 Juta', min: 2000000, max: 3000000 },
-                    { label: '> 3 Juta', min: 3000000, max: 10000000 }
-                  ].map((budget) => (
-                    <button
-                      key={budget.label}
-                      type="button"
-                      onClick={() => {
-                        setFilters(prev => ({ ...prev, priceRange: [budget.min, budget.max] }));
-                      }}
-                      className={`px-3 py-2 text-sm rounded-lg transition-colors duration-200 border ${
-                        filters.priceRange[0] === budget.min && filters.priceRange[1] === budget.max
-                          ? 'bg-primary text-primary-foreground border-primary'
-                          : 'bg-card text-card-foreground border-border hover:bg-accent'
-                      }`}
-                    >
-                      {budget.label}
-                    </button>
-                  ))}
-                </div>
-
-                {/* Custom Range Inputs - Simplified */}
-                <div className="grid grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-sm text-muted-foreground mb-2">
-                      Minimum
-                    </label>
-                    <div className="relative">
-                      <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground text-sm">
-                        Rp
-                      </span>
-                      <input
-                        type="number"
-                        value={filters.priceRange[0]}
-                        onChange={(e) => handlePriceRangeChange(0, parseInt(e.target.value) || 0)}
-                        placeholder="500000"
-                        className="w-full pl-8 pr-3 py-2 text-sm bg-input border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <label className="block text-sm text-muted-foreground mb-2">
-                      Maksimum
-                    </label>
-                    <div className="relative">
-                      <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground text-sm">
-                        Rp
-                      </span>
-                      <input
-                        type="number"
-                        value={filters.priceRange[1]}
-                        onChange={(e) => handlePriceRangeChange(1, parseInt(e.target.value) || 0)}
-                        placeholder="2000000"
-                        className="w-full pl-8 pr-3 py-2 text-sm bg-input border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Budget Display - Simplified */}
-                <div className="mt-3 text-center">
-                  <div className="text-sm text-muted-foreground">
-                    Budget: <span className="font-medium text-foreground">{formatPrice(filters.priceRange[0])} - {formatPrice(filters.priceRange[1])}</span>
-                  </div>
-                </div>
-              </div>
-
             </div>
 
-            {/* Search Button - Simplified Design */}
-            <div className="mt-6">
+            {/* Search Button - Modern Design */}
+            <div className="mt-8">
               <button
                 onClick={handleSearch}
                 disabled={isSearching || !filters.location.trim()}
-                className="w-full px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2"
+                className="w-full px-8 py-5 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-bold text-lg rounded-xl hover:from-primary/90 hover:to-primary/70 focus:outline-none focus:ring-4 focus:ring-primary/30 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center gap-3 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                 aria-label={isSearching ? 'Sedang mencari kost' : 'Mulai pencarian kost'}
               >
                 {isSearching ? (
                   <>
-                    <div className="animate-spin rounded-full h-4 w-4 border-2 border-primary-foreground border-t-transparent"></div>
-                    <span>Mencari...</span>
+                    <div className="animate-spin rounded-full h-5 w-5 border-2 border-primary-foreground border-t-transparent"></div>
+                    <span>Mencari Kost...</span>
                   </>
                 ) : (
                   <>
-                    <Search className="w-4 h-4" />
-                    <span>Cari Kost Sekarang</span>
+                    <Search className="w-5 h-5" />
+                    <span>Temukan Kost Sekarang</span>
                   </>
                 )}
               </button>
 
-              {/* Simplified Helper Text */}
+              {/* Status Text */}
               <div className="mt-4 text-center">
                 {!filters.location.trim() ? (
-                  <p className="text-sm text-muted-foreground">
-                    Masukkan lokasi untuk mulai pencarian
+                  <p className="text-muted-foreground">
+                    💡 Masukkan lokasi untuk memulai pencarian
                   </p>
                 ) : (
-                  <div className="text-sm text-muted-foreground">
-                    Mencari di <span className="font-medium text-foreground">{filters.selectedLocation?.name || filters.location}</span>
-                    {filters.amenities.length > 0 && (
-                      <span> • {filters.amenities.length} fasilitas</span>
-                    )}
+                  <div className="flex items-center justify-center gap-2 text-sm">
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                    <span className="text-muted-foreground">
+                      Siap mencari di <span className="font-semibold text-foreground">{filters.selectedLocation?.name || filters.location}</span>
+                      {filters.amenities.length > 0 && (
+                        <span> • {filters.amenities.length} fasilitas dipilih</span>
+                      )}
+                    </span>
                   </div>
                 )}
               </div>
             </div>
           </div>
 
-          {/* Advanced Filters Toggle - Simplified */}
-          <div className="border-t border-border px-6 py-4">
+          {/* Advanced Filters Toggle - Modern Design */}
+          <div className="border-t border-border/30 px-8 py-6 bg-muted/20">
             <div className="flex justify-center">
               <button
                 onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
-                className="inline-flex items-center gap-2 px-3 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
+                className="inline-flex items-center gap-3 px-6 py-3 text-sm font-medium text-muted-foreground hover:text-foreground bg-background/50 hover:bg-background/80 rounded-full border border-border/50 hover:border-border transition-all duration-300 hover:shadow-md"
               >
                 <Sliders className="w-4 h-4" />
                 <span>
-                  {showAdvancedFilters ? 'Sembunyikan' : 'Pilih'} Fasilitas
+                  {showAdvancedFilters ? '🔼 Sembunyikan' : '🔽 Tambah'} Fasilitas
                 </span>
-                <div className={`transform transition-transform duration-200 ${showAdvancedFilters ? 'rotate-180' : ''}`}>
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </div>
+                {filters.amenities.length > 0 && (
+                  <div className="bg-primary text-primary-foreground text-xs px-2 py-1 rounded-full font-bold">
+                    {filters.amenities.length}
+                  </div>
+                )}
               </button>
             </div>
           </div>
 
-          {/* Advanced Filters - Simplified */}
+          {/* Advanced Filters - Modern Design */}
           {showAdvancedFilters && (
-            <div className="px-6 pb-6">
-              <div className="bg-muted/30 rounded-lg p-4">
-                <div className="mb-4">
-                  <h3 className="text-base font-semibold text-foreground mb-1">
-                    Pilih Fasilitas
+            <div className="px-8 pb-8 border-t border-border/30 bg-gradient-to-b from-muted/10 to-muted/30">
+              <div className="pt-6">
+                <div className="text-center mb-6">
+                  <h3 className="text-xl font-bold text-foreground mb-2">
+                    ✨ Pilih Fasilitas Favorit
                   </h3>
-                  <p className="text-sm text-muted-foreground">
-                    Fasilitas yang Anda butuhkan
+                  <p className="text-muted-foreground">
+                    Sesuaikan pencarian dengan fasilitas yang Anda butuhkan
                   </p>
                 </div>
 
-                {/* All Amenities in one grid - Simplified */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-4">
+                {/* Modern Amenities Grid */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 mb-6">
                   {availableAmenities.map((amenity) => (
                     <button
                       key={amenity.id}
                       onClick={() => handleAmenityToggle(amenity.id)}
-                      className={`flex items-center gap-2 p-3 rounded-lg border transition-colors duration-200 text-left ${
+                      className={`group relative flex flex-col items-center gap-3 p-4 rounded-xl border-2 transition-all duration-300 text-center hover:scale-105 hover:shadow-lg ${
                         filters.amenities.includes(amenity.id)
-                          ? 'bg-primary text-primary-foreground border-primary'
-                          : 'bg-card text-card-foreground border-border hover:bg-accent'
+                          ? 'bg-gradient-to-br from-primary to-primary/80 text-primary-foreground border-primary shadow-lg scale-105'
+                          : 'bg-background/80 text-foreground border-border/50 hover:bg-background hover:border-primary/30'
                       }`}
                     >
-                      <div className={`flex-shrink-0 w-6 h-6 rounded flex items-center justify-center ${
+                      {/* Icon Container */}
+                      <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
                         filters.amenities.includes(amenity.id)
-                          ? 'bg-primary-foreground/20'
-                          : 'bg-muted'
+                          ? 'bg-primary-foreground/20 text-primary-foreground'
+                          : 'bg-primary/10 text-primary group-hover:bg-primary/20'
                       }`}>
                         {amenity.icon}
                       </div>
-                      <span className="text-sm font-medium">{amenity.name}</span>
+
+                      {/* Amenity Name */}
+                      <span className="text-sm font-semibold leading-tight">
+                        {amenity.name}
+                      </span>
+
+                      {/* Selection Indicator */}
+                      {filters.amenities.includes(amenity.id) && (
+                        <div className="absolute -top-1 -right-1 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                          <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                          </svg>
+                        </div>
+                      )}
                     </button>
                   ))}
                 </div>
 
-                {/* Selected Amenities Summary - Simplified */}
+                {/* Selection Summary */}
                 {filters.amenities.length > 0 && (
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-muted-foreground">
-                      {filters.amenities.length} fasilitas dipilih
-                    </span>
+                  <div className="flex items-center justify-between p-4 bg-background/50 rounded-xl border border-border/50">
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 bg-green-500/10 rounded-full flex items-center justify-center">
+                        <svg className="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <span className="font-semibold text-foreground">
+                        {filters.amenities.length} fasilitas dipilih
+                      </span>
+                    </div>
                     <button
                       onClick={() => setFilters(prev => ({ ...prev, amenities: [] }))}
-                      className="text-muted-foreground hover:text-foreground transition-colors duration-200"
+                      className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground bg-muted/50 hover:bg-muted rounded-lg transition-all duration-200"
                     >
-                      Hapus semua
+                      Hapus Semua
                     </button>
                   </div>
                 )}
