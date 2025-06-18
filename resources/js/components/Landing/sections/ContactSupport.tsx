@@ -128,19 +128,55 @@ const ContactSupport: React.FC = () => {
     }
   };
 
-  // Get platform-specific colors
-  const getPlatformColor = (platform: string) => {
-    const colors = {
-      instagram: 'hover:bg-gradient-to-r hover:from-purple-500 hover:to-pink-500',
-      facebook: 'hover:bg-blue-600',
-      twitter: 'hover:bg-blue-400',
-      linkedin: 'hover:bg-blue-700',
-      youtube: 'hover:bg-red-600',
-      tiktok: 'hover:bg-black',
-      whatsapp: 'hover:bg-green-500',
-      telegram: 'hover:bg-blue-500',
+  // Get platform-specific colors and hover effects
+  const getPlatformStyles = (platform: string) => {
+    const styles = {
+      instagram: {
+        hover: 'hover:bg-gradient-to-br hover:from-purple-500 hover:via-pink-500 hover:to-orange-500 hover:shadow-purple-500/25',
+        icon: 'bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500 text-white group-hover:scale-110 group-hover:rotate-6',
+        border: 'group-hover:border-purple-400'
+      },
+      facebook: {
+        hover: 'hover:bg-blue-600 hover:shadow-blue-500/25',
+        icon: 'bg-blue-600 text-white group-hover:scale-110 group-hover:-rotate-3',
+        border: 'group-hover:border-blue-400'
+      },
+      twitter: {
+        hover: 'hover:bg-blue-400 hover:shadow-blue-400/25',
+        icon: 'bg-blue-400 text-white group-hover:scale-110 group-hover:rotate-3',
+        border: 'group-hover:border-blue-300'
+      },
+      linkedin: {
+        hover: 'hover:bg-blue-700 hover:shadow-blue-700/25',
+        icon: 'bg-blue-700 text-white group-hover:scale-110 group-hover:-rotate-2',
+        border: 'group-hover:border-blue-500'
+      },
+      youtube: {
+        hover: 'hover:bg-red-600 hover:shadow-red-500/25',
+        icon: 'bg-red-600 text-white group-hover:scale-110 group-hover:rotate-2',
+        border: 'group-hover:border-red-400'
+      },
+      tiktok: {
+        hover: 'hover:bg-black hover:shadow-gray-800/25',
+        icon: 'bg-black text-white group-hover:scale-110 group-hover:rotate-6',
+        border: 'group-hover:border-gray-600'
+      },
+      whatsapp: {
+        hover: 'hover:bg-green-500 hover:shadow-green-500/25',
+        icon: 'bg-green-500 text-white group-hover:scale-110 group-hover:-rotate-3',
+        border: 'group-hover:border-green-400'
+      },
+      telegram: {
+        hover: 'hover:bg-blue-500 hover:shadow-blue-500/25',
+        icon: 'bg-blue-500 text-white group-hover:scale-110 group-hover:rotate-3',
+        border: 'group-hover:border-blue-400'
+      },
     };
-    return colors[platform.toLowerCase() as keyof typeof colors] || 'hover:bg-primary';
+    return styles[platform.toLowerCase() as keyof typeof styles] || {
+      hover: 'hover:bg-blue-600 hover:shadow-blue-500/25',
+      icon: 'bg-blue-600 text-white group-hover:scale-110',
+      border: 'group-hover:border-blue-400'
+    };
   };
 
   // Handle contact form submission
@@ -519,70 +555,68 @@ const ContactSupport: React.FC = () => {
           </div>
 
           {/* Social Media Links */}
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 lg:p-8 shadow-lg">
+          <div className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-6 lg:p-8 shadow-xl border border-gray-100 dark:border-gray-700">
               <div className="mb-8">
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center mb-2">
-                  <Heart className="h-6 w-6 text-red-500 mr-3" />
+                <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white flex items-center mb-3">
+                  <div className="p-2 bg-gradient-to-r from-red-400 to-pink-500 rounded-lg mr-4 animate-pulse">
+                    <Heart className="h-6 w-6 text-white" />
+                  </div>
                   Ikuti Kami
-                  <span className="ml-4 text-sm bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300 px-3 py-1 rounded-full font-medium">
+                  <span className="ml-3 text-sm bg-gradient-to-r from-blue-500 to-purple-600 text-white px-3 py-1 rounded-full font-medium animate-bounce">
                     Stay Connected
                   </span>
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300">
+                <p className="text-lg text-gray-600 dark:text-gray-300">
                   Tetap terhubung dengan kami di media sosial
                 </p>
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4">
-                {data.social_media.map((social) => (
-                  <a
-                    key={social.id}
-                    href={social.platform_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`flex flex-col items-center p-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50 transition-all duration-200 group hover:shadow-lg ${getPlatformColor(social.platform_name)} hover:text-white hover:border-transparent`}
-                  >
-                    <div className={`p-3 rounded-lg mb-3 transition-all duration-200 ${
-                      social.platform_name.toLowerCase() === 'instagram' ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white' :
-                      social.platform_name.toLowerCase() === 'facebook' ? 'bg-blue-600 text-white' :
-                      social.platform_name.toLowerCase() === 'twitter' ? 'bg-blue-400 text-white' :
-                      social.platform_name.toLowerCase() === 'linkedin' ? 'bg-blue-700 text-white' :
-                      social.platform_name.toLowerCase() === 'youtube' ? 'bg-red-600 text-white' :
-                      social.platform_name.toLowerCase() === 'tiktok' ? 'bg-black text-white' :
-                      social.platform_name.toLowerCase() === 'whatsapp' ? 'bg-green-500 text-white' :
-                      social.platform_name.toLowerCase() === 'telegram' ? 'bg-blue-500 text-white' :
-                      'bg-gray-200 dark:bg-gray-700 group-hover:bg-blue-600'
-                    }`}>
-                      {getIcon(social.icon)}
-                    </div>
-                    <span className="text-sm font-semibold text-center text-gray-900 dark:text-white group-hover:text-white transition-colors">
-                      {social.display_name || social.platform_name}
-                    </span>
-                    {social.username && (
-                      <span className="text-xs text-center text-gray-600 dark:text-gray-400 group-hover:text-white/90 transition-colors">
-                        @{social.username.replace('@', '')}
+                {data.social_media.map((social) => {
+                  const platformStyles = getPlatformStyles(social.platform_name);
+                  return (
+                    <a
+                      key={social.id}
+                      href={social.platform_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`flex flex-col items-center p-4 rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/50 backdrop-blur-sm transition-all duration-300 group hover:shadow-2xl hover:text-white hover:border-transparent transform hover:-translate-y-2 hover:scale-105 ${platformStyles.hover} ${platformStyles.border}`}
+                    >
+                      <div className={`p-3 rounded-xl mb-3 transition-all duration-300 shadow-lg ${platformStyles.icon}`}>
+                        {getIcon(social.icon)}
+                      </div>
+                      <span className="text-sm font-bold text-center text-gray-900 dark:text-white group-hover:text-white transition-all duration-300 group-hover:scale-105">
+                        {social.display_name || social.platform_name}
                       </span>
-                    )}
-                  </a>
-                ))}
+                      {social.username && (
+                        <span className="text-xs text-center text-gray-600 dark:text-gray-400 group-hover:text-white/90 transition-all duration-300 font-medium">
+                          @{social.username.replace('@', '')}
+                        </span>
+                      )}
+
+                      {/* Hover glow effect */}
+                      <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                    </a>
+                  );
+                })}
               </div>
 
               {/* Social Media Stats */}
               <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
-                <div className="grid grid-cols-3 gap-4 text-center">
-                  <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
-                    <div className="text-xl font-bold text-gray-900 dark:text-white">50K+</div>
-                    <div className="text-xs text-gray-600 dark:text-gray-400">Total Followers</div>
+                <div className="grid grid-cols-3 gap-3 sm:gap-4 text-center">
+                  <div className="group p-4 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-xl border border-blue-200 dark:border-blue-700 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25 hover:-translate-y-1 hover:scale-105 cursor-pointer">
+                    <div className="text-lg sm:text-xl font-bold text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform duration-300">50K+</div>
+                    <div className="text-xs text-blue-700 dark:text-blue-300 font-medium">Total Followers</div>
                   </div>
-                  <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
-                    <div className="text-xl font-bold text-gray-900 dark:text-white">1.2K</div>
-                    <div className="text-xs text-gray-600 dark:text-gray-400">Daily Engagement</div>
+                  <div className="group p-4 bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-xl border border-green-200 dark:border-green-700 transition-all duration-300 hover:shadow-lg hover:shadow-green-500/25 hover:-translate-y-1 hover:scale-105 cursor-pointer">
+                    <div className="text-lg sm:text-xl font-bold text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform duration-300">1.2K</div>
+                    <div className="text-xs text-green-700 dark:text-green-300 font-medium">Daily Engagement</div>
                   </div>
-                  <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
-                    <div className="text-xl font-bold text-gray-900 dark:text-white flex items-center justify-center">
-                      <TrendingUp className="h-4 w-4 mr-1 text-green-500" />
+                  <div className="group p-4 bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 rounded-xl border border-purple-200 dark:border-purple-700 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 hover:-translate-y-1 hover:scale-105 cursor-pointer">
+                    <div className="text-lg sm:text-xl font-bold text-purple-600 dark:text-purple-400 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <TrendingUp className="h-4 w-4 mr-1 text-green-500 group-hover:animate-bounce" />
                       +15%
                     </div>
-                    <div className="text-xs text-gray-600 dark:text-gray-400">Growth Rate</div>
+                    <div className="text-xs text-purple-700 dark:text-purple-300 font-medium">Growth Rate</div>
                   </div>
                 </div>
               </div>
