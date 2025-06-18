@@ -570,27 +570,7 @@ const ContactSupport: React.FC = () => {
                 </p>
               </div>
 
-              {/* Quick Contact Info */}
-              <div className="mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-700">
-                <h4 className="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-3 flex items-center">
-                  <Phone className="h-5 w-5 mr-2" />
-                  Kontak Cepat
-                </h4>
-                <div className="space-y-2 text-sm">
-                  <div className="flex items-center text-blue-800 dark:text-blue-200">
-                    <MessageCircle className="h-4 w-4 mr-2 text-blue-600" />
-                    <span>WhatsApp: +62 812-3456-7890</span>
-                  </div>
-                  <div className="flex items-center text-blue-800 dark:text-blue-200">
-                    <Mail className="h-4 w-4 mr-2 text-blue-600" />
-                    <span>Email: info@satuatap.com</span>
-                  </div>
-                  <div className="flex items-center text-blue-800 dark:text-blue-200">
-                    <Clock className="h-4 w-4 mr-2 text-blue-600" />
-                    <span>Respon dalam 2 jam</span>
-                  </div>
-                </div>
-              </div>
+
               <div className="flex-1">
                 <div className="grid grid-cols-2 gap-3 mb-6">
                   {data.social_media.map((social) => {
@@ -623,50 +603,9 @@ const ContactSupport: React.FC = () => {
                 </div>
               </div>
 
-              {/* Social Media Stats */}
-              <div className="grid grid-cols-3 gap-2 mb-6">
-                  <div className="group p-3 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-xl border border-blue-200 dark:border-blue-700 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25 hover:-translate-y-1 hover:scale-105 cursor-pointer text-center">
-                    <div className="text-lg font-bold text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform duration-300">50K+</div>
-                    <div className="text-xs text-blue-700 dark:text-blue-300 font-medium">Followers</div>
-                  </div>
-                  <div className="group p-3 bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-xl border border-green-200 dark:border-green-700 transition-all duration-300 hover:shadow-lg hover:shadow-green-500/25 hover:-translate-y-1 hover:scale-105 cursor-pointer text-center">
-                    <div className="text-lg font-bold text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform duration-300">1.2K</div>
-                    <div className="text-xs text-green-700 dark:text-green-300 font-medium">Daily</div>
-                  </div>
-                  <div className="group p-3 bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 rounded-xl border border-purple-200 dark:border-purple-700 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 hover:-translate-y-1 hover:scale-105 cursor-pointer text-center">
-                    <div className="text-lg font-bold text-purple-600 dark:text-purple-400 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <TrendingUp className="h-3 w-3 mr-1 text-green-500 group-hover:animate-bounce" />
-                      +15%
-                    </div>
-                    <div className="text-xs text-purple-700 dark:text-purple-300 font-medium">Growth</div>
-                  </div>
-                </div>
 
-              {/* Additional Info */}
-              <div className="bg-gradient-to-r from-gray-50 to-white dark:from-gray-800 dark:to-gray-700 rounded-xl p-4 border border-gray-200 dark:border-gray-600">
-                  <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
-                    <Star className="h-4 w-4 mr-2 text-yellow-500" />
-                    Mengapa Mengikuti Kami?
-                  </h4>
-                  <ul className="space-y-2 text-xs text-gray-600 dark:text-gray-300">
-                    <li className="flex items-center">
-                      <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2"></div>
-                      Update properti terbaru setiap hari
-                    </li>
-                    <li className="flex items-center">
-                      <div className="w-1.5 h-1.5 bg-green-500 rounded-full mr-2"></div>
-                      Tips investasi properti gratis
-                    </li>
-                    <li className="flex items-center">
-                      <div className="w-1.5 h-1.5 bg-purple-500 rounded-full mr-2"></div>
-                      Promo eksklusif untuk follower
-                    </li>
-                    <li className="flex items-center">
-                      <div className="w-1.5 h-1.5 bg-orange-500 rounded-full mr-2"></div>
-                      Konsultasi gratis via DM
-                    </li>
-                  </ul>
-                </div>
+
+
             </div>
         </div>
 
