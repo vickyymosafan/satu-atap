@@ -236,3 +236,26 @@ Route::prefix('contact')->group(function () {
         ]);
     })->name('api.contact.owner');
 });
+
+// Why Choose Us section routes
+Route::prefix('why-choose-us')->group(function () {
+    // Get all Why Choose Us data
+    Route::get('/', [App\Http\Controllers\WhyChooseUsController::class, 'index'])
+        ->name('api.why-choose-us.index');
+
+    // Get company benefits
+    Route::get('/benefits', [App\Http\Controllers\WhyChooseUsController::class, 'getBenefits'])
+        ->name('api.why-choose-us.benefits');
+
+    // Get trust indicators
+    Route::get('/trust-indicators', [App\Http\Controllers\WhyChooseUsController::class, 'getTrustIndicators'])
+        ->name('api.why-choose-us.trust-indicators');
+
+    // Get platform statistics
+    Route::get('/statistics', [App\Http\Controllers\WhyChooseUsController::class, 'getStatistics'])
+        ->name('api.why-choose-us.statistics');
+
+    // Get verification badges
+    Route::get('/verification-badges', [App\Http\Controllers\WhyChooseUsController::class, 'getVerificationBadges'])
+        ->name('api.why-choose-us.verification-badges');
+});

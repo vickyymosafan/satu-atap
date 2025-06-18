@@ -32,6 +32,11 @@ class DatabaseSeeder extends Seeder
             KostPropertySeeder::class,
             KostPropertyAmenitySeeder::class,
             KostImageSeeder::class,
+            // Why Choose Us section data
+            CompanyBenefitSeeder::class,
+            TrustIndicatorSeeder::class,
+            PlatformStatisticSeeder::class,
+            VerificationBadgeSeeder::class,
         ]);
     }
 }

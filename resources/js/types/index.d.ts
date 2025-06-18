@@ -101,3 +101,59 @@ export interface KostProperty {
     created_at: string;
     updated_at: string;
 }
+
+// Why Choose Us section interfaces
+export interface CompanyBenefit {
+    id: string;
+    title: string;
+    description: string;
+    icon: string;
+    category: 'service' | 'quality' | 'support' | 'technology';
+    is_active: boolean;
+    sort_order: number;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface TrustIndicator {
+    id: string;
+    title: string;
+    description: string;
+    icon: string;
+    badge_type: 'security' | 'verification' | 'quality' | 'service';
+    is_active: boolean;
+    sort_order: number;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface PlatformStatistic {
+    id: string;
+    metric_name: string;
+    metric_value: string;
+    metric_label: string;
+    icon: string;
+    is_active: boolean;
+    sort_order: number;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface VerificationBadge {
+    id: string;
+    title: string;
+    description: string;
+    icon: string;
+    badge_color: 'blue' | 'green' | 'yellow' | 'red' | 'purple' | 'gray';
+    is_active: boolean;
+    sort_order: number;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface WhyChooseUsData {
+    benefits: CompanyBenefit[];
+    trust_indicators: TrustIndicator[];
+    statistics: PlatformStatistic[];
+    verification_badges: VerificationBadge[];
+}

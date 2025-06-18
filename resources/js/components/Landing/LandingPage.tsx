@@ -6,6 +6,7 @@ import Header from './sections/Header';
 import Hero from './sections/Hero';
 import QuickSearch from './sections/QuickSearch';
 import FeaturedKosts from './sections/FeaturedKosts';
+import WhyChooseUs from './sections/WhyChooseUs';
 
 // Search filters interface
 interface SearchFilters {
@@ -159,6 +160,13 @@ const LandingPage: React.FC = () => {
               </div>
             </div>
           </div>
+          {/* Consistent Section Divider */}
+          <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent opacity-50"></div>
+        </section>
+
+        {/* Why Choose Us Section */}
+        <section id="why-choose-us" className="relative">
+          <WhyChooseUs {...themeProps} />
         </section>
 
         {/* Contact Section - Laptop optimized styling */}
