@@ -388,7 +388,7 @@ const ContactSupport: React.FC = () => {
         {/* Main Content Grid */}
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 lg:gap-8 mb-12 lg:mb-16">
           {/* Contact Form */}
-          <div className="xl:col-span-2 bg-white dark:bg-gray-800 rounded-xl p-6 lg:p-8 shadow-lg">
+          <div className="xl:col-span-2 bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-6 lg:p-8 shadow-xl border border-gray-100 dark:border-gray-700">
             <div className="mb-8">
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center mb-2">
                 <Mail className="h-6 w-6 text-blue-600 mr-3" />
@@ -555,70 +555,118 @@ const ContactSupport: React.FC = () => {
           </div>
 
           {/* Social Media Links */}
-          <div className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-6 lg:p-8 shadow-xl border border-gray-100 dark:border-gray-700">
-              <div className="mb-8">
+          <div className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-6 lg:p-8 shadow-xl border border-gray-100 dark:border-gray-700 h-fit xl:h-full flex flex-col">
+              <div className="mb-6">
                 <div className="flex items-center mb-4">
                   <div className="p-3 bg-gradient-to-r from-red-400 to-pink-500 rounded-xl mr-4 shadow-lg">
                     <Heart className="h-7 w-7 text-white" />
                   </div>
-                  <h3 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white whitespace-nowrap">
+                  <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white whitespace-nowrap">
                     Ikuti Kami
                   </h3>
                 </div>
-                <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                <p className="text-base text-gray-600 dark:text-gray-300 leading-relaxed">
                   Tetap terhubung dengan kami di media sosial untuk mendapatkan update terbaru
                 </p>
               </div>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4">
-                {data.social_media.map((social) => {
-                  const platformStyles = getPlatformStyles(social.platform_name);
-                  return (
-                    <a
-                      key={social.id}
-                      href={social.platform_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`flex flex-col items-center p-4 rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/50 backdrop-blur-sm transition-all duration-300 group hover:shadow-2xl hover:text-white hover:border-transparent transform hover:-translate-y-2 hover:scale-105 ${platformStyles.hover} ${platformStyles.border}`}
-                    >
-                      <div className={`p-3 rounded-xl mb-3 transition-all duration-300 shadow-lg ${platformStyles.icon}`}>
-                        {getIcon(social.icon)}
-                      </div>
-                      <span className="text-sm font-bold text-center text-gray-900 dark:text-white group-hover:text-white transition-all duration-300 group-hover:scale-105">
-                        {social.display_name || social.platform_name}
-                      </span>
-                      {social.username && (
-                        <span className="text-xs text-center text-gray-600 dark:text-gray-400 group-hover:text-white/90 transition-all duration-300 font-medium">
-                          @{social.username.replace('@', '')}
-                        </span>
-                      )}
 
-                      {/* Hover glow effect */}
-                      <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-                    </a>
-                  );
-                })}
-              </div>
-
-              {/* Social Media Stats */}
-              <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
-                <div className="grid grid-cols-3 gap-3 sm:gap-4 text-center">
-                  <div className="group p-4 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-xl border border-blue-200 dark:border-blue-700 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25 hover:-translate-y-1 hover:scale-105 cursor-pointer">
-                    <div className="text-lg sm:text-xl font-bold text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform duration-300">50K+</div>
-                    <div className="text-xs text-blue-700 dark:text-blue-300 font-medium">Total Followers</div>
+              {/* Quick Contact Info */}
+              <div className="mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-700">
+                <h4 className="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-3 flex items-center">
+                  <Phone className="h-5 w-5 mr-2" />
+                  Kontak Cepat
+                </h4>
+                <div className="space-y-2 text-sm">
+                  <div className="flex items-center text-blue-800 dark:text-blue-200">
+                    <MessageCircle className="h-4 w-4 mr-2 text-blue-600" />
+                    <span>WhatsApp: +62 812-3456-7890</span>
                   </div>
-                  <div className="group p-4 bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-xl border border-green-200 dark:border-green-700 transition-all duration-300 hover:shadow-lg hover:shadow-green-500/25 hover:-translate-y-1 hover:scale-105 cursor-pointer">
-                    <div className="text-lg sm:text-xl font-bold text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform duration-300">1.2K</div>
-                    <div className="text-xs text-green-700 dark:text-green-300 font-medium">Daily Engagement</div>
+                  <div className="flex items-center text-blue-800 dark:text-blue-200">
+                    <Mail className="h-4 w-4 mr-2 text-blue-600" />
+                    <span>Email: info@satuatap.com</span>
                   </div>
-                  <div className="group p-4 bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 rounded-xl border border-purple-200 dark:border-purple-700 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 hover:-translate-y-1 hover:scale-105 cursor-pointer">
-                    <div className="text-lg sm:text-xl font-bold text-purple-600 dark:text-purple-400 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <TrendingUp className="h-4 w-4 mr-1 text-green-500 group-hover:animate-bounce" />
-                      +15%
-                    </div>
-                    <div className="text-xs text-purple-700 dark:text-purple-300 font-medium">Growth Rate</div>
+                  <div className="flex items-center text-blue-800 dark:text-blue-200">
+                    <Clock className="h-4 w-4 mr-2 text-blue-600" />
+                    <span>Respon dalam 2 jam</span>
                   </div>
                 </div>
               </div>
+              <div className="flex-1">
+                <div className="grid grid-cols-2 gap-3 mb-6">
+                  {data.social_media.map((social) => {
+                    const platformStyles = getPlatformStyles(social.platform_name);
+                    return (
+                      <a
+                        key={social.id}
+                        href={social.platform_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`flex flex-col items-center p-3 rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/50 backdrop-blur-sm transition-all duration-300 group hover:shadow-2xl hover:text-white hover:border-transparent transform hover:-translate-y-2 hover:scale-105 ${platformStyles.hover} ${platformStyles.border}`}
+                      >
+                        <div className={`p-2 rounded-lg mb-2 transition-all duration-300 shadow-lg ${platformStyles.icon}`}>
+                          {getIcon(social.icon)}
+                        </div>
+                        <span className="text-xs font-bold text-center text-gray-900 dark:text-white group-hover:text-white transition-all duration-300 group-hover:scale-105">
+                          {social.display_name || social.platform_name}
+                        </span>
+                        {social.username && (
+                          <span className="text-xs text-center text-gray-600 dark:text-gray-400 group-hover:text-white/90 transition-all duration-300 font-medium">
+                            @{social.username.replace('@', '')}
+                          </span>
+                        )}
+
+                        {/* Hover glow effect */}
+                        <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                      </a>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Social Media Stats */}
+              <div className="grid grid-cols-3 gap-2 mb-6">
+                  <div className="group p-3 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-xl border border-blue-200 dark:border-blue-700 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25 hover:-translate-y-1 hover:scale-105 cursor-pointer text-center">
+                    <div className="text-lg font-bold text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform duration-300">50K+</div>
+                    <div className="text-xs text-blue-700 dark:text-blue-300 font-medium">Followers</div>
+                  </div>
+                  <div className="group p-3 bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-xl border border-green-200 dark:border-green-700 transition-all duration-300 hover:shadow-lg hover:shadow-green-500/25 hover:-translate-y-1 hover:scale-105 cursor-pointer text-center">
+                    <div className="text-lg font-bold text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform duration-300">1.2K</div>
+                    <div className="text-xs text-green-700 dark:text-green-300 font-medium">Daily</div>
+                  </div>
+                  <div className="group p-3 bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 rounded-xl border border-purple-200 dark:border-purple-700 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 hover:-translate-y-1 hover:scale-105 cursor-pointer text-center">
+                    <div className="text-lg font-bold text-purple-600 dark:text-purple-400 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <TrendingUp className="h-3 w-3 mr-1 text-green-500 group-hover:animate-bounce" />
+                      +15%
+                    </div>
+                    <div className="text-xs text-purple-700 dark:text-purple-300 font-medium">Growth</div>
+                  </div>
+                </div>
+
+              {/* Additional Info */}
+              <div className="bg-gradient-to-r from-gray-50 to-white dark:from-gray-800 dark:to-gray-700 rounded-xl p-4 border border-gray-200 dark:border-gray-600">
+                  <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
+                    <Star className="h-4 w-4 mr-2 text-yellow-500" />
+                    Mengapa Mengikuti Kami?
+                  </h4>
+                  <ul className="space-y-2 text-xs text-gray-600 dark:text-gray-300">
+                    <li className="flex items-center">
+                      <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2"></div>
+                      Update properti terbaru setiap hari
+                    </li>
+                    <li className="flex items-center">
+                      <div className="w-1.5 h-1.5 bg-green-500 rounded-full mr-2"></div>
+                      Tips investasi properti gratis
+                    </li>
+                    <li className="flex items-center">
+                      <div className="w-1.5 h-1.5 bg-purple-500 rounded-full mr-2"></div>
+                      Promo eksklusif untuk follower
+                    </li>
+                    <li className="flex items-center">
+                      <div className="w-1.5 h-1.5 bg-orange-500 rounded-full mr-2"></div>
+                      Konsultasi gratis via DM
+                    </li>
+                  </ul>
+                </div>
             </div>
         </div>
 
@@ -691,50 +739,7 @@ const ContactSupport: React.FC = () => {
             </div>
           </div>
 
-          {/* Category Pills */}
-          <div className="flex flex-wrap gap-2 sm:gap-3 mb-6 lg:mb-8">
-            <button
-              onClick={() => setSelectedCategory('all')}
-              className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 transform hover:scale-105 ${
-                selectedCategory === 'all'
-                  ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-500/25'
-                  : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-600 hover:border-blue-300 dark:hover:border-blue-500'
-              }`}
-            >
-              <span className="flex items-center gap-2">
-                <div className={`w-2 h-2 rounded-full ${selectedCategory === 'all' ? 'bg-white' : 'bg-blue-500'}`}></div>
-                Semua
-              </span>
-            </button>
-            {data.faq_categories && Object.entries(data.faq_categories).map(([key, label]) => {
-              const categoryColors = {
-                general: 'from-blue-500 to-blue-600',
-                booking: 'from-green-500 to-green-600',
-                payment: 'from-yellow-500 to-yellow-600',
-                property: 'from-purple-500 to-purple-600',
-                account: 'from-pink-500 to-pink-600',
-                technical: 'from-gray-500 to-gray-600'
-              };
-              const colorClass = categoryColors[key as keyof typeof categoryColors] || 'from-blue-500 to-blue-600';
 
-              return (
-                <button
-                  key={key}
-                  onClick={() => setSelectedCategory(key)}
-                  className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 transform hover:scale-105 ${
-                    selectedCategory === key
-                      ? `bg-gradient-to-r ${colorClass} text-white shadow-lg`
-                      : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-600 hover:border-blue-300 dark:hover:border-blue-500'
-                  }`}
-                >
-                  <span className="flex items-center gap-2">
-                    <div className={`w-2 h-2 rounded-full ${selectedCategory === key ? 'bg-white' : `bg-gradient-to-r ${colorClass}`}`}></div>
-                    {label}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
 
           {/* FAQ Items */}
           <div className="space-y-4">
@@ -892,7 +897,6 @@ const ContactSupport: React.FC = () => {
           </div>
         </div>
       </div>
-
     </section>
   );
 };
