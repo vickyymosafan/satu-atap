@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Search, Star, Users, Shield, ChevronLeft, ChevronRight, Play } from 'lucide-react';
 
-// Theme props interface
-interface ThemeProps {
+// Hero-specific props interface (only needs currentTheme)
+interface HeroProps {
   currentTheme: 'light' | 'dark';
-  toggleTheme: () => void;
-  getThemeIcon: () => React.ReactElement;
 }
 
 // Data slider dengan konten spesifik kota
@@ -72,7 +70,7 @@ const floatingAnimation = `
   }
 `;
 
-const Hero: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon }) => {
+const Hero: React.FC<HeroProps> = ({ currentTheme }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const heroRef = useRef<HTMLElement>(null);
@@ -177,21 +175,6 @@ const Hero: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon })
               }`} />
             </div>
           ))}
-        </div>
-
-        {/* Theme Toggle Button - Floating */}
-        <div className="absolute top-6 right-6 z-30">
-          <button
-            onClick={toggleTheme}
-            className={`p-3 ${
-              currentTheme === 'dark'
-                ? 'bg-card/20 border-border/30 text-foreground hover:bg-card/30'
-                : 'bg-white/10 border-white/20 text-white hover:bg-white/20'
-            } backdrop-blur-md rounded-full border transition-all duration-300 hover:scale-110 shadow-lg`}
-            aria-label={`Switch to ${currentTheme === 'light' ? 'dark' : 'light'} mode`}
-          >
-            {getThemeIcon()}
-          </button>
         </div>
 
         {/* Floating Highlight Cards */}
