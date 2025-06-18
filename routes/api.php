@@ -260,19 +260,15 @@ Route::prefix('why-choose-us')->group(function () {
         ->name('api.why-choose-us.verification-badges');
 });
 
-// Contact & Support section routes
+// Contact section routes (removed support hotlines)
 Route::prefix('contact-support')->group(function () {
-    // Get all Contact & Support data
+    // Get all Contact data
     Route::get('/', [App\Http\Controllers\ContactSupportController::class, 'index'])
         ->name('api.contact-support.index');
 
     // Submit contact form
     Route::post('/contact-form', [App\Http\Controllers\ContactSupportController::class, 'submitContactForm'])
         ->name('api.contact-support.contact-form');
-
-    // Get support hotlines
-    Route::get('/hotlines', [App\Http\Controllers\ContactSupportController::class, 'getHotlines'])
-        ->name('api.contact-support.hotlines');
 
     // Get social media links
     Route::get('/social-media', [App\Http\Controllers\ContactSupportController::class, 'getSocialMediaLinks'])

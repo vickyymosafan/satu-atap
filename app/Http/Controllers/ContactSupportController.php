@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\ContactForm;
-use App\Models\SupportHotline;
 use App\Models\SocialMediaLink;
 use App\Models\FaqItem;
 use Illuminate\Http\JsonResponse;
@@ -13,27 +12,26 @@ use Illuminate\Validation\ValidationException;
 class ContactSupportController extends Controller
 {
     /**
-     * Get all Contact & Support section data
+     * Get all Contact section data (removed support hotlines)
      */
     public function index(): JsonResponse
     {
         try {
             $data = [
-                'hotlines' => SupportHotline::active()->ordered()->get(),
                 'social_media' => SocialMediaLink::active()->ordered()->get(),
-                'featured_faqs' => FaqItem::active()->featured()->ordered()->get(),
+                'featured_faqs' => FaqItem::active()->featured()->ordered()->limit(6)->get(),
                 'faq_categories' => $this->getFaqCategories(),
             ];
 
             return response()->json([
                 'success' => true,
                 'data' => $data,
-                'message' => 'Contact & Support data retrieved successfully'
+                'message' => 'Contact data retrieved successfully'
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Failed to retrieve Contact & Support data',
+                'message' => 'Failed to retrieve Contact data',
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -75,27 +73,7 @@ class ContactSupportController extends Controller
         }
     }
 
-    /**
-     * Get support hotlines
-     */
-    public function getHotlines(): JsonResponse
-    {
-        try {
-            $hotlines = SupportHotline::active()->ordered()->get();
 
-            return response()->json([
-                'success' => true,
-                'data' => $hotlines,
-                'message' => 'Support hotlines retrieved successfully'
-            ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Failed to retrieve support hotlines',
-                'error' => $e->getMessage()
-            ], 500);
-        }
-    }
 
     /**
      * Get social media links

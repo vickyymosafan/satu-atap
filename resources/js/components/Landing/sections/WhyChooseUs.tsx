@@ -4,7 +4,7 @@ import {
   Lock, BadgeCheck, Award, Activity, Building2, Users, MapPin, TrendingUp,
   Shield, MessageCircle
 } from 'lucide-react';
-import { WhyChooseUsData, CompanyBenefit, TrustIndicator, PlatformStatistic, VerificationBadge } from '@/types';
+import { WhyChooseUsData } from '@/types';
 
 interface WhyChooseUsProps {
   currentTheme: 'light' | 'dark';
@@ -115,33 +115,33 @@ const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ currentTheme }) => {
   }
 
   return (
-    <section className="relative py-12 sm:py-16 lg:py-20 bg-muted/20">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
-        <div className="text-center mb-12">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4 md:mb-6 leading-tight">
+    <section className="relative py-16 sm:py-20 lg:py-24 bg-gray-50 dark:bg-gray-900/50">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6 md:mb-8 leading-tight">
             Mengapa Memilih Satu Atap?
           </h2>
-          <p className="text-sm md:text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto leading-normal">
+          <p className="text-base md:text-lg lg:text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed font-medium">
             Platform terdepan untuk mencari kost dengan berbagai keunggulan dan jaminan kualitas terbaik
           </p>
         </div>
 
         {/* Company Benefits */}
         {data.benefits.length > 0 && (
-          <div className="mb-16">
-            <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-8 text-center">
+          <div className="mb-20">
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-12 text-center">
               Keunggulan Layanan Kami
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {data.benefits.map((benefit) => (
-                <div key={benefit.id} className="bg-card/80 backdrop-blur-sm rounded-xl p-6 border border-border/50 shadow-lg hover:shadow-xl transition-all duration-300">
-                  <div className="flex items-center mb-4">
-                    <div className="p-2 bg-primary/10 rounded-lg mr-3">
+                <div key={benefit.id} className="bg-white dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl p-8 border border-gray-200 dark:border-gray-700 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02]">
+                  <div className="flex items-center mb-6">
+                    <div className="p-3 bg-primary/10 rounded-xl mr-4">
                       {getIcon(benefit.icon)}
                     </div>
-                    <h4 className="text-lg font-semibold text-foreground">{benefit.title}</h4>
+                    <h4 className="text-xl font-bold text-gray-900 dark:text-white">{benefit.title}</h4>
                   </div>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{benefit.description}</p>
+                  <p className="text-base text-gray-700 dark:text-gray-300 leading-relaxed">{benefit.description}</p>
                 </div>
               ))}
             </div>
@@ -150,20 +150,20 @@ const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ currentTheme }) => {
 
         {/* Platform Statistics */}
         {data.statistics.length > 0 && (
-          <div className="mb-16">
-            <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-8 text-center">
+          <div className="mb-20">
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-12 text-center">
               Statistik Platform
             </h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               {data.statistics.map((stat) => (
-                <div key={stat.id} className="text-center bg-card/80 backdrop-blur-sm rounded-xl p-6 border border-border/50 shadow-lg">
-                  <div className="flex justify-center mb-3">
-                    <div className="p-3 bg-primary/10 rounded-full">
+                <div key={stat.id} className="text-center bg-white dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl p-8 border border-gray-200 dark:border-gray-700 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.05]">
+                  <div className="flex justify-center mb-6">
+                    <div className="p-4 bg-primary/10 rounded-full">
                       {getIcon(stat.icon)}
                     </div>
                   </div>
-                  <div className="text-2xl md:text-3xl font-bold text-foreground mb-1">{stat.metric_value}</div>
-                  <div className="text-sm text-muted-foreground">{stat.metric_label}</div>
+                  <div className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3">{stat.metric_value}</div>
+                  <div className="text-base text-gray-600 dark:text-gray-400 font-medium">{stat.metric_label}</div>
                 </div>
               ))}
             </div>
@@ -171,22 +171,22 @@ const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ currentTheme }) => {
         )}
 
         {/* Trust Indicators & Verification Badges */}
-        <div className="grid md:grid-cols-2 gap-12">
+        <div className="grid md:grid-cols-2 gap-16">
           {/* Trust Indicators */}
           {data.trust_indicators.length > 0 && (
             <div>
-              <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-6 text-center">
+              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
                 Indikator Kepercayaan
               </h3>
-              <div className="space-y-4">
+              <div className="space-y-6">
                 {data.trust_indicators.map((indicator) => (
-                  <div key={indicator.id} className="flex items-center p-4 bg-card/80 backdrop-blur-sm rounded-lg border border-border/50">
-                    <div className="p-2 bg-green-100 text-green-600 rounded-lg mr-4">
+                  <div key={indicator.id} className="flex items-center p-6 bg-white dark:bg-gray-800/90 backdrop-blur-sm rounded-xl border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300">
+                    <div className="p-3 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-xl mr-6">
                       {getIcon(indicator.icon)}
                     </div>
                     <div>
-                      <h4 className="font-semibold text-foreground">{indicator.title}</h4>
-                      <p className="text-sm text-muted-foreground">{indicator.description}</p>
+                      <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{indicator.title}</h4>
+                      <p className="text-base text-gray-700 dark:text-gray-300">{indicator.description}</p>
                     </div>
                   </div>
                 ))}
@@ -197,18 +197,18 @@ const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ currentTheme }) => {
           {/* Verification Badges */}
           {data.verification_badges.length > 0 && (
             <div>
-              <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-6 text-center">
+              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
                 Badge Verifikasi
               </h3>
-              <div className="space-y-4">
+              <div className="space-y-6">
                 {data.verification_badges.map((badge) => (
-                  <div key={badge.id} className="flex items-center p-4 bg-card/80 backdrop-blur-sm rounded-lg border border-border/50">
-                    <div className={`p-2 rounded-lg mr-4 border ${getBadgeColorClasses(badge.badge_color)}`}>
+                  <div key={badge.id} className="flex items-center p-6 bg-white dark:bg-gray-800/90 backdrop-blur-sm rounded-xl border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300">
+                    <div className={`p-3 rounded-xl mr-6 border-2 ${getBadgeColorClasses(badge.badge_color)}`}>
                       {getIcon(badge.icon)}
                     </div>
                     <div>
-                      <h4 className="font-semibold text-foreground">{badge.title}</h4>
-                      <p className="text-sm text-muted-foreground">{badge.description}</p>
+                      <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{badge.title}</h4>
+                      <p className="text-base text-gray-700 dark:text-gray-300">{badge.description}</p>
                     </div>
                   </div>
                 ))}
@@ -217,9 +217,9 @@ const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ currentTheme }) => {
           )}
         </div>
       </div>
-      
+
       {/* Consistent Section Divider */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent opacity-50"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-700 to-transparent opacity-50"></div>
     </section>
   );
 };

@@ -223,7 +223,6 @@ export interface FaqItem {
 }
 
 export interface ContactSupportData {
-    hotlines: SupportHotline[];
     social_media: SocialMediaLink[];
     featured_faqs: FaqItem[];
     faq_categories: Record<string, string>;

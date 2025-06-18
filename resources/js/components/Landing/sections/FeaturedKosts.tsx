@@ -82,11 +82,11 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
   }, [property.id]);
 
   return (
-    <div className="group bg-card/80 backdrop-blur-sm rounded-xl shadow-lg border border-border/50 overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 hover:scale-[1.01] h-full flex flex-col">
+    <div className="group bg-white dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:scale-[1.01] h-full flex flex-col">
       {/* Optimized Image Section - Reduced aspect ratio for compactness */}
       <div className="relative aspect-[3/2] overflow-hidden">
         {/* Image */}
-        <div className="relative w-full h-full bg-muted">
+        <div className="relative w-full h-full bg-gray-100 dark:bg-gray-800">
           {!imageLoaded && !imageError && (
             <div className="absolute inset-0 bg-muted animate-pulse flex items-center justify-center">
               <div className="text-muted-foreground text-sm font-medium">Memuat gambar...</div>
@@ -212,54 +212,54 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
       <div className="p-4 flex flex-col flex-grow">
         {/* Title and Rating - Reduced spacing */}
         <div className="space-y-2 mb-3">
-          <h3 className="text-base font-bold text-foreground line-clamp-2 group-hover:text-primary transition-colors duration-300 leading-tight min-h-[2.5rem]">
+          <h3 className="text-lg font-bold text-gray-900 dark:text-white line-clamp-2 group-hover:text-primary transition-colors duration-300 leading-tight min-h-[3rem]">
             {property.title}
           </h3>
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <div className="flex items-center space-x-1 bg-yellow-50 dark:bg-yellow-900/20 px-2 py-1 rounded-lg">
-                <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-                <span className="text-xs font-bold text-foreground">
+              <div className="flex items-center space-x-1 bg-yellow-50 dark:bg-yellow-900/30 px-3 py-1.5 rounded-lg">
+                <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                <span className="text-sm font-bold text-gray-900 dark:text-white">
                   {property.rating}
                 </span>
               </div>
-              <span className="text-xs text-muted-foreground">
+              <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">
                 ({property.review_count} ulasan)
               </span>
             </div>
-            <div className="text-xs font-semibold text-green-600 dark:text-green-400">
+            <div className="text-sm font-bold text-green-600 dark:text-green-400">
               {property.available_rooms} kamar tersisa
             </div>
           </div>
         </div>
 
         {/* Location - Optimized for compactness */}
-        <div className="flex items-start space-x-2 bg-muted/30 rounded-lg p-3 mb-3">
-          <MapPin className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+        <div className="flex items-start space-x-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4 mb-4">
+          <MapPin className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
           <div>
-            <div className="text-xs font-semibold text-foreground">
+            <div className="text-sm font-bold text-gray-900 dark:text-white">
               {property.location.district}, {property.location.city}
             </div>
-            <div className="text-xs text-muted-foreground">
+            <div className="text-sm text-gray-600 dark:text-gray-400">
               {property.location.province}
             </div>
           </div>
         </div>
 
         {/* Amenities - Optimized for compactness */}
-        <div className="space-y-2 mb-4 flex-grow">
-          <div className="text-xs font-semibold text-foreground">Fasilitas:</div>
-          <div className="flex flex-wrap gap-1.5">
+        <div className="space-y-3 mb-6 flex-grow">
+          <div className="text-sm font-bold text-gray-900 dark:text-white">Fasilitas:</div>
+          <div className="flex flex-wrap gap-2">
             {property.amenities.slice(0, 3).map((amenity) => (
-              <div key={amenity.id} className="flex items-center space-x-1 bg-primary/10 text-primary px-2 py-1 rounded-full text-xs font-medium">
-                {amenity.icon === 'wifi' && <Wifi className="w-3 h-3" />}
-                {amenity.icon === 'car' && <Car className="w-3 h-3" />}
-                {amenity.icon === 'shield' && <Shield className="w-3 h-3" />}
+              <div key={amenity.id} className="flex items-center space-x-2 bg-primary/10 text-primary px-3 py-2 rounded-full text-sm font-medium">
+                {amenity.icon === 'wifi' && <Wifi className="w-4 h-4" />}
+                {amenity.icon === 'car' && <Car className="w-4 h-4" />}
+                {amenity.icon === 'shield' && <Shield className="w-4 h-4" />}
                 <span>{amenity.name}</span>
               </div>
             ))}
             {property.amenities.length > 3 && (
-              <div className="bg-muted text-muted-foreground px-2 py-1 rounded-full text-xs font-medium">
+              <div className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-3 py-2 rounded-full text-sm font-medium">
                 +{property.amenities.length - 3} lainnya
               </div>
             )}
@@ -267,17 +267,17 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
         </div>
 
         {/* Price - Optimized for compactness */}
-        <div className="pt-4 border-t border-border mt-auto">
+        <div className="pt-6 border-t-2 border-gray-200 dark:border-gray-700 mt-auto">
           <div className="flex items-center justify-between">
             <div>
-              <div className="text-lg font-bold text-primary">
+              <div className="text-xl font-bold text-primary">
                 {formatPrice(property.price_monthly)}
               </div>
-              <div className="text-xs text-muted-foreground font-medium">per bulan</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400 font-medium">per bulan</div>
             </div>
             <button
               onClick={() => onQuickView(property)}
-              className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all duration-300 text-xs font-bold shadow-lg hover:shadow-xl transform hover:scale-105"
+              className="px-5 py-3 bg-gradient-to-r from-primary to-primary/90 text-white rounded-xl hover:from-primary/90 hover:to-primary transition-all duration-300 text-sm font-bold shadow-lg hover:shadow-xl transform hover:scale-105"
             >
               Lihat Detail
             </button>
@@ -375,12 +375,12 @@ const FeaturedKosts: React.FC<FeaturedKostsProps> = ({
   return (
     <section
       ref={sectionRef}
-      className="py-16 sm:py-20 lg:py-24 bg-muted/20 relative overflow-hidden"
+      className="py-16 sm:py-20 lg:py-24 bg-gray-50 dark:bg-gray-900/50 relative overflow-hidden"
     >
       {/* Background decoration */}
       <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(circle_at_1px_1px,_rgb(0,0,0)_1px,_transparent_0)] bg-[length:32px_32px]"></div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl relative">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative">
         {/* Section Header - Dynamic based on search state */}
         <div className={`text-center mb-8 md:mb-12 transition-all duration-700 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
@@ -391,13 +391,13 @@ const FeaturedKosts: React.FC<FeaturedKostsProps> = ({
               <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-500/10 rounded-full border border-blue-500/20 mb-4">
                 <span className="text-blue-600 font-semibold text-xs">🔍 Hasil Pencarian</span>
               </div>
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3 md:mb-4 leading-tight">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4 md:mb-6 leading-tight">
                 {displayProperties.length > 0
                   ? `Ditemukan ${displayProperties.length} Kost`
                   : 'Tidak Ada Kost Ditemukan'
                 }
               </h2>
-              <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              <p className="text-base md:text-lg lg:text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed font-medium">
                 {displayProperties.length > 0
                   ? 'Berikut adalah kost yang sesuai dengan kriteria pencarian Anda. Semua properti telah diverifikasi.'
                   : 'Maaf, tidak ada kost yang sesuai dengan kriteria pencarian Anda. Coba ubah filter pencarian.'
@@ -415,10 +415,10 @@ const FeaturedKosts: React.FC<FeaturedKostsProps> = ({
           ) : (
             // Featured Kosts Header
             <>
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3 md:mb-4 leading-tight">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4 md:mb-6 leading-tight">
                 Kost
               </h2>
-              <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              <p className="text-base md:text-lg lg:text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed font-medium">
                 Temukan kost terbaik dengan fasilitas lengkap dan lokasi strategis yang telah dipilih khusus untuk Anda.
                 Semua properti telah diverifikasi dan mendapat rating tinggi dari penghuni.
               </p>
