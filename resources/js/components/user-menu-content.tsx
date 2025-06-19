@@ -1,6 +1,5 @@
 import { DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
 import { UserInfo } from '@/components/user-info';
-import { useMobileNavigation } from '@/hooks/use-mobile-navigation';
 import { type User } from '@/types';
 import { Link, router } from '@inertiajs/react';
 import { LogOut, Settings } from 'lucide-react';
@@ -10,7 +9,10 @@ interface UserMenuContentProps {
 }
 
 export function UserMenuContent({ user }: UserMenuContentProps) {
-    const cleanup = useMobileNavigation();
+    const cleanup = () => {
+        // Remove pointer-events style from body if it exists
+        document.body.style.removeProperty('pointer-events');
+    };
 
     const handleLogout = () => {
         cleanup();

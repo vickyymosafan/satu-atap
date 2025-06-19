@@ -150,7 +150,7 @@ const LandingPage: React.FC = () => {
 
         {/* Contact & Support Section */}
         <section id="contact" className="relative">
-          <ContactSupport {...themeProps} />
+          <ContactSupport />
         </section>
       </main>
     </div>

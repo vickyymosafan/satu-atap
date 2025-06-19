@@ -429,7 +429,7 @@ const FeaturedKosts: React.FC<FeaturedKostsProps> = ({
         {/* Content Section */}
         {displayLoading ? (
           // Loading State - Optimized for compact cards
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {[...Array(6)].map((_, index) => (
               <div key={index} className="bg-card/80 backdrop-blur-sm rounded-xl shadow-lg border border-border/50 overflow-hidden">
                 <div className="aspect-[3/2] bg-muted animate-pulse" />
@@ -470,7 +470,7 @@ const FeaturedKosts: React.FC<FeaturedKostsProps> = ({
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}>
             {/* Properties Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
               {displayProperties.map((property, index) => (
                 <div
                   key={property.id}

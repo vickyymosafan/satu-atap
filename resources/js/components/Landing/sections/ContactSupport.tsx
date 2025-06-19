@@ -1,27 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Phone, MessageCircle, Mail, Send, ChevronDown, ChevronUp, Search,
-  Instagram, Facebook, Twitter, Linkedin, Youtube,
-  Clock, CheckCircle, AlertCircle, Loader2, Copy,
-  Eye, Filter, Heart, TrendingUp, Star, Zap
+  ChevronDown, Search, Clock, CheckCircle,
+  Loader2, Copy, Eye, Filter, Heart, Star, Zap, Mail, Send
 } from 'lucide-react';
 import {
   ContactSupportData, ContactFormSubmission,
-  SocialMediaLink, FaqItem
+  FaqItem
 } from '@/types';
-
-// Icon mapping for dynamic icon rendering
-const iconMap = {
-  Phone, MessageCircle, Mail, Send, ChevronDown, ChevronUp, Search,
-  Instagram, Facebook, Twitter, Linkedin, Youtube,
-  Clock, CheckCircle, AlertCircle, Loader2, Copy,
-  Eye, Filter, Heart, TrendingUp, Star, Zap
-};
+import { getIcon } from '@/lib/utils';
+import { useApiFetch } from '@/hooks/use-api-fetch';
+import { LoadingSkeleton } from '@/components/ui/loading-skeleton';
+import { ErrorState } from '@/components/ui/error-state';
+import { SectionContainer } from '@/components/ui/section-container';
+import { FormField } from '@/components/ui/form-field';
 
 const ContactSupport: React.FC = () => {
-  const [data, setData] = useState<ContactSupportData | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { data, loading, error, refetch } = useApiFetch<ContactSupportData>('/api/contact-support', {
+    onSuccess: (data) => {
+      setFaqs(data.featured_faqs);
+    }
+  });
 
   // Contact form state - simplified
   const [contactForm, setContactForm] = useState<ContactFormSubmission>({
@@ -44,31 +42,6 @@ const ContactSupport: React.FC = () => {
 
   // UI state - simplified
   const [copiedText, setCopiedText] = useState<string | null>(null);
-
-  // Fetch Contact & Support data
-  useEffect(() => {
-    const fetchContactSupportData = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch('/api/contact-support');
-        const result = await response.json();
-
-        if (result.success) {
-          setData(result.data);
-          setFaqs(result.data.featured_faqs);
-        } else {
-          setError(result.message || 'Gagal memuat data.');
-        }
-      } catch (error) {
-        console.error('Error fetching Contact & Support data:', error);
-        setError('Gagal memuat data. Silakan coba lagi.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchContactSupportData();
-  }, []);
 
   // Fetch FAQs based on filters
   useEffect(() => {
@@ -109,12 +82,6 @@ const ContactSupport: React.FC = () => {
     const { name, email, subject, message } = contactForm;
     return !!(name.trim() && email.trim() && subject.trim() && message.trim() &&
            email.includes('@') && email.includes('.'));
-  };
-
-  // Get icon component by name
-  const getIcon = (iconName: string) => {
-    const IconComponent = iconMap[iconName as keyof typeof iconMap];
-    return IconComponent ? <IconComponent className="h-5 w-5" /> : null;
   };
 
   // Copy to clipboard function
@@ -211,12 +178,13 @@ const ContactSupport: React.FC = () => {
         if (result.errors) {
           setFormErrors(result.errors);
         } else {
-          setError(result.message || 'Gagal mengirim pesan.');
+          // Handle general error - could show in form or use a toast
+          console.error('Form submission error:', result.message);
         }
       }
     } catch (error) {
       console.error('Error submitting contact form:', error);
-      setError('Gagal mengirim pesan. Silakan coba lagi.');
+      // Handle network error - could show in form or use a toast
     } finally {
       setFormLoading(false);
     }
@@ -257,114 +225,19 @@ const ContactSupport: React.FC = () => {
     }
   };
 
-  // Get field validation status
-  const getFieldStatus = (fieldName: string) => {
-    const value = contactForm[fieldName as keyof ContactFormSubmission] || '';
-    const hasError = formErrors[fieldName]?.length > 0;
-    const hasValue = value.trim().length > 0;
 
-    if (hasError) return 'error';
-    if (hasValue) return 'success';
-    return 'default';
-  };
-
-  // Get field CSS classes
-  const getFieldClasses = (fieldName: string) => {
-    const status = getFieldStatus(fieldName);
-    return `w-full px-4 py-3 border rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 transition-colors ${
-      status === 'error'
-        ? 'border-red-500 focus:ring-red-500/20'
-        : status === 'success'
-        ? 'border-green-500 focus:ring-green-500/20'
-        : 'border-gray-300 dark:border-gray-600 focus:ring-blue-500/20 focus:border-blue-500'
-    }`;
-  };
 
   if (loading) {
-    return (
-      <section className="py-16 lg:py-24 bg-gray-50 dark:bg-gray-900">
-        <div className="container mx-auto px-4 max-w-7xl">
-          <div className="text-center">
-            <div className="space-y-8">
-              {/* Header skeleton */}
-              <div className="space-y-4">
-                <div className="h-12 bg-gray-200 dark:bg-gray-700 rounded-lg w-80 mx-auto animate-pulse"></div>
-                <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-96 mx-auto animate-pulse"></div>
-              </div>
-
-              {/* Content skeleton */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                {/* Contact form skeleton */}
-                <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg">
-                  <div className="space-y-6">
-                    <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-32 animate-pulse"></div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {[...Array(4)].map((_, i) => (
-                        <div key={i} className="h-12 bg-gray-200 dark:bg-gray-700 rounded-lg animate-pulse"></div>
-                      ))}
-                    </div>
-                    <div className="h-24 bg-gray-200 dark:bg-gray-700 rounded-lg animate-pulse"></div>
-                    <div className="h-12 bg-gray-200 dark:bg-gray-700 rounded-lg animate-pulse"></div>
-                  </div>
-                </div>
-
-                {/* Support info skeleton */}
-                <div className="space-y-6">
-                  <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg">
-                    <div className="space-y-4">
-                      <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-40 animate-pulse"></div>
-                      {[...Array(3)].map((_, i) => (
-                        <div key={i} className="p-4 bg-gray-100 dark:bg-gray-700 rounded-lg space-y-3">
-                          <div className="h-5 bg-gray-200 dark:bg-gray-600 rounded w-32 animate-pulse"></div>
-                          <div className="h-4 bg-gray-200 dark:bg-gray-600 rounded w-full animate-pulse"></div>
-                          <div className="grid grid-cols-2 gap-2">
-                            <div className="h-8 bg-gray-200 dark:bg-gray-600 rounded animate-pulse"></div>
-                            <div className="h-8 bg-gray-200 dark:bg-gray-600 rounded animate-pulse"></div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* FAQ skeleton */}
-              <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg">
-                <div className="space-y-6">
-                  <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-48 animate-pulse"></div>
-                  <div className="flex gap-4">
-                    <div className="flex-1 h-12 bg-gray-200 dark:bg-gray-700 rounded-lg animate-pulse"></div>
-                    <div className="w-48 h-12 bg-gray-200 dark:bg-gray-700 rounded-lg animate-pulse"></div>
-                  </div>
-                  {[...Array(4)].map((_, i) => (
-                    <div key={i} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-                      <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded w-3/4 animate-pulse"></div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    );
+    return <LoadingSkeleton type="form" />;
   }
 
   if (error || !data) {
-    return (
-      <section className="relative py-12 sm:py-16 lg:py-20 bg-background">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
-          <div className="text-center">
-            <p className="text-muted-foreground">{error || 'Data tidak tersedia'}</p>
-          </div>
-        </div>
-      </section>
-    );
+    return <ErrorState error={error} showRetry onRetry={refetch} />;
   }
 
   return (
-    <section className="py-16 lg:py-24 bg-gray-50 dark:bg-gray-900">
-      <div className="container mx-auto px-4 max-w-7xl">
+    <SectionContainer background="muted" padding="normal" maxWidth="wide">
+      <div>
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6">
@@ -413,122 +286,72 @@ const ContactSupport: React.FC = () => {
               </div>
             )}
 
-            <form onSubmit={handleContactFormSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Nama Lengkap *
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={contactForm.name}
-                    onChange={handleInputChange}
-                    className={getFieldClasses('name')}
-                    placeholder="Masukkan nama lengkap Anda"
-                    required
-                  />
-                  {formErrors.name && (
-                    <p className="text-red-600 dark:text-red-400 text-sm mt-1 flex items-center">
-                      <AlertCircle className="h-4 w-4 mr-1" />
-                      {formErrors.name[0]}
-                    </p>
-                  )}
-                </div>
-
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Email *
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={contactForm.email}
-                    onChange={handleInputChange}
-                    className={getFieldClasses('email')}
-                    placeholder="Masukkan alamat email Anda"
-                    required
-                  />
-                  {formErrors.email && (
-                    <p className="text-red-600 dark:text-red-400 text-sm mt-1 flex items-center">
-                      <AlertCircle className="h-4 w-4 mr-1" />
-                      {formErrors.email[0]}
-                    </p>
-                  )}
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
-                <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Nomor Telepon
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={contactForm.phone}
-                    onChange={handleInputChange}
-                    className={getFieldClasses('phone')}
-                    placeholder="Masukkan nomor telepon Anda"
-                  />
-                  {formErrors.phone && (
-                    <p className="text-red-600 dark:text-red-400 text-sm mt-1 flex items-center">
-                      <AlertCircle className="h-4 w-4 mr-1" />
-                      {formErrors.phone[0]}
-                    </p>
-                  )}
-                </div>
-
-                <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Subjek *
-                  </label>
-                  <input
-                    type="text"
-                    id="subject"
-                    name="subject"
-                    value={contactForm.subject}
-                    onChange={handleInputChange}
-                    className={getFieldClasses('subject')}
-                    placeholder="Masukkan subjek pesan"
-                    required
-                  />
-                  {formErrors.subject && (
-                    <p className="text-red-600 dark:text-red-400 text-sm mt-1 flex items-center">
-                      <AlertCircle className="h-4 w-4 mr-1" />
-                      {formErrors.subject[0]}
-                    </p>
-                  )}
-                </div>
-              </div>
-
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Pesan *
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={contactForm.message}
+            <form onSubmit={handleContactFormSubmit} className="space-y-4 sm:space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-6">
+                <FormField
+                  id="name"
+                  name="name"
+                  label="Nama Lengkap"
+                  type="text"
+                  value={contactForm.name}
                   onChange={handleInputChange}
-                  rows={5}
-                  className={`${getFieldClasses('message')} resize-none`}
-                  placeholder="Tulis pesan Anda di sini..."
+                  placeholder="Masukkan nama lengkap Anda"
                   required
-                ></textarea>
-                {formErrors.message && (
-                  <p className="text-red-600 dark:text-red-400 text-sm mt-1 flex items-center">
-                    <AlertCircle className="h-4 w-4 mr-1" />
-                    {formErrors.message[0]}
-                  </p>
-                )}
-                <div className="text-sm text-gray-500 dark:text-gray-400 mt-1 text-right">
-                  {contactForm.message.length}/2000 karakter
-                </div>
+                  error={formErrors.name}
+                />
+
+                <FormField
+                  id="email"
+                  name="email"
+                  label="Email"
+                  type="email"
+                  value={contactForm.email}
+                  onChange={handleInputChange}
+                  placeholder="Masukkan alamat email Anda"
+                  required
+                  error={formErrors.email}
+                />
               </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-6">
+                <FormField
+                  id="phone"
+                  name="phone"
+                  label="Nomor Telepon"
+                  type="tel"
+                  value={contactForm.phone || ''}
+                  onChange={handleInputChange}
+                  placeholder="Masukkan nomor telepon Anda"
+                  error={formErrors.phone}
+                />
+
+                <FormField
+                  id="subject"
+                  name="subject"
+                  label="Subjek"
+                  type="text"
+                  value={contactForm.subject}
+                  onChange={handleInputChange}
+                  placeholder="Masukkan subjek pesan"
+                  required
+                  error={formErrors.subject}
+                />
+              </div>
+
+              <FormField
+                id="message"
+                name="message"
+                label="Pesan"
+                type="textarea"
+                value={contactForm.message}
+                onChange={handleInputChange}
+                placeholder="Tulis pesan Anda di sini..."
+                required
+                rows={5}
+                maxLength={2000}
+                showCharCount
+                error={formErrors.message}
+              />
 
               <button
                 type="submit"
@@ -836,7 +659,7 @@ const ContactSupport: React.FC = () => {
           </div>
         </div>
       </div>
-    </section>
+    </SectionContainer>
   );
 };
 
