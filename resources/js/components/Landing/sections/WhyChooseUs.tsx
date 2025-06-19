@@ -77,7 +77,7 @@ const WhyChooseUs: React.FC<WhyChooseUsProps> = () => {
   // Get tab button classes with consistent styling
   const getTabButtonClasses = (tabId: TabType) => {
     const isActive = activeTab === tabId;
-    const baseClasses = 'relative flex-1 flex flex-col items-center justify-center p-4 sm:p-6 rounded-xl transition-all duration-300 group cursor-pointer';
+    const baseClasses = 'relative flex-1 flex flex-col items-center justify-center p-4 sm:p-6 rounded-xl transition-all duration-300 group cursor-pointer text-center';
     const activeClasses = isActive
       ? 'bg-primary text-primary-foreground shadow-lg transform scale-105'
       : 'bg-card text-card-foreground hover:bg-accent hover:text-accent-foreground hover:shadow-md border border-border';
@@ -110,13 +110,13 @@ const WhyChooseUs: React.FC<WhyChooseUsProps> = () => {
             >
               {/* Icon container */}
               <div className={cn(
-                'flex items-center justify-center w-14 h-14 mb-4 rounded-xl transition-all duration-300 shadow-sm',
+                'flex items-center justify-center w-14 h-14 mb-4 rounded-xl transition-all duration-300 shadow-sm mx-auto',
                 isActive
                   ? 'bg-primary-foreground/20 shadow-lg scale-110'
                   : 'bg-muted group-hover:bg-primary/10 group-hover:shadow-md group-hover:scale-105'
               )}>
                 <div className={cn(
-                  'h-7 w-7 transition-all duration-300',
+                  'h-7 w-7 transition-all duration-300 flex items-center justify-center',
                   isActive ? 'text-primary-foreground' : 'text-muted-foreground group-hover:text-primary'
                 )}>
                   {iconElement}
@@ -124,13 +124,13 @@ const WhyChooseUs: React.FC<WhyChooseUsProps> = () => {
               </div>
 
               <h3 className={cn(
-                'font-bold text-sm sm:text-base mb-2 transition-all duration-300 text-center',
+                'font-bold text-sm sm:text-base mb-2 transition-all duration-300',
                 isActive ? 'text-primary-foreground' : 'text-card-foreground group-hover:text-accent-foreground'
               )}>
                 {tab.label}
               </h3>
               <p className={cn(
-                'text-xs sm:text-sm text-center leading-tight transition-all duration-300',
+                'text-xs sm:text-sm leading-tight transition-all duration-300',
                 isActive ? 'text-primary-foreground/80' : 'text-muted-foreground group-hover:text-accent-foreground/80'
               )}>
                 {tab.description}
