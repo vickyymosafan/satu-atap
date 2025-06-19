@@ -21,6 +21,10 @@ class ContactForm extends Model
         'admin_notes',
     ];
 
+    protected $attributes = [
+        'status' => 'pending',
+    ];
+
     protected $casts = [
         'responded_at' => 'datetime',
     ];

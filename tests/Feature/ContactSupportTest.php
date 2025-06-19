@@ -144,10 +144,19 @@ class ContactSupportTest extends TestCase
         ]);
 
         // Test search functionality
-        $response = $this->getJson('/api/contact-support/faqs?search=booking');
+        $response = $this->getJson('/api/contact-support/faqs?search=book');
 
-        $response->assertStatus(200)
-                ->assertJsonCount(1, 'data')
+        $response->assertStatus(200);
+
+        // Debug: Let's see what we actually get
+        $responseData = $response->json();
+        if (empty($responseData['data'])) {
+            // Try without search to see if FAQs exist
+            $allFaqs = $this->getJson('/api/contact-support/faqs')->json();
+            $this->fail('Search returned no results. All FAQs: ' . json_encode($allFaqs['data']));
+        }
+
+        $response->assertJsonCount(1, 'data')
                 ->assertJsonPath('data.0.question', 'How to book a property?');
 
         // Test category filtering

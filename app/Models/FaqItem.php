@@ -64,9 +64,10 @@ class FaqItem extends Model
      */
     public function scopeSearch(Builder $query, string $search): Builder
     {
-        return $query->whereFullText(['question', 'answer'], $search)
-                    ->orWhere('question', 'LIKE', "%{$search}%")
-                    ->orWhere('answer', 'LIKE', "%{$search}%");
+        return $query->where(function ($q) use ($search) {
+            $q->where('question', 'LIKE', "%{$search}%")
+              ->orWhere('answer', 'LIKE', "%{$search}%");
+        });
     }
 
     /**
