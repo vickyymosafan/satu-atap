@@ -26,7 +26,8 @@ return new class extends Migration
             $table->index(['is_active', 'sort_order']);
             $table->index(['category', 'is_active']);
             $table->index(['is_featured', 'is_active']);
-            $table->fullText(['question', 'answer']); // For search functionality
+            // Skip fulltext index for SQLite compatibility
+            // $table->fullText(['question', 'answer']); // For search functionality
         });
     }
 
