@@ -1,5 +1,6 @@
 import React from 'react';
 import { Menu, X } from 'lucide-react';
+import SatuAtapLogo from '../components/SatuAtapLogo';
 
 // Theme props interface
 interface ThemeProps {
@@ -92,12 +93,7 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
       <div className="flex items-center justify-between py-2 md:py-3 px-4 md:px-6 lg:px-8">
         {/* Logo with professional styling - Laptop optimized */}
         <div className="flex items-center space-x-2 md:space-x-3">
-          <div className="w-7 h-7 md:w-8 md:h-8 bg-primary rounded-lg flex items-center justify-center">
-            <span className="text-primary-foreground font-bold text-xs md:text-sm">SA</span>
-          </div>
-          <div className="text-lg md:text-xl lg:text-2xl font-bold text-foreground tracking-tight select-none">
-            Satu Atap
-          </div>
+          <SatuAtapLogo size="md" className="rounded-lg" />
         </div>
 
         {/* Desktop Navigation */}
