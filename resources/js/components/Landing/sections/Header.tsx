@@ -45,8 +45,7 @@ const popularLocations: PopularLocation[] = [
 ];
 
 const authButtons = [
-  { label: 'Masuk', type: 'outline', href: '#' },
-  { label: 'Daftar', type: 'primary', href: '#' },
+  { label: 'Masuk', type: 'primary', href: '#' },
 ];
 
 const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon }) => {
