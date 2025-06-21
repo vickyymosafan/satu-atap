@@ -103,9 +103,9 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
               key={link.href}
               href={link.href}
               onClick={(e) => handleNavClick(e, link.id)}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${
+              className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
                 activeSection === link.id
-                  ? 'text-primary-foreground bg-primary'
+                  ? 'text-white bg-gradient-to-r from-blue-600 to-blue-700 shadow-lg'
                   : 'text-muted-foreground hover:text-foreground hover:bg-accent'
               }`}
             >
@@ -132,7 +132,7 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
               href={btn.href}
               className={
                 btn.type === 'primary'
-                  ? 'px-6 py-2 rounded-lg font-semibold text-primary-foreground bg-primary hover:bg-primary/90 transition-colors duration-200'
+                  ? 'px-6 py-2 rounded-lg font-semibold text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105'
                   : 'px-6 py-2 rounded-lg font-semibold text-muted-foreground border border-border hover:bg-accent hover:text-accent-foreground transition-colors duration-200'
               }
             >
@@ -169,16 +169,16 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
                   key={link.href}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.id)}
-                  className={`block px-4 py-3 rounded-lg font-medium transition-colors duration-200 ${
+                  className={`block px-4 py-3 rounded-lg font-medium transition-all duration-200 ${
                     activeSection === link.id
-                      ? 'text-primary-foreground bg-primary'
+                      ? 'text-white bg-gradient-to-r from-blue-600 to-blue-700 shadow-lg'
                       : 'text-muted-foreground hover:text-foreground hover:bg-accent'
                   }`}
                 >
                   <div className="flex items-center justify-between">
                     {link.label}
                     {activeSection === link.id && (
-                      <div className="w-2 h-2 bg-primary-foreground rounded-full"></div>
+                      <div className="w-2 h-2 bg-white rounded-full"></div>
                     )}
                   </div>
                 </a>
@@ -205,7 +205,7 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
                   href={btn.href}
                   className={
                     btn.type === 'primary'
-                      ? 'block w-full px-6 py-3 rounded-lg font-semibold text-primary-foreground bg-primary hover:bg-primary/90 transition-colors duration-200 text-center'
+                      ? 'block w-full px-6 py-3 rounded-lg font-semibold text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 transition-all duration-200 text-center shadow-lg hover:shadow-xl transform hover:scale-105'
                       : 'block w-full px-6 py-3 rounded-lg font-semibold text-muted-foreground border border-border hover:bg-accent hover:text-accent-foreground transition-colors duration-200 text-center'
                   }
                   onClick={() => setMobileOpen(false)}
