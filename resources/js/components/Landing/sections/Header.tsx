@@ -371,25 +371,7 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
               ))}
             </div>
 
-            {/* Mobile Quick Actions - Responsive */}
-            <div className="pt-2 sm:pt-3 border-t border-border/30">
-              <div className="text-xs sm:text-sm font-semibold text-muted-foreground mb-2 sm:mb-3">Akses Cepat</div>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5 sm:gap-2">
-                {popularLocations.slice(0, 6).map((location) => (
-                  <button
-                    key={location.id}
-                    onClick={() => {
-                      handleLocationClick(location);
-                      setMobileOpen(false);
-                    }}
-                    className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm bg-muted/50 hover:bg-muted rounded-lg transition-colors min-w-0"
-                  >
-                    <MapPin className="h-3 w-3 text-primary flex-shrink-0" />
-                    <span className="truncate">{location.name}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
+
           </div>
         </div>
       )}
