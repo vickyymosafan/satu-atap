@@ -106,7 +106,7 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
               className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
                 activeSection === link.id
                   ? 'text-white bg-gradient-to-r from-blue-600 to-blue-700 shadow-lg'
-                  : 'text-muted-foreground hover:text-foreground hover:bg-accent'
+                  : 'text-muted-foreground hover:text-white hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-600 hover:shadow-md transition-all duration-200'
               }`}
             >
               {link.label}
@@ -119,7 +119,7 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
           {/* Theme Toggle */}
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-lg bg-secondary text-secondary-foreground hover:bg-accent transition-colors duration-200"
+            className="p-2 rounded-lg bg-secondary text-secondary-foreground hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-600 hover:text-white hover:shadow-md transition-all duration-200"
             aria-label={`Switch to ${currentTheme === 'light' ? 'dark' : 'light'} mode`}
           >
             {getThemeIcon()}
@@ -133,7 +133,7 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
               className={
                 btn.type === 'primary'
                   ? 'px-6 py-2 rounded-lg font-semibold text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105'
-                  : 'px-6 py-2 rounded-lg font-semibold text-muted-foreground border border-border hover:bg-accent hover:text-accent-foreground transition-colors duration-200'
+                  : 'px-6 py-2 rounded-lg font-semibold text-muted-foreground border border-blue-300 hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-600 hover:text-white hover:border-blue-600 hover:shadow-md transition-all duration-200'
               }
             >
               {btn.label}
@@ -143,8 +143,8 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
 
         {/* Mobile Menu Button */}
         <button
-          className={`md:hidden p-2 rounded-lg bg-secondary text-secondary-foreground hover:bg-accent transition-colors duration-200 ${
-            mobileOpen ? 'ring-2 ring-ring' : ''
+          className={`md:hidden p-2 rounded-lg bg-secondary text-secondary-foreground hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-600 hover:text-white hover:shadow-md transition-all duration-200 ${
+            mobileOpen ? 'ring-2 ring-blue-500' : ''
           }`}
           aria-label="Toggle menu"
           onClick={() => setMobileOpen(v => !v)}
@@ -172,7 +172,7 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
                   className={`block px-4 py-3 rounded-lg font-medium transition-all duration-200 ${
                     activeSection === link.id
                       ? 'text-white bg-gradient-to-r from-blue-600 to-blue-700 shadow-lg'
-                      : 'text-muted-foreground hover:text-foreground hover:bg-accent'
+                      : 'text-muted-foreground hover:text-white hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-600 hover:shadow-md transition-all duration-200'
                   }`}
                 >
                   <div className="flex items-center justify-between">
@@ -188,7 +188,7 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
             {/* Mobile Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className="flex items-center justify-center space-x-3 w-full p-3 rounded-lg bg-secondary text-secondary-foreground hover:bg-accent transition-colors duration-200"
+              className="flex items-center justify-center space-x-3 w-full p-3 rounded-lg bg-secondary text-secondary-foreground hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-600 hover:text-white hover:shadow-md transition-all duration-200"
               aria-label={`Switch to ${currentTheme === 'light' ? 'dark' : 'light'} mode`}
             >
               {getThemeIcon()}
@@ -206,7 +206,7 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
                   className={
                     btn.type === 'primary'
                       ? 'block w-full px-6 py-3 rounded-lg font-semibold text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 transition-all duration-200 text-center shadow-lg hover:shadow-xl transform hover:scale-105'
-                      : 'block w-full px-6 py-3 rounded-lg font-semibold text-muted-foreground border border-border hover:bg-accent hover:text-accent-foreground transition-colors duration-200 text-center'
+                      : 'block w-full px-6 py-3 rounded-lg font-semibold text-muted-foreground border border-blue-300 hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-600 hover:text-white hover:border-blue-600 hover:shadow-md transition-all duration-200 text-center'
                   }
                   onClick={() => setMobileOpen(false)}
                 >
