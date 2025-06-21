@@ -54,12 +54,31 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
   const [showQuickSearch, setShowQuickSearch] = React.useState(false);
   const [showLocationDropdown, setShowLocationDropdown] = React.useState(false);
   const [quickSearchQuery, setQuickSearchQuery] = React.useState('');
+  const [isHeaderVisible, setIsHeaderVisible] = React.useState(true);
+  const [lastScrollY, setLastScrollY] = React.useState(0);
 
-  // Scroll detection for active section
+  // Scroll detection for active section and header visibility
   React.useEffect(() => {
     const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      // Header visibility logic
+      if (currentScrollY < 10) {
+        // Always show header at top
+        setIsHeaderVisible(true);
+      } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling down and past threshold - hide header
+        setIsHeaderVisible(false);
+      } else if (currentScrollY < lastScrollY) {
+        // Scrolling up - show header
+        setIsHeaderVisible(true);
+      }
+
+      setLastScrollY(currentScrollY);
+
+      // Active section detection
       const sections = navLinks.map(link => document.getElementById(link.id));
-      const scrollPosition = window.scrollY + 100; // Offset for header height
+      const scrollPosition = currentScrollY + 100; // Offset for header height
 
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = sections[i];
@@ -75,7 +94,7 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   // Close mobile menu and dropdowns when clicking outside
   React.useEffect(() => {
@@ -141,7 +160,11 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
     setShowLocationDropdown(false);
   };
   return (
-    <header className="fixed top-1 sm:top-4 left-1/2 transform -translate-x-1/2 w-[98%] sm:w-[95%] md:w-[92%] lg:w-[90%] max-w-7xl bg-card/95 backdrop-blur-lg shadow-lg rounded-lg md:rounded-xl z-[100] border border-border transition-all duration-300">
+    <header className={`fixed left-1/2 transform -translate-x-1/2 w-[98%] sm:w-[95%] md:w-[92%] lg:w-[90%] max-w-7xl bg-card/95 backdrop-blur-lg shadow-lg rounded-lg md:rounded-xl z-[100] border border-border transition-all duration-300 ${
+      isHeaderVisible
+        ? 'top-1 sm:top-4 translate-y-0 opacity-100'
+        : '-top-20 sm:-top-24 -translate-y-full opacity-0'
+    }`}>
       <div className="flex items-center justify-between py-1.5 sm:py-2.5 md:py-3 px-2 sm:px-4 md:px-6 lg:px-8">
         {/* Logo Section - User Friendly with Brand Name */}
         <div className="flex items-center space-x-2 sm:space-x-3 min-w-0 flex-shrink-0">
