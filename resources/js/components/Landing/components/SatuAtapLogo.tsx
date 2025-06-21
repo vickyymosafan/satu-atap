@@ -23,12 +23,18 @@ const SatuAtapLogo: React.FC<SatuAtapLogoProps> = ({
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-full"
       >
-        {/* Background Circle */}
+        {/* Background Circle with Blue Gradient */}
+        <defs>
+          <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#2563eb" />
+            <stop offset="100%" stopColor="#1d4ed8" />
+          </linearGradient>
+        </defs>
         <circle
           cx="16"
           cy="16"
           r="16"
-          className="fill-primary"
+          fill="url(#logoGradient)"
         />
 
         {/* Main Building Structure - Modern Kost Design */}
@@ -50,7 +56,7 @@ const SatuAtapLogo: React.FC<SatuAtapLogoProps> = ({
           />
 
           {/* Multiple Windows - Representing multiple rooms in kost */}
-          <g className="fill-primary">
+          <g fill="url(#logoGradient)">
             {/* First floor windows */}
             <rect x="10" y="17" width="2.5" height="2.5" rx="0.3" />
             <rect x="13.75" y="17" width="2.5" height="2.5" rx="0.3" />
@@ -67,7 +73,7 @@ const SatuAtapLogo: React.FC<SatuAtapLogoProps> = ({
             y="21"
             width="2.5"
             height="5"
-            className="fill-primary"
+            fill="url(#logoGradient)"
             rx="0.3"
           />
 
