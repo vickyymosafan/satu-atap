@@ -218,7 +218,7 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
               }`}
               title={link.label}
             >
-              {link.icon && React.cloneElement(link.icon, { className: 'h-3 w-3 lg:h-4 lg:w-4' })}
+              {link.icon && React.cloneElement(link.icon, { className: 'h-3 w-3 lg:h-4 lg:w-4' } as any)}
               <span className="hidden xl:inline">{link.label}</span>
             </a>
           ))}
@@ -236,7 +236,7 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
                 className="flex items-center gap-1 px-2 py-1.5 text-sm text-muted-foreground hover:text-primary transition-colors"
                 title={link.label}
               >
-                {link.icon && React.cloneElement(link.icon, { className: 'h-3 w-3' })}
+                {link.icon && React.cloneElement(link.icon, { className: 'h-3 w-3' } as any)}
                 <span className="text-xs">{link.label}</span>
               </a>
             ))}
@@ -248,7 +248,7 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
             className="p-1.5 sm:p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-600 hover:text-white hover:shadow-md transition-all duration-200"
             aria-label={`Switch to ${currentTheme === 'light' ? 'dark' : 'light'} mode`}
           >
-            {React.cloneElement(getThemeIcon(), { className: 'h-4 w-4' })}
+            {React.cloneElement(getThemeIcon(), { className: 'h-4 w-4' } as any)}
           </button>
 
           {/* Auth Button - Icon Only, Responsive */}
@@ -260,7 +260,7 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
               title={btn.label}
               aria-label={btn.label}
             >
-              {React.cloneElement(btn.icon, { className: 'h-4 w-4' })}
+              {React.cloneElement(btn.icon, { className: 'h-4 w-4' } as any)}
             </a>
           ))}
 
@@ -333,7 +333,7 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
                       : 'text-gray-600 dark:text-gray-300 hover:text-white hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-600 hover:shadow-md transition-all duration-200'
                   }`}
                 >
-                  {link.icon && React.cloneElement(link.icon, { className: 'h-4 w-4 flex-shrink-0' })}
+                  {link.icon && React.cloneElement(link.icon, { className: 'h-4 w-4 flex-shrink-0' } as any)}
                   <div className="flex items-center justify-between flex-1 min-w-0">
                     <span className="truncate">{link.label}</span>
                     {activeSection === link.id && (
@@ -350,7 +350,7 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
               className="flex items-center justify-center space-x-2 sm:space-x-3 w-full p-2.5 sm:p-3 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-600 hover:text-white hover:shadow-md transition-all duration-200"
               aria-label={`Switch to ${currentTheme === 'light' ? 'dark' : 'light'} mode`}
             >
-              {React.cloneElement(getThemeIcon(), { className: 'h-4 w-4' })}
+              {React.cloneElement(getThemeIcon(), { className: 'h-4 w-4' } as any)}
               <span className="font-medium text-sm sm:text-base">
                 {currentTheme === 'dark' ? 'Mode Gelap' : 'Mode Terang'}
               </span>
@@ -365,7 +365,7 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
                   className="flex items-center justify-center gap-2 sm:gap-3 w-full px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-semibold text-sm sm:text-base text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
                   onClick={() => setMobileOpen(false)}
                 >
-                  {React.cloneElement(btn.icon, { className: 'h-4 w-4' })}
+                  {React.cloneElement(btn.icon, { className: 'h-4 w-4' } as any)}
                   <span>{btn.label}</span>
                 </a>
               ))}
