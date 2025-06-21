@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, X, Search, MapPin, ChevronDown, Home, Phone, HelpCircle } from 'lucide-react';
+import { Menu, X, Search, MapPin, ChevronDown, Home, Phone, HelpCircle, User } from 'lucide-react';
 import SatuAtapLogo from '../components/SatuAtapLogo';
 
 // Theme props interface
@@ -45,7 +45,7 @@ const popularLocations: PopularLocation[] = [
 ];
 
 const authButtons = [
-  { label: 'Masuk', type: 'primary', href: '#' },
+  { label: 'Masuk', type: 'primary', href: '#', icon: <User className="w-4 h-4" /> },
 ];
 
 const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon }) => {
@@ -250,18 +250,16 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
             {getThemeIcon()}
           </button>
 
-          {/* Auth Buttons - Compact */}
+          {/* Auth Button - Icon Only */}
           {authButtons.map(btn => (
             <a
               key={btn.label}
               href={btn.href}
-              className={
-                btn.type === 'primary'
-                  ? 'px-4 py-2 rounded-lg font-semibold text-sm text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105'
-                  : 'px-4 py-2 rounded-lg font-semibold text-sm text-gray-600 dark:text-gray-300 border border-blue-300 dark:border-blue-400 hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-600 hover:text-white hover:border-blue-600 hover:shadow-md transition-all duration-200'
-              }
+              className="p-2.5 rounded-lg text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+              title={btn.label}
+              aria-label={btn.label}
             >
-              {btn.label}
+              {btn.icon}
             </a>
           ))}
         </div>
@@ -356,20 +354,17 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
               </span>
             </button>
 
-            {/* Mobile Auth Buttons */}
-            <div className="space-y-3 pt-2">
+            {/* Mobile Auth Button */}
+            <div className="pt-2">
               {authButtons.map(btn => (
                 <a
                   key={btn.label}
                   href={btn.href}
-                  className={
-                    btn.type === 'primary'
-                      ? 'block w-full px-6 py-3 rounded-lg font-semibold text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 transition-all duration-200 text-center shadow-lg hover:shadow-xl transform hover:scale-105'
-                      : 'block w-full px-6 py-3 rounded-lg font-semibold text-gray-600 dark:text-gray-300 border border-blue-300 dark:border-blue-400 hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-600 hover:text-white hover:border-blue-600 hover:shadow-md transition-all duration-200 text-center'
-                  }
+                  className="flex items-center justify-center gap-3 w-full px-6 py-3 rounded-lg font-semibold text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
                   onClick={() => setMobileOpen(false)}
                 >
-                  {btn.label}
+                  {btn.icon}
+                  <span>{btn.label}</span>
                 </a>
               ))}
             </div>
