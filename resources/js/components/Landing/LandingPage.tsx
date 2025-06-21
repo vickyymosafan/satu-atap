@@ -109,7 +109,7 @@ const LandingPage: React.FC = () => {
 
   return (
     <div className="bg-background min-h-screen transition-colors duration-300">
-      <Header {...themeProps} />
+      <Header {...themeProps} onSearch={handleSearch} />
       <main className="relative">
         {/* Hero Section - Beranda */}
         <section id="hero" className="relative">

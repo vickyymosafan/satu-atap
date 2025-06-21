@@ -244,9 +244,9 @@ const IntegratedKostSearch: React.FC<ThemeProps> = () => {
     }));
   };
 
-  // Handle search submission
-  const handleSearch = async () => {
-    if (!filters.location.trim()) {
+  // Handle search submission with custom filters (for Header integration)
+  const handleSearchWithFilters = async (searchFilters: SearchFilters) => {
+    if (!searchFilters.location.trim()) {
       alert('Silakan masukkan lokasi terlebih dahulu');
       return;
     }
@@ -256,13 +256,13 @@ const IntegratedKostSearch: React.FC<ThemeProps> = () => {
 
     try {
       const searchParams = new URLSearchParams({
-        location: filters.selectedLocation?.name || filters.location,
-        min_price: filters.priceRange[0].toString(),
-        max_price: filters.priceRange[1].toString(),
+        location: searchFilters.selectedLocation?.name || searchFilters.location,
+        min_price: searchFilters.priceRange[0].toString(),
+        max_price: searchFilters.priceRange[1].toString(),
       });
 
-      if (filters.amenities.length > 0) {
-        filters.amenities.forEach(amenity => {
+      if (searchFilters.amenities.length > 0) {
+        searchFilters.amenities.forEach(amenity => {
           searchParams.append('amenities[]', amenity);
         });
       }
@@ -282,6 +282,11 @@ const IntegratedKostSearch: React.FC<ThemeProps> = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  // Handle search submission (for internal form)
+  const handleSearch = async () => {
+    await handleSearchWithFilters(filters);
   };
 
   const handleQuickView = (property: KostProperty) => {
@@ -304,6 +309,25 @@ const IntegratedKostSearch: React.FC<ThemeProps> = () => {
     });
   };
 
+  // Listen for search events from Header (fallback integration)
+  useEffect(() => {
+    const handleHeaderSearch = (event: CustomEvent) => {
+      const searchFilters = event.detail as SearchFilters;
+
+      // Update filters with data from Header
+      setFilters(searchFilters);
+
+      // Trigger search automatically
+      setTimeout(() => {
+        handleSearchWithFilters(searchFilters);
+      }, 100);
+    };
+
+    // Listen for legacy headerSearch events (fallback)
+    window.addEventListener('headerSearch', handleHeaderSearch as EventListener);
+    return () => window.removeEventListener('headerSearch', handleHeaderSearch as EventListener);
+  }, []);
+
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -324,6 +348,7 @@ const IntegratedKostSearch: React.FC<ThemeProps> = () => {
 
   return (
     <section
+      id="integrated-kost-search"
       ref={sectionRef}
       className="py-8 sm:py-12 lg:py-16 bg-background transition-colors duration-300"
     >

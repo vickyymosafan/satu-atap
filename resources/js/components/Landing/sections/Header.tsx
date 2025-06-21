@@ -9,6 +9,19 @@ interface ThemeProps {
   getThemeIcon: () => React.ReactElement;
 }
 
+// Search filters interface - consistent with QuickSearch
+interface SearchFilters {
+  location: string;
+  selectedLocation: LocationData | null;
+  priceRange: [number, number];
+  amenities: string[];
+}
+
+// Extended props interface for Header with search integration
+interface HeaderProps extends ThemeProps {
+  onSearch?: (filters: SearchFilters) => Promise<void>;
+}
+
 // Location data interface - consistent with QuickSearch
 interface LocationData {
   id: string;
@@ -86,7 +99,7 @@ const authButtons = [
   { label: 'Masuk', type: 'primary', href: '#', icon: <User className="w-4 h-4" /> },
 ];
 
-const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon }) => {
+const Header: React.FC<HeaderProps> = ({ currentTheme, toggleTheme, getThemeIcon, onSearch }) => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [activeSection, setActiveSection] = React.useState('hero');
 
@@ -204,30 +217,30 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
     handleQuickSearch(location.name);
   };
 
-  // Handle quick search - enhanced with API integration
+  // Handle quick search - following QuickSearch workflow
   const handleQuickSearch = async (query: string) => {
     if (query.trim()) {
       try {
-        // Create search filters similar to QuickSearch
-        const searchFilters = {
+        // Create search filters like QuickSearch
+        const searchFilters: SearchFilters = {
           location: query,
           selectedLocation: selectedLocation,
           priceRange: [500000, 5000000] as [number, number],
           amenities: [] as string[]
         };
 
-        // Dispatch custom event to trigger search in QuickSearch component
-        const searchEvent = new CustomEvent('headerSearch', {
-          detail: searchFilters
-        });
-        window.dispatchEvent(searchEvent);
+        // Call onSearch prop if provided (like QuickSearch does)
+        if (onSearch) {
+          await onSearch(searchFilters);
+        }
 
-        // Navigate to featured section (where results will be displayed)
+        // Navigate to featured section (where results will be displayed) - like QuickSearch
         const featuredSection = document.getElementById('featured');
         if (featuredSection) {
           const headerHeight = 100;
           const targetPosition = featuredSection.offsetTop - headerHeight;
 
+          // Add a small delay to ensure search results are processed
           setTimeout(() => {
             window.scrollTo({
               top: targetPosition,
