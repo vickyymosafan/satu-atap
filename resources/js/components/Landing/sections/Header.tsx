@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, X, Search, MapPin, ChevronDown, Home, Phone, HelpCircle, User } from 'lucide-react';
+import { Menu, X, Search, Home, Phone, HelpCircle, User } from 'lucide-react';
 import SatuAtapLogo from '../components/SatuAtapLogo';
 
 // Theme props interface
@@ -17,12 +17,7 @@ interface NavLink {
   icon?: React.ReactElement;
 }
 
-// Popular location interface for quick access
-interface PopularLocation {
-  id: string;
-  name: string;
-  type: 'city' | 'campus';
-}
+
 
 // Main navigation links - simplified and focused
 const navLinks: NavLink[] = [
@@ -33,16 +28,7 @@ const navLinks: NavLink[] = [
   { label: 'Hubungi Kami', href: '#contact', id: 'contact', icon: <Phone className="w-4 h-4" /> },
 ];
 
-// Popular locations for quick access - based on competitor analysis
-const popularLocations: PopularLocation[] = [
-  { id: 'jakarta', name: 'Jakarta', type: 'city' },
-  { id: 'bandung', name: 'Bandung', type: 'city' },
-  { id: 'yogyakarta', name: 'Yogyakarta', type: 'city' },
-  { id: 'surabaya', name: 'Surabaya', type: 'city' },
-  { id: 'binus', name: 'BINUS', type: 'campus' },
-  { id: 'ugm', name: 'UGM', type: 'campus' },
-  { id: 'ipb', name: 'IPB', type: 'campus' },
-];
+
 
 const authButtons = [
   { label: 'Masuk', type: 'primary', href: '#', icon: <User className="w-4 h-4" /> },
@@ -51,8 +37,8 @@ const authButtons = [
 const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon }) => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [activeSection, setActiveSection] = React.useState('hero');
-  const [showQuickSearch, setShowQuickSearch] = React.useState(false);
-  const [showLocationDropdown, setShowLocationDropdown] = React.useState(false);
+
+
   const [quickSearchQuery, setQuickSearchQuery] = React.useState('');
   const [isHeaderVisible, setIsHeaderVisible] = React.useState(true);
   const [lastScrollY, setLastScrollY] = React.useState(0);
@@ -96,23 +82,20 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
 
-  // Close mobile menu and dropdowns when clicking outside
+  // Close mobile menu when clicking outside
   React.useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Element;
       if (mobileOpen && !target.closest('header')) {
         setMobileOpen(false);
       }
-      if (showLocationDropdown && !target.closest('.location-dropdown')) {
-        setShowLocationDropdown(false);
-      }
     };
 
-    if (mobileOpen || showLocationDropdown) {
+    if (mobileOpen) {
       document.addEventListener('mousedown', handleClickOutside);
       return () => document.removeEventListener('mousedown', handleClickOutside);
     }
-  }, [mobileOpen, showLocationDropdown]);
+  }, [mobileOpen]);
 
   // Handle navigation click with smooth scroll
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
@@ -149,16 +132,11 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
 
         // Trigger search with the query (this would need to be connected to the search component)
         setQuickSearchQuery('');
-        setShowQuickSearch(false);
       }
     }
   };
 
-  // Handle popular location click
-  const handleLocationClick = (location: PopularLocation) => {
-    handleQuickSearch(location.name);
-    setShowLocationDropdown(false);
-  };
+
   return (
     <header className={`fixed left-1/2 transform -translate-x-1/2 w-[98%] sm:w-[95%] md:w-[92%] lg:w-[90%] max-w-7xl bg-card/95 backdrop-blur-lg shadow-lg rounded-lg md:rounded-xl z-[100] border border-border transition-all duration-300 ${
       isHeaderVisible
@@ -189,45 +167,15 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
                 placeholder="Cari kost..."
                 value={quickSearchQuery}
                 onChange={(e) => setQuickSearchQuery(e.target.value)}
-                onFocus={() => setShowQuickSearch(true)}
+
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
                     handleQuickSearch(quickSearchQuery);
                   }
                 }}
-                className="w-full pl-10 pr-10 py-2 lg:py-2.5 bg-background/50 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm transition-all duration-200"
+                className="w-full pl-10 pr-4 py-2 lg:py-2.5 bg-background/50 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm transition-all duration-200"
               />
-              <button
-                onClick={() => setShowLocationDropdown(!showLocationDropdown)}
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 lg:p-1.5 text-muted-foreground hover:text-primary transition-colors location-dropdown"
-              >
-                <ChevronDown className="h-3 w-3 lg:h-4 lg:w-4" />
-              </button>
             </div>
-
-            {/* Quick Location Dropdown - Responsive */}
-            {showLocationDropdown && (
-              <div className="absolute top-full left-0 right-0 mt-2 bg-popover/95 backdrop-blur-md border border-border rounded-lg shadow-xl z-50 location-dropdown max-h-80 overflow-y-auto">
-                <div className="p-2 lg:p-3">
-                  <div className="text-xs font-semibold text-muted-foreground mb-2 px-2">Lokasi Populer</div>
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-1">
-                    {popularLocations.map((location) => (
-                      <button
-                        key={location.id}
-                        onClick={() => handleLocationClick(location)}
-                        className="flex items-center gap-2 px-2 lg:px-3 py-1.5 lg:py-2 text-xs lg:text-sm text-left hover:bg-accent rounded-md transition-colors w-full"
-                      >
-                        <MapPin className="h-3 w-3 text-primary flex-shrink-0" />
-                        <span className="truncate">{location.name}</span>
-                        {location.type === 'campus' && (
-                          <span className="text-xs text-muted-foreground hidden lg:inline">(Kampus)</span>
-                        )}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
           </div>
         </div>
 
