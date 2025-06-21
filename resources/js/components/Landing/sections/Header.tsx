@@ -141,19 +141,23 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
     setShowLocationDropdown(false);
   };
   return (
-    <header className="fixed top-2 sm:top-4 left-1/2 transform -translate-x-1/2 w-[96%] sm:w-[95%] md:w-[92%] lg:w-[90%] max-w-7xl bg-card/90 backdrop-blur-lg shadow-lg rounded-lg md:rounded-xl z-[100] border border-border transition-all duration-300">
-      <div className="flex items-center justify-between py-2 sm:py-2.5 md:py-3 px-3 sm:px-4 md:px-6 lg:px-8">
-        {/* Logo Section - Responsive */}
-        <div className="flex items-center space-x-2 sm:space-x-3 min-w-0">
-          <SatuAtapLogo size="md" className="rounded-lg flex-shrink-0" />
-          <div className="hidden sm:block min-w-0">
-            <h1 className="text-sm sm:text-base lg:text-lg font-bold text-foreground truncate">SatuAtap</h1>
-            <p className="text-xs text-muted-foreground hidden md:block">Temukan Kost Impian</p>
+    <header className="fixed top-1 sm:top-4 left-1/2 transform -translate-x-1/2 w-[98%] sm:w-[95%] md:w-[92%] lg:w-[90%] max-w-7xl bg-card/95 backdrop-blur-lg shadow-lg rounded-lg md:rounded-xl z-[100] border border-border transition-all duration-300">
+      <div className="flex items-center justify-between py-1.5 sm:py-2.5 md:py-3 px-2 sm:px-4 md:px-6 lg:px-8">
+        {/* Logo Section - User Friendly with Brand Name */}
+        <div className="flex items-center space-x-2 sm:space-x-3 min-w-0 flex-shrink-0">
+          <SatuAtapLogo size="sm" className="rounded-lg flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10" />
+          <div className="flex flex-col min-w-0">
+            <h1 className="text-sm sm:text-base lg:text-lg font-bold text-blue-600 dark:text-blue-400 leading-tight truncate">
+              Satu Atap
+            </h1>
+            <p className="hidden sm:block text-xs text-muted-foreground leading-none truncate">
+              Platform Kost Terpercaya
+            </p>
           </div>
         </div>
 
-        {/* Desktop/Tablet Quick Search Bar - Responsive */}
-        <div className="hidden md:flex items-center flex-1 max-w-xs lg:max-w-md mx-4 lg:mx-8">
+        {/* Desktop/Tablet Quick Search Bar - Hidden on Mobile */}
+        <div className="hidden md:flex items-center flex-1 max-w-xs lg:max-w-md mx-2 lg:mx-8">
           <div className="relative w-full">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -224,8 +228,8 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
           ))}
         </nav>
 
-        {/* Desktop/Tablet Actions - Responsive */}
-        <div className="flex items-center space-x-1 sm:space-x-2">
+        {/* Mobile-First Actions - Compact Layout */}
+        <div className="flex items-center space-x-1 flex-shrink-0">
           {/* Support & Contact Links - Only on large screens */}
           <div className="hidden xl:flex items-center space-x-1">
             {navLinks.slice(3).map(link => (
@@ -242,31 +246,31 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
             ))}
           </div>
 
-          {/* Theme Toggle - Responsive */}
+          {/* Theme Toggle - Mobile Optimized */}
           <button
             onClick={toggleTheme}
-            className="p-1.5 sm:p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-600 hover:text-white hover:shadow-md transition-all duration-200"
+            className="p-1 sm:p-2 rounded-md sm:rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-600 hover:text-white hover:shadow-md transition-all duration-200"
             aria-label={`Switch to ${currentTheme === 'light' ? 'dark' : 'light'} mode`}
           >
-            {React.cloneElement(getThemeIcon(), { className: 'h-4 w-4' } as any)}
+            {React.cloneElement(getThemeIcon(), { className: 'h-3.5 w-3.5 sm:h-4 sm:w-4' } as any)}
           </button>
 
-          {/* Auth Button - Icon Only, Responsive */}
+          {/* Auth Button - Mobile Optimized */}
           {authButtons.map(btn => (
             <a
               key={btn.label}
               href={btn.href}
-              className="p-1.5 sm:p-2 lg:p-2.5 rounded-lg text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+              className="p-1 sm:p-2 lg:p-2.5 rounded-md sm:rounded-lg text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
               title={btn.label}
               aria-label={btn.label}
             >
-              {React.cloneElement(btn.icon, { className: 'h-4 w-4' } as any)}
+              {React.cloneElement(btn.icon, { className: 'h-3.5 w-3.5 sm:h-4 sm:w-4' } as any)}
             </a>
           ))}
 
-          {/* Mobile Menu Button - Responsive */}
+          {/* Mobile Menu Button - Compact */}
           <button
-            className={`lg:hidden p-1.5 sm:p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-600 hover:text-white hover:shadow-md transition-all duration-200 ${
+            className={`lg:hidden p-1 sm:p-2 rounded-md sm:rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-600 hover:text-white hover:shadow-md transition-all duration-200 ${
               mobileOpen ? 'ring-2 ring-blue-500' : ''
             }`}
             aria-label="Toggle menu"
@@ -274,95 +278,84 @@ const Header: React.FC<ThemeProps> = ({ currentTheme, toggleTheme, getThemeIcon 
           >
             <span className="sr-only">Toggle menu</span>
             {mobileOpen ? (
-              <X className="h-4 w-4 sm:h-5 sm:w-5" />
+              <X className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
             ) : (
-              <Menu className="h-4 w-4 sm:h-5 sm:w-5" />
+              <Menu className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
             )}
           </button>
         </div>
 
       </div>
 
-      {/* Mobile/Tablet Quick Search Bar - Responsive */}
-      <div className="md:hidden border-t border-border/30 px-3 sm:px-4 py-2 sm:py-3">
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <input
-            type="text"
-            placeholder="Cari kost..."
-            value={quickSearchQuery}
-            onChange={(e) => setQuickSearchQuery(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                handleQuickSearch(quickSearchQuery);
-              }
-            }}
-            className="w-full pl-10 pr-4 py-2 sm:py-2.5 bg-background/50 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm"
-          />
-        </div>
 
-        {/* Popular Locations for Mobile/Tablet - Responsive */}
-        <div className="mt-2 sm:mt-3 flex flex-wrap gap-1 sm:gap-2">
-          {popularLocations.slice(0, 6).map((location) => (
-            <button
-              key={location.id}
-              onClick={() => handleLocationClick(location)}
-              className="flex items-center gap-1 px-2 py-1 text-xs bg-muted/50 hover:bg-muted rounded-md transition-colors"
-            >
-              <MapPin className="h-3 w-3 flex-shrink-0" />
-              <span className="truncate">{location.name}</span>
-            </button>
-          ))}
-        </div>
-      </div>
 
-      {/* Mobile/Tablet Menu - Responsive */}
+      {/* Mobile Menu - Clean & Organized */}
       {mobileOpen && (
-        <div className="lg:hidden border-t border-border bg-card/95 backdrop-blur-lg rounded-b-xl sm:rounded-b-2xl shadow-lg">
-          <div className="flex flex-col p-3 sm:p-4 md:p-6 space-y-3 sm:space-y-4">
-            {/* Mobile Navigation - Responsive */}
-            <div className="space-y-1 sm:space-y-2">
+        <div className="lg:hidden border-t border-border/30 bg-card/98 backdrop-blur-lg rounded-b-lg shadow-xl">
+          <div className="flex flex-col p-3 space-y-3">
+            {/* Mobile Search Bar - Inside Burger Menu */}
+            <div className="mb-2">
+              <div className="relative">
+                <Search className="absolute left-2.5 top-1/2 transform -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
+                <input
+                  type="text"
+                  placeholder="Cari kost..."
+                  value={quickSearchQuery}
+                  onChange={(e) => setQuickSearchQuery(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      handleQuickSearch(quickSearchQuery);
+                      setMobileOpen(false); // Close menu after search
+                    }
+                  }}
+                  className="w-full pl-9 pr-3 py-2.5 bg-background/60 border border-border/50 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary/30 focus:border-primary text-sm placeholder:text-xs"
+                />
+              </div>
+            </div>
+
+            {/* Mobile Navigation - Clean Layout */}
+            <div className="space-y-1">
               {navLinks.map(link => (
                 <a
                   key={link.href}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.id)}
-                  className={`flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg font-medium text-sm sm:text-base transition-all duration-200 ${
+                  className={`flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium text-sm transition-all duration-200 ${
                     activeSection === link.id
-                      ? 'text-white bg-gradient-to-r from-blue-600 to-blue-700 shadow-lg'
-                      : 'text-gray-600 dark:text-gray-300 hover:text-white hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-600 hover:shadow-md transition-all duration-200'
+                      ? 'text-white bg-gradient-to-r from-blue-600 to-blue-700 shadow-md'
+                      : 'text-gray-600 dark:text-gray-300 hover:text-white hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-600 hover:shadow-sm transition-all duration-200'
                   }`}
                 >
                   {link.icon && React.cloneElement(link.icon, { className: 'h-4 w-4 flex-shrink-0' } as any)}
                   <div className="flex items-center justify-between flex-1 min-w-0">
                     <span className="truncate">{link.label}</span>
                     {activeSection === link.id && (
-                      <div className="w-2 h-2 bg-white rounded-full flex-shrink-0"></div>
+                      <div className="w-1.5 h-1.5 bg-white rounded-full flex-shrink-0"></div>
                     )}
                   </div>
                 </a>
               ))}
             </div>
 
-            {/* Mobile Theme Toggle - Responsive */}
+            {/* Mobile Theme Toggle - Compact */}
             <button
               onClick={toggleTheme}
-              className="flex items-center justify-center space-x-2 sm:space-x-3 w-full p-2.5 sm:p-3 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-600 hover:text-white hover:shadow-md transition-all duration-200"
+              className="flex items-center justify-center space-x-2 w-full p-2.5 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-600 hover:text-white hover:shadow-sm transition-all duration-200"
               aria-label={`Switch to ${currentTheme === 'light' ? 'dark' : 'light'} mode`}
             >
               {React.cloneElement(getThemeIcon(), { className: 'h-4 w-4' } as any)}
-              <span className="font-medium text-sm sm:text-base">
+              <span className="font-medium text-sm">
                 {currentTheme === 'dark' ? 'Mode Gelap' : 'Mode Terang'}
               </span>
             </button>
 
-            {/* Mobile Auth Button - Responsive */}
-            <div className="pt-1 sm:pt-2">
+            {/* Mobile Auth Button - Clean Design */}
+            <div className="pt-1">
               {authButtons.map(btn => (
                 <a
                   key={btn.label}
                   href={btn.href}
-                  className="flex items-center justify-center gap-2 sm:gap-3 w-full px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-semibold text-sm sm:text-base text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+                  className="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-lg font-semibold text-sm text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-md hover:shadow-lg"
                   onClick={() => setMobileOpen(false)}
                 >
                   {React.cloneElement(btn.icon, { className: 'h-4 w-4' } as any)}
