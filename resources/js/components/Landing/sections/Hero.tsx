@@ -14,7 +14,7 @@ const heroSlides = [
     title: "Kost Modern di Jantung Semarang",
     subtitle: "Dekat kampus UNDIP & pusat kota • Fasilitas lengkap",
     image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=1200&h=800&fit=crop&crop=center",
-    gradient: "from-orange-500/20 via-red-500/10 to-pink-500/20",
+    gradient: "from-blue-500/20 via-blue-600/10 to-blue-700/20",
     highlight: "🏛️ Kota Atlas"
   },
   {
@@ -23,7 +23,7 @@ const heroSlides = [
     title: "Hunian Premium Jakarta",
     subtitle: "Akses mudah ke CBD & transportasi umum • Lokasi strategis",
     image: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=1200&h=800&fit=crop&crop=center",
-    gradient: "from-blue-500/20 via-cyan-500/10 to-teal-500/20",
+    gradient: "from-blue-600/20 via-blue-500/10 to-blue-400/20",
     highlight: "🏙️ Ibu Kota"
   },
   {
@@ -32,7 +32,7 @@ const heroSlides = [
     title: "Kost Aesthetic Bandung",
     subtitle: "Suasana sejuk pegunungan yang nyaman • Udara segar",
     image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=800&fit=crop&crop=center",
-    gradient: "from-purple-500/20 via-indigo-500/10 to-blue-500/20",
+    gradient: "from-blue-400/20 via-blue-500/10 to-blue-600/20",
     highlight: "🏔️ Paris van Java"
   }
 ];
@@ -243,7 +243,7 @@ const Hero: React.FC<HeroProps> = ({ currentTheme }) => {
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}>
               <span className="block mb-2">Temukan</span>
-              <span className="block bg-gradient-to-r from-orange-400 via-red-400 to-pink-400 bg-clip-text text-transparent">
+              <span className="block bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 bg-clip-text text-transparent">
                 Kost Impian
               </span>
               <span className={`block text-2xl sm:text-3xl lg:text-4xl font-bold mt-4 ${
@@ -273,7 +273,7 @@ const Hero: React.FC<HeroProps> = ({ currentTheme }) => {
             }`}>
               <button
                 onClick={scrollToSearch}
-                className="group bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold px-8 py-4 rounded-2xl hover:from-orange-600 hover:to-red-600 transition-all duration-300 shadow-2xl hover:shadow-orange-500/25 transform hover:scale-105 active:scale-95 flex items-center gap-3 min-w-[220px]"
+                className="group bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold px-8 py-4 rounded-2xl hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-2xl hover:shadow-blue-500/25 transform hover:scale-105 active:scale-95 flex items-center gap-3 min-w-[220px]"
               >
                 <Search className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
                 <span>Temukan Kost Impian Sekarang</span>
@@ -351,8 +351,8 @@ const Hero: React.FC<HeroProps> = ({ currentTheme }) => {
                   className={`w-3 h-3 rounded-full transition-all duration-300 ${
                     index === currentSlide
                       ? currentTheme === 'dark'
-                        ? 'bg-primary scale-125'
-                        : 'bg-white scale-125'
+                        ? 'bg-blue-600 scale-125'
+                        : 'bg-blue-500 scale-125'
                       : currentTheme === 'dark'
                         ? 'bg-muted hover:bg-muted-foreground/50'
                         : 'bg-white/40 hover:bg-white/60'
