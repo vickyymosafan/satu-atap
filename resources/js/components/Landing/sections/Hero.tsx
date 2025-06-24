@@ -20,7 +20,7 @@ const heroSlides = [
   {
     id: 2,
     city: "Jakarta",
-    title: "Hunian Premium Jakarta",
+    title: "Tempat Premium Jakarta",
     subtitle: "Akses mudah ke CBD & transportasi umum • Lokasi strategis",
     image: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=1200&h=800&fit=crop&crop=center",
     gradient: "from-blue-500/20 via-cyan-500/10 to-teal-500/20",
