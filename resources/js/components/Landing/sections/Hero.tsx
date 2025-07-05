@@ -29,7 +29,7 @@ const heroSlides = [
   {
     id: 3,
     city: "Bandung",
-    title: "Kost Aesthetic Bandung",
+    title: "Kos Aesthetic Bandung",
     subtitle: "Suasana sejuk pegunungan yang nyaman • Udara segar",
     image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=800&fit=crop&crop=center",
     gradient: "from-blue-400/20 via-blue-500/10 to-blue-600/20",
