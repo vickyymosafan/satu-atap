@@ -1,17 +1,13 @@
-# Satu Atap - Kost Management Platform
+# Satu Atap - Header Only Version
 
-A modern web application for managing and finding kost (boarding house) properties in Indonesia. Built with Laravel 12, React, TypeScript, and Inertia.js.
+A simplified version of the Satu Atap platform with only the header component remaining. Built with Laravel 12, React, TypeScript, and Inertia.js.
 
 ## Features
 
-- 🏠 Property listing and management
-- 🖼️ Image gallery with local storage
-- 🔍 Advanced search and filtering
-- ⭐ Property ratings and reviews
-- 📱 Responsive design
+- 🎨 Responsive header with navigation
 - 🌙 Dark/Light theme support
 - 🔐 User authentication
-- 📊 Database-driven content management
+- 📱 Mobile-friendly design
 
 ## Tech Stack
 
@@ -197,38 +193,24 @@ npm run dev
 
 ## Database Structure
 
-The application includes the following main entities:
+The application includes only the basic Laravel authentication system:
 
-### Properties System
-- **kost_properties**: Main property data
-- **kost_images**: Property images with local storage
-- **kost_amenities**: Available amenities (WiFi, parking, etc.)
-- **kost_locations**: Geographic location data
-- **kost_property_amenity**: Many-to-many relationship
+### Authentication System
+- **users**: User accounts and authentication
+- **sessions**: User session management
+- **password_reset_tokens**: Password reset functionality
 
 ### Sample Data Included
 
 After running seeders, you'll have:
-- **4 Featured Properties** with complete data
-- **8 High-quality Images** downloaded from Unsplash
-- **5 Common Amenities** (WiFi, Parking, Security, Gym, Laundry)
-- **4 Strategic Locations** in Jakarta and Depok
 - **1 Test User** (email: test@example.com, password: password)
 
 ## API Endpoints
 
-The application provides RESTful API endpoints:
-
-### Public Endpoints
-- `GET /api/kosts/featured` - Get featured properties
-- `GET /api/kosts/search` - Search properties with filters
-- `GET /api/kosts/{id}` - Get property details
-- `GET /api/kosts/{id}/images` - Get property images
+The application provides minimal API endpoints:
 
 ### Authenticated Endpoints
-- `GET /api/favorites` - User's favorite properties
-- `POST /api/favorites/{propertyId}` - Add to favorites
-- `DELETE /api/favorites/{propertyId}` - Remove from favorites
+- `GET /api/user` - Get authenticated user data
 
 ## File Structure
 
@@ -236,33 +218,36 @@ The application provides RESTful API endpoints:
 satu-atap/
 ├── app/
 │   ├── Http/Controllers/
-│   │   └── KostController.php
+│   │   ├── Auth/ (authentication controllers)
+│   │   └── Settings/ (user settings controllers)
 │   └── Models/
-│       ├── KostProperty.php
-│       ├── KostImage.php
-│       ├── KostAmenity.php
-│       └── KostLocation.php
+│       └── User.php
 ├── database/
 │   ├── migrations/
-│   │   ├── 2024_01_01_000003_create_kost_locations_table.php
-│   │   ├── 2024_01_01_000004_create_kost_amenities_table.php
-│   │   ├── 2024_01_01_000005_create_kost_properties_table.php
-│   │   ├── 2024_01_01_000006_create_kost_images_table.php
-│   │   └── 2024_01_01_000007_create_kost_property_amenity_table.php
+│   │   ├── 0001_01_01_000000_create_users_table.php
+│   │   ├── 0001_01_01_000001_create_cache_table.php
+│   │   └── 0001_01_01_000002_create_jobs_table.php
 │   └── seeders/
-│       ├── KostLocationSeeder.php
-│       ├── KostAmenitySeeder.php
-│       ├── KostPropertySeeder.php
-│       └── KostImageSeeder.php
+│       └── DatabaseSeeder.php
 ├── resources/
 │   └── js/
-│       ├── components/Landing/
-│       │   └── sections/FeaturedKosts.tsx
-│       └── types/index.d.ts
-└── storage/app/public/kost-images/
-    ├── kost-image-1-*.jpg
-    ├── kost-image-2-*.jpg
-    └── ... (8 images total)
+│       ├── components/
+│       │   └── Landing/
+│       │       ├── LandingPage.tsx
+│       │       ├── components/
+│       │       │   └── SatuAtapLogo.tsx
+│       │       └── sections/
+│       │           └── Header.tsx
+│       └── pages/
+│           ├── welcome.tsx
+│           ├── dashboard.tsx
+│           ├── auth/ (authentication pages)
+│           └── settings/ (user settings pages)
+└── routes/
+    ├── web.php
+    ├── api.php
+    ├── auth.php
+    └── settings.php
 ```
 
 ## Troubleshooting

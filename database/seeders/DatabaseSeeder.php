@@ -24,23 +24,6 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        // Seed kost-related data
-        $this->call([
-            CitySeeder::class, // Add cities first
-            KostLocationSeeder::class,
-            KostAmenitySeeder::class,
-            KostPropertySeeder::class,
-            KostPropertyAmenitySeeder::class,
-            KostImageSeeder::class,
-            // Why Choose Us section data
-            CompanyBenefitSeeder::class,
-            TrustIndicatorSeeder::class,
-            PlatformStatisticSeeder::class,
-            VerificationBadgeSeeder::class,
-            // Contact & Support section data
-            SupportHotlineSeeder::class,
-            SocialMediaLinkSeeder::class,
-            FaqItemSeeder::class,
-        ]);
+
     }
 }
